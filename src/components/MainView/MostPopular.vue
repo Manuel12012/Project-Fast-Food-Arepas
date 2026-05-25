@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
       <div class="flex items-center justify-between mb-lg">
         <h2 class="font-display-lg text-display-lg-mobile md:text-headline-md text-on-surface">
-          Most Popular
+          Los mas populares
         </h2>
         <div class="flex gap-2">
           <button
@@ -29,7 +29,7 @@
             >
               <span
                 class="material-symbols-outlined"
-               style="font-variation-settings: 'FILL' 0"
+                style="font-variation-settings: &quot;FILL&quot; 0"
                 >favorite</span
               >
             </button>
@@ -50,7 +50,7 @@
               <p class="text-label-sm text-on-surface-variant flex items-center gap-1">
                 <span
                   class="material-symbols-outlined text-tertiary-container text-sm"
-                  style="font-variation-settings: 'FILL' 1"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
                   >star</span
                 >
                 4.9 (1.2k+ reviews)
@@ -61,7 +61,7 @@
           <button
             class="mt-md w-full py-3 bg-secondary text-on-secondary rounded-lg font-bold hover:bg-secondary-container transition-colors active:scale-95"
           >
-            Add to Cart
+            Agregar al carrito
           </button>
         </div>
         <!-- Item 2 -->
@@ -74,7 +74,7 @@
             >
               <span
                 class="material-symbols-outlined"
-                style="font-variation-settings: 'FILL' 0"
+                style="font-variation-settings: &quot;FILL&quot; 0"
                 >favorite</span
               >
             </button>
@@ -95,7 +95,7 @@
               <p class="text-label-sm text-on-surface-variant flex items-center gap-1">
                 <span
                   class="material-symbols-outlined text-tertiary-container text-sm"
-                  style="font-variation-settings: 'FILL' 1"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
                   >star</span
                 >
                 4.8 (800+ reviews)
@@ -106,7 +106,7 @@
           <button
             class="mt-md w-full py-3 bg-secondary text-on-secondary rounded-lg font-bold hover:bg-secondary-container transition-colors active:scale-95"
           >
-            Add to Cart
+            Agregar al carrito
           </button>
         </div>
         <!-- Item 3 -->
@@ -119,7 +119,7 @@
             >
               <span
                 class="material-symbols-outlined"
-                style="font-variation-settings: 'FILL' 0"
+                style="font-variation-settings: &quot;FILL&quot; 0"
                 >favorite</span
               >
             </button>
@@ -140,7 +140,7 @@
               <p class="text-label-sm text-on-surface-variant flex items-center gap-1">
                 <span
                   class="material-symbols-outlined text-tertiary-container text-sm"
-                style="font-variation-settings: 'FILL' 1"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
                   >star</span
                 >
                 4.7 (500+ reviews)
@@ -151,7 +151,7 @@
           <button
             class="mt-md w-full py-3 bg-secondary text-on-secondary rounded-lg font-bold hover:bg-secondary-container transition-colors active:scale-95"
           >
-            Add to Cart
+            Agregar al carrito
           </button>
         </div>
         <!-- Item 4 -->
@@ -164,7 +164,7 @@
             >
               <span
                 class="material-symbols-outlined"
-                style="font-variation-settings: 'FILL' 0"
+                style="font-variation-settings: &quot;FILL&quot; 0"
                 >favorite</span
               >
             </button>
@@ -185,7 +185,7 @@
               <p class="text-label-sm text-on-surface-variant flex items-center gap-1">
                 <span
                   class="material-symbols-outlined text-tertiary-container text-sm"
-                  style="font-variation-settings: 'FILL' 1"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
                   >star</span
                 >
                 4.9 (300+ reviews)
@@ -196,7 +196,7 @@
           <button
             class="mt-md w-full py-3 bg-secondary text-on-secondary rounded-lg font-bold hover:bg-secondary-container transition-colors active:scale-95"
           >
-            Add to Cart
+            Agregar al carrito
           </button>
         </div>
       </div>

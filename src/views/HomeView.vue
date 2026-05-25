@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Categories from "@/components/Categories.vue";
-import DeliverySpeedBaner from "@/components/DeliverySpeedBaner.vue";
-import Footer from "@/components/Footer.vue";
-import Hero from "@/components/Hero.vue";
-import MostPopular from "@/components/MostPopular.vue";
-import NavBar from "@/components/NavBar.vue";
-import NewsLetter from "@/components/NewsLetter.vue";
+import Categories from "@/components/MainView/Categories.vue";
+import DeliverySpeedBaner from "@/components/MainView/DeliverySpeedBaner.vue";
+import Footer from "@/components/MainView/Footer.vue";
+import Hero from "@/components/MainView/Hero.vue";
+import MostPopular from "@/components/MainView/MostPopular.vue";
+import NavBar from "@/components/MainView/NavBar.vue";
+import NewsLetter from "@/components/MainView/NewsLetter.vue";
 </script>
 
 <template>

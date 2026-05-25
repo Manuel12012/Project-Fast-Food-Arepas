@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-surface-container-highest dark:bg-inverse-surface mt-xl">
+  <footer class="bg-surface-container-highest bg-[#E2E2E2] mt-xl">
     <div
       class="grid grid-cols-1 md:grid-cols-3 gap-lg w-full px-margin-mobile md:px-margin-desktop py-xl max-w-7xl mx-auto"
     >
@@ -9,7 +9,7 @@
           class="h-10 w-auto object-contain mb-md"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-dzToZgSfwVHe8xvINgXj5N-TyV6Dbn2JwBnl6bOBUDcSAh_S6Tb8VGvRdCRQk79W6E6Na3vOcKx2wC76sOzeh4M8OevFtERBfYKaGOiXvcgUm_P_LibyJHFFXQy5W046gunVO9fyDB1kgRABYVJioooASQXiV06aDIxA-yol1d4UpKwfLjdvJ-hIuzkObk4AA6M7-AOuHrqg6YsBZKqgEPpqx28OGwYr1QWPXerxm61ok9Ycjohn6NLve4fmKW_ToFoJklLXwJk"
         />
-        <p class="text-on-surface-variant dark:text-surface-variant text-body-md mb-md max-w-xs">
+        <p class="text-on-surface-variant dark:text-surface-variant text-body-md mb-md max-w-2xl">
           © 2024 Q'BOCAO. High-speed Latino culinary excellence. We make sure your favorite flavors
           reach you before your cravings fade.
         </p>

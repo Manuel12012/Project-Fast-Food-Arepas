@@ -1,12 +1,12 @@
 <template>
-  <section class="py-xl px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+  <section class="py-xl px-margin-mobile md:px-margin-desktop max-w-full mx-auto bg-[#F9F9F9]">
     <div class="flex items-end justify-between mb-lg">
       <div>
         <h2 class="font-display-lg text-display-lg-mobile md:text-headline-md text-on-surface">
-          Browse by category
+          Buscar por categoria
         </h2>
-        <p class="text-on-surface-variant font-body-md">
-          Explore our curated selection of high-speed Latino treats.
+        <p class="text-on-surface-variant [font-family:var(--font-body-md)]">
+          Descubre nuestra cuidada selección de delicias latinas de alta velocidad.
         </p>
       </div>
       <button class="hidden md:flex items-center gap-2 text-primary font-bold hover:underline">
