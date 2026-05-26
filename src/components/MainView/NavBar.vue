@@ -15,7 +15,7 @@
       </a>
       <div class="hidden md:flex items-center gap-(--spacing-lg)">
         <div class="relative" @mouseenter="showMegaMenu = true">
-          <button class="text-primary font-bold border-b-2 border-primary py-1">Menú</button>
+          <button class="text-primary font-bold border-b-2 border-primary py-1">Notre Carte</button>
           <Transition name="fade">
             <div
               @mouseleave="showMegaMenu = false"
