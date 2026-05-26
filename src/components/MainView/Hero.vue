@@ -1,10 +1,10 @@
 <template>
-<section
-  class="relative min-h-screen flex items-center overflow-hidden pt-24 md:pt-28 px-(--spacing-margin-mobile) md:px-(--spacing-margin-desktop) bg-[#F9F9F9]"
->
-  <div
-    class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-(--spacing-xl) items-center w-full"
+  <section
+    class="relative min-h-screen flex items-center overflow-hidden pt-24 md:pt-28 px-(--spacing-margin-mobile) md:px-(--spacing-margin-desktop) bg-[#F9F9F9]"
   >
+    <div
+      class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-(--spacing-xl) items-center w-full"
+    >
       <div class="z-10 text-center lg:text-left max-w-2xl">
         <span
           class="inline-block py-1 px-4 bg-tertiary-fixed text-on-tertiary-container rounded-full font-label-md mb-md"
@@ -12,8 +12,12 @@
           #1 FASTEST LATINO DELIVERY
         </span>
         <h1 class="font-black text-6xl md:text-8xl leading-none text-on-surface mb-6">
-          Comida rapida, <br />
-          <span class="text-primary">Faster Service.</span>
+          Traiteur à domicile <br />
+          <div class="font-black text-6xl sm:text-md">
+            <span class="text-yellow-500">Fast</span>
+            <span class="text-blue-500">Fresh</span>
+            <span class="text-red-500">Latino</span>
+          </div>
         </h1>
         <p
           class="text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-10 mx-auto lg:mx-0 leading-relaxed"
@@ -41,7 +45,7 @@
           alt="Gourmet Burger"
           class="relative z-10 w-full max-w-2xl mx-auto drop-shadow-2xl animate-[float_6s_ease-in-out_infinite]"
           data-alt="A high-end, gourmet burger with melting cheese, crisp lettuce, and artisanal buns, shot in a professional studio setting with high-key lighting. The burger is the central focus against a clean white and minimalist background with vibrant orange splashes in the composition. The lighting is bright and modern, emphasizing the freshness of the ingredients and the premium aesthetic of the Q'Bocao brand."
-          src="../../assets/img/mainImage.png"
+          src="../../assets/img/withoutBg.png"
         />
       </div>
     </div>
