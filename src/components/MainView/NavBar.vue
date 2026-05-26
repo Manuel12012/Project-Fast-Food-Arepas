@@ -95,18 +95,46 @@
       </div>
       <div class="flex items-center gap-(--spacing-md)">
         <div class="hidden lg:flex items-center bg-surface-container rounded-full px-md py-xs">
-          <span class="material-symbols-outlined text-outline">search</span>
+          <svg
+            width="16px"
+            height="32px"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#000000"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <title>ionicons-v5-f</title>
+              <path
+                d="M221.09,64A157.09,157.09,0,1,0,378.18,221.09,157.1,157.1,0,0,0,221.09,64Z"
+                style="fill: none; stroke: #000000; stroke-miterlimit: 10; stroke-width: 32px"
+              ></path>
+              <line
+                x1="338.29"
+                y1="338.29"
+                x2="448"
+                y2="448"
+                style="
+                  fill: none;
+                  stroke: #000000;
+                  stroke-linecap: round;
+                  stroke-miterlimit: 10;
+                  stroke-width: 32px;
+                "
+              ></line>
+            </g>
+          </svg>
           <input
             class="appearance-none bg-transparent border-none outline-none focus:ring-0 ml-2 text-(length:--text-body-md) placeholder:text-primary"
-            placeholder="Search flavors..."
+            placeholder="Buscar..."
             type="text"
           />
         </div>
         <button
           class="relative p-2 text-on-surface active:scale-95 transition-transform duration-100"
         >
-          <span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
-          <span
+<svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>          <span
             class="absolute top-0 right-0 bg-primary text-on-primary text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold"
             >3</span
           >
