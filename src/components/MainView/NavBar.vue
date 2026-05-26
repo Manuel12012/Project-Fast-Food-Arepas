@@ -10,7 +10,7 @@
           alt="Q'Bocao Logo"
           class="h-10 md:h-14 w-auto object-contain aspect-video"
           loading="lazy"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-dzToZgSfwVHe8xvINgXj5N-TyV6Dbn2JwBnl6bOBUDcSAh_S6Tb8VGvRdCRQk79W6E6Na3vOcKx2wC76sOzeh4M8OevFtERBfYKaGOiXvcgUm_P_LibyJHFFXQy5W046gunVO9fyDB1kgRABYVJioooASQXiV06aDIxA-yol1d4UpKwfLjdvJ-hIuzkObk4AA6M7-AOuHrqg6YsBZKqgEPpqx28OGwYr1QWPXerxm61ok9Ycjohn6NLve4fmKW_ToFoJklLXwJk"
+          src="../../assets/icons/LogoMain.png"
         />
       </a>
       <div class="hidden md:flex items-center gap-(--spacing-lg)">
@@ -136,6 +136,42 @@ const categories = ref([
       },
       {
         name: "La Pelúa",
+        image: "/images/pelua.jpg",
+        desc: "Viande + fromage",
+        price: "10€",
+      },
+      {
+        name: "La Dominó",
+        image: "/images/pelua.jpg",
+        desc: "Haricots noirs et + fromage blanc râpé",
+        price: "36€",
+      },
+      {
+        name: "La Viuda",
+        image: "/images/pelua.jpg",
+        desc: "Fromage blanc, fromage jaune ou beurre",
+        price: "30€",
+      },
+      {
+        name: "La Pernil",
+        image: "/images/pelua.jpg",
+        desc: "Porc rôti au vin",
+        price: "48€",
+      },
+      {
+        name: "La Catira",
+        image: "/images/pelua.jpg",
+        desc: "Viande + fromage",
+        price: "10€",
+      },
+      {
+        name: "Lomo negro",
+        image: "/images/pelua.jpg",
+        desc: "Viande + fromage",
+        price: "10€",
+      },
+      {
+        name: "Pabellón Criollo",
         image: "/images/pelua.jpg",
         desc: "Viande + fromage",
         price: "10€",
