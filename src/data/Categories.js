@@ -1,8 +1,8 @@
  const categorias = [
     { id: 1, nombre: "arepas" },
-    { id: 2, nombre: "EMPANADAS" },
-    { id: 3, nombre: "PASTELITOS" },
-    { id: 4, nombre: "TEQUEÑOS" },
+    { id: 2, nombre: "empanadas" },
+    { id: 3, nombre: "pastelitos" },
+    { id: 4, nombre: "tequeños" },
     { id: 5, nombre: "CACHITOS" },
     { id: 6, nombre: "PAN DE JAMON" },
     { id: 7, nombre: "HALLACAS" },
