@@ -12,7 +12,7 @@
         <div>
 
           <h2
-            class="text-2xl md:text-4xl font-bold text-on-surface mb-2"
+            class="text-2xl md:text-4xl font-semibold text-on-surface mb-2"
           >
             Buscar por categoría
           </h2>
