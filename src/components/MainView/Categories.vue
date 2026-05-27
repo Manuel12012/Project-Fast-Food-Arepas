@@ -9,10 +9,10 @@
           Explore our curated selection of high-speed Latino treats.
         </p>
       </div>
-      <button
+      <a
+      href="/menu"
         class="hidden md:flex items-center gap-2 cursor-pointer text-primary font-bold hover:underline"
-      >
-        Ver todas
+      > Ver todos
         <span class="material-symbols-outlined"
           ><svg
             width="16px"
@@ -32,7 +32,7 @@
               ></path>
             </g></svg
         ></span>
-      </button>
+          </a>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-md">
@@ -50,9 +50,8 @@
             class="w-3/4 object-contain transition-transform duration-500 group-hover:scale-110"
           />
         </div>
-
         <p class="mt-sm font-headline-sm text-center">
-          {{ categoria.nombre }}
+          {{ convertirAOracion(categoria.nombre) }}
         </p>
       </div>
     </div>
@@ -61,6 +60,7 @@
 
 <script setup>
 import categorias from "@/data/Categories.js";
+import { convertirAOracion } from "@/helpers/text.js";
 
 const images = import.meta.glob("../../assets/categories/*", {
   eager: true,

@@ -5,13 +5,13 @@
     >
       <div>
         <h1
-          class="[font-family:var(--font-display-lg)] font-black text-[length:var(--text-display-lg-mobile)] md:text-[length:var(--text-display-lg)] text-on-surface mb-(--spacing-xs)"
+          class="[font-family:var(--font-display-lg)] font-black text-(length:--text-display-lg-mobile) md:text-(length:--text-display-lg) text-on-surface mb-(--spacing-xs)"
         >
           Q'Bocao
         </h1>
 
         <p
-          class="text-on-surface-variant [font-family:var(--font-body-lg)] text-[length:var(--text-body-lg)]"
+          class="text-on-surface-variant [font-family:var(--font-body-lg)] text-(length:--text-body-lg)"
         >
           Fast. Fresh. Latino. Sabor auténtico en cada mordida.
         </p>
@@ -20,43 +20,18 @@
 
     <!-- Chips / Filter Row -->
     <div class="flex overflow-x-auto pb-4 gap-(--spacing-sm) hide-scrollbar">
-      <button
-        class="active-chip px-(--spacing-md) py-(--spacing-sm) rounded-full [font-family:var(--font-label-md)] whitespace-nowrap transition-all shadow-sm"
-      >
-        All Items
-      </button>
-
-      <button
-        class="bg-surface-container text-on-surface px-(--spacing-md) py-(--spacing-sm) rounded-full [font-family:var(--font-label-md)] whitespace-nowrap hover:bg-surface-container-high transition-all"
-      >
-        Burgers
-      </button>
-
-      <button
-        class="bg-surface-container text-on-surface px-(--spacing-md) py-(--spacing-sm) rounded-full [font-family:var(--font-label-md)] whitespace-nowrap hover:bg-surface-container-high transition-all"
-      >
-        Sides
-      </button>
-
-      <button
-        class="bg-surface-container text-on-surface px-(--spacing-md) py-(--spacing-sm) rounded-full [font-family:var(--font-label-md)] whitespace-nowrap hover:bg-surface-container-high transition-all"
-      >
-        Beverages
-      </button>
-
-      <button
-        class="bg-surface-container text-on-surface px-(--spacing-md) py-(--spacing-sm) rounded-full [font-family:var(--font-label-md)] whitespace-nowrap hover:bg-surface-container-high transition-all"
-      >
-        Deals
-      </button>
-
-      <button
-        class="bg-surface-container text-on-surface px-(--spacing-md) py-(--spacing-sm) rounded-full [font-family:var(--font-label-md)] whitespace-nowrap hover:bg-surface-container-high transition-all flex items-center gap-(--spacing-xs)"
-      >
-        <span class="material-symbols-outlined text-[18px]"> filter_list </span>
-
-        Filters
-      </button>
+      <div v-for="categoria in categorias" :key="categoria.id" class="group cursor-pointer">
+        <button
+          class="bg-[#F9F9F9] cursor-pointer px-5 py-2 rounded-full hover:bg-[#EE6C4B] hover:text-white"
+        >
+          {{ convertirAOracion(categoria.nombre) }}
+        </button>
+      </div>
     </div>
   </section>
 </template>
+
+<script setup>
+import categorias from "@/data/Categories.js";
+import { convertirAOracion } from "@/helpers/text.js";
+</script>

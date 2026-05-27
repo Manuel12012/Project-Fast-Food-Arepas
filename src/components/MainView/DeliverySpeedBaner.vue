@@ -31,14 +31,13 @@
 
         <div>
           <h3 class="font-headline-md text-on-primary">Menos de 30 minutos</h3>
-          <p class="[font-family:var(--font-body-md)] opacity-90">
-            Menos de 30 minutos
-          </p>
+          <p class="[font-family:var(--font-body-md)] opacity-90">Menos de 30 minutos</p>
         </div>
         <!-- Fin Tiempo-->
       </div>
-      
+
       <div class="h-px w-full md:w-px md:h-12 bg-on-primary/20"></div>
+      <!-- Retrait -->
       <div class="flex items-center gap-md">
         <div class="w-16 h-16 rounded-full bg-on-primary/20 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
@@ -53,7 +52,11 @@
           <p class="[font-family:var(--font-body-md)] opacity-90">Retrait</p>
         </div>
       </div>
+      <!-- Fin Retrait -->
+
       <div class="h-px w-full md:w-px md:h-12 bg-on-primary/20"></div>
+      <!-- A domicile -->
+
       <div class="flex items-center gap-md">
         <div class="w-16 h-16 rounded-full bg-on-primary/20 flex items-center justify-center">
           <svg
@@ -87,6 +90,7 @@
           <p class="[font-family:var(--font-body-md)] opacity-90">A domicile</p>
         </div>
       </div>
+      <!-- Fin A domicile -->
     </div>
   </section>
 </template>
