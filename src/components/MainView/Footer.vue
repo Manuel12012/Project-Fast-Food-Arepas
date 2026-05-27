@@ -1,95 +1,291 @@
 <template>
-  <footer class="bg-surface-container-highest bg-[#E2E2E2] mt-xl">
+
+  <footer
+    class="
+      bg-[#E2E2E2]
+      mt-20
+      border-t
+      border-outline-variant/20
+    "
+  >
+
     <div
-      class="grid grid-cols-1 md:grid-cols-3 gap-lg w-full px-margin-mobile md:px-margin-desktop py-xl max-w-7xl mx-auto"
+      class="
+        max-w-7xl
+        mx-auto
+        px-(--spacing-margin-mobile)
+        md:px-(--spacing-margin-desktop)
+        py-16
+      "
     >
-      <div>
-        <img
-          alt="Q'Bocao Logo"
-          class="h-10 w-auto object-contain mb-md"
-          src="../../assets/icons/LogoMain.png"
-        />
-        <p class="text-on-surface-variant dark:text-surface-variant text-body-md mb-md max-w-2xl">
-          © 2024 Q'BOCAO. High-speed Latino culinary excellence. We make sure your favorite flavors
-          reach you before your cravings fade.
-        </p>
-        <div class="flex gap-md">
-          <a class="text-on-surface-variant hover:text-primary transition-colors" href="#"
-            ><span class="material-symbols-outlined">social_leaderboard</span></a
-          >
-          <a class="text-on-surface-variant hover:text-primary transition-colors" href="#"
-            ><span class="material-symbols-outlined">chat_bubble</span></a
-          >
-          <a class="text-on-surface-variant hover:text-primary transition-colors" href="#"
-            ><span class="material-symbols-outlined">share</span></a
-          >
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-lg">
+
+      <div
+        class="
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-4
+          gap-12
+        "
+      >
+
+        <!-- BRAND -->
+
         <div>
-          <h4 class="font-label-md text-on-surface mb-md">Explore</h4>
-          <ul class="space-y-sm">
-            <li>
-              <a
-                class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors"
-                href="#"
-                >Menu</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors"
-                href="#"
-                >Deals</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors"
-                href="#"
-                >Track Order</a
-              >
-            </li>
-          </ul>
+
+          <img
+            src="../../assets/icons/LogoMain.png"
+            alt="Q'Bocao Logo"
+            class="h-10 w-auto object-contain mb-5"
+          />
+
+          <p
+            class="
+              text-sm
+              leading-relaxed
+              text-on-surface-variant
+              mb-6
+            "
+          >
+            © 2026 Q'BOCAO.
+
+            High-speed Latino culinary excellence.
+            Authentic flavors delivered before
+            your cravings fade.
+          </p>
+
+          <div class="flex gap-4">
+
+            <a
+              href="#"
+              class="
+                text-on-surface-variant
+                hover:text-primary
+                transition-colors
+              "
+            >
+              <span class="material-symbols-outlined">
+                social_leaderboard
+              </span>
+            </a>
+
+            <a
+              href="#"
+              class="
+                text-on-surface-variant
+                hover:text-primary
+                transition-colors
+              "
+            >
+              <span class="material-symbols-outlined">
+                chat_bubble
+              </span>
+            </a>
+
+            <a
+              href="#"
+              class="
+                text-on-surface-variant
+                hover:text-primary
+                transition-colors
+              "
+            >
+              <span class="material-symbols-outlined">
+                share
+              </span>
+            </a>
+
+          </div>
+
         </div>
+
+        <!-- EXPLORE -->
+
+        <nav>
+
+          <h4
+            class="
+              font-semibold
+              text-on-surface
+              mb-5
+            "
+          >
+            Explore
+          </h4>
+
+          <ul class="space-y-3">
+
+            <li>
+              <a
+                href="#"
+                class="
+                  text-on-surface-variant
+                  hover:text-primary
+                  transition-colors
+                "
+              >
+                Menu
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="#"
+                class="
+                  text-on-surface-variant
+                  hover:text-primary
+                  transition-colors
+                "
+              >
+                Deals
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="#"
+                class="
+                  text-on-surface-variant
+                  hover:text-primary
+                  transition-colors
+                "
+              >
+                Track Order
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+        <!-- COMPANY -->
+
+        <nav>
+
+          <h4
+            class="
+              font-semibold
+              text-on-surface
+              mb-5
+            "
+          >
+            Company
+          </h4>
+
+          <ul class="space-y-3">
+
+            <li>
+              <a
+                href="#"
+                class="
+                  text-on-surface-variant
+                  hover:text-primary
+                  transition-colors
+                "
+              >
+                Contact Us
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="#"
+                class="
+                  text-on-surface-variant
+                  hover:text-primary
+                  transition-colors
+                "
+              >
+                Privacy Policy
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+        <!-- APP DOWNLOAD -->
+
         <div>
-          <h4 class="font-label-md text-on-surface mb-md">Company</h4>
-          <ul class="space-y-sm">
-            <li>
-              <a
-                class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors"
-                href="#"
-                >Contact Us</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors"
-                href="#"
-                >Privacy Policy</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div>
-        <h4 class="font-label-md text-on-surface mb-md">Download our App</h4>
-        <p class="text-on-surface-variant dark:text-surface-variant text-label-sm mb-md">
-          Experience the fastest Latino ordering process on mobile.
-        </p>
-        <div class="flex flex-col gap-sm">
-          <button
-            class="flex items-center gap-2 bg-on-surface text-on-primary px-4 py-2 rounded-lg font-bold text-sm w-fit transition-transform active:scale-95"
+
+          <h4
+            class="
+              font-semibold
+              text-on-surface
+              mb-5
+            "
           >
-            <span class="material-symbols-outlined">ios</span> App Store
-          </button>
-          <button
-            class="flex items-center gap-2 bg-on-surface text-on-primary px-4 py-2 rounded-lg font-bold text-sm w-fit transition-transform active:scale-95"
+            Download our App
+          </h4>
+
+          <p
+            class="
+              text-sm
+              text-on-surface-variant
+              mb-6
+            "
           >
-            <span class="material-symbols-outlined">play_arrow</span> Google Play
-          </button>
+            Experience the fastest Latino ordering process on mobile.
+          </p>
+
+          <div class="flex flex-col gap-3">
+
+            <button
+              class="
+                flex
+                items-center
+                gap-3
+                bg-on-surface
+                text-on-primary
+                px-5
+                py-3
+                rounded-xl
+                font-medium
+                w-fit
+                transition-all
+                hover:scale-[1.03]
+                active:scale-95
+              "
+            >
+              <span class="material-symbols-outlined">
+                ios
+              </span>
+
+              App Store
+            </button>
+
+            <button
+              class="
+                flex
+                items-center
+                gap-3
+                bg-on-surface
+                text-on-primary
+                px-5
+                py-3
+                rounded-xl
+                font-medium
+                w-fit
+                transition-all
+                hover:scale-[1.03]
+                active:scale-95
+              "
+            >
+              <span class="material-symbols-outlined">
+                play_arrow
+              </span>
+
+              Google Play
+            </button>
+
+          </div>
+
         </div>
+
       </div>
+
     </div>
+
   </footer>
+
 </template>

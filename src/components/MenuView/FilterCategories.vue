@@ -1,37 +1,61 @@
 <template>
-  <section class="mb-(--spacing-xl) pt-24">
+
+  <section class="pt-24 pb-8">
+
     <div
-      class="flex flex-col md:flex-row md:items-end justify-between gap-(--spacing-md) mb-(--spacing-lg)"
+      class="
+        flex
+        overflow-x-auto
+        gap-3
+        pb-2
+        hide-scrollbar
+        md:flex-wrap
+        md:justify-center
+      "
     >
-      <div>
-        <h1
-          class="[font-family:var(--font-display-lg)] font-black text-(length:--text-display-lg-mobile) md:text-(length:--text-display-lg) text-on-surface mb-(--spacing-xs)"
-        >
-          Q'Bocao
-        </h1>
 
-        <p
-          class="text-on-surface-variant [font-family:var(--font-body-lg)] text-(length:--text-body-lg)"
-        >
-          Fast. Fresh. Latino. Sabor auténtico en cada mordida.
-        </p>
-      </div>
+      <button
+        v-for="categoria in categorias"
+        :key="categoria.id"
+
+        @click="$emit('change-category', categoria.id)"
+
+        class="
+          shrink-0
+          px-5
+          py-3
+          rounded-xl
+          cursor-pointer
+          transition-all
+          duration-300
+          font-medium
+          whitespace-nowrap
+        "
+
+        :class="[
+          categoriaSeleccionada === categoria.id
+            ? 'bg-[#EE6C4B] text-white shadow-md'
+            : 'bg-surface-container-low hover:bg-[#EE6C4B] hover:text-white'
+        ]"
+      >
+
+        {{ convertirAOracion(categoria.nombre) }}
+
+      </button>
+
     </div>
 
-    <!-- Chips / Filter Row -->
-    <div class="flex overflow-x-auto pb-4 gap-(--spacing-sm) hide-scrollbar">
-      <div v-for="categoria in categorias" :key="categoria.id" class="group cursor-pointer">
-        <button
-          class="bg-[#F9F9F9] cursor-pointer px-5 py-2 rounded-full hover:bg-[#EE6C4B] hover:text-white"
-        >
-          {{ convertirAOracion(categoria.nombre) }}
-        </button>
-      </div>
-    </div>
   </section>
+
 </template>
 
 <script setup>
 import categorias from "@/data/Categories.js";
 import { convertirAOracion } from "@/helpers/text.js";
+
+defineProps({
+  categoriaSeleccionada: String
+});
+
+defineEmits(["change-category"]);
 </script>
