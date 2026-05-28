@@ -10,8 +10,14 @@ export interface Product {
   image: string;
 }
 
+export interface Category {
+  id: string;
+  nombre: string;
+}
 
-export interface Categorie {
-  id: string,
-  nombre: string
+export interface CartItem {
+  id: number;
+  nombre: string;
+  precio: number;
+  cantidad: number;
 }

@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 
 import Main from '@/components/DetailProduct/Main.vue';
 import Reccomendation from '@/components/DetailProduct/Reccomendation.vue';
-import Footer from '@/components/MainView/Footer.vue';
+import Footer from '@/components/core/Footer.vue';
 import NavBar from '@/components/MainView/NavBar.vue';
 
 const route = useRoute();

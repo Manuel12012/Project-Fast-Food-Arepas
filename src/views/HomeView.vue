@@ -1,23 +1,21 @@
 <script setup lang="ts">
-import NavBar from "@/components/MainView/NavBar.vue";
+import NavBar from "@/components/core/NavBar.vue";
 import Hero from "@/components/MainView/Hero.vue";
 import DeliverySpeedBaner from "@/components/MainView/DeliverySpeedBaner.vue";
 import Categories from "@/components/MainView/Categories.vue";
 import MostPopular from "@/components/MainView/MostPopular.vue";
 import NewsLetter from "@/components/MainView/NewsLetter.vue";
-import Footer from "@/components/MainView/Footer.vue";
+import Footer from "@/components/core/Footer.vue";
 </script>
 
 <template>
 
-  <div
-    class="
+  <div class="
       min-h-screen
       bg-background
       text-on-surface
       overflow-x-hidden
-    "
-  >
+    ">
 
     <!-- HEADER -->
 
