@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative min-h-screen flex items-center overflow-hidden pt-24 md:pt-28 px-(--spacing-margin-mobile) md:px-(--spacing-margin-desktop) bg-[#F9F9F9]"
+    class="relative min-h-screen flex items-center overflow-hidden pt-24 md:pt-28 px-(--spacing-margin-mobile) md:px-(--spacing-margin-desktop) bg-[#FFFFF] "
   >
     <div
       class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-(--spacing-xl) items-center w-full"

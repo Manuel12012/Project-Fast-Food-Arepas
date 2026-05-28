@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-[#F9F9F9] py-12">
+  <section class="py-12">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -12,7 +12,7 @@
         <div>
 
           <h2
-            class="text-2xl md:text-4xl font-semibold text-on-surface mb-2"
+            class="text-2xl md:text-xl font-medium text-on-surface mb-2"
           >
             Buscar por categoría
           </h2>

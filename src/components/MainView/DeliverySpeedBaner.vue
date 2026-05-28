@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-primary py-10">
+  <section class="bg-primary py-10 sm:mt-0 md:mt-10 mt-10">
     <div class="max-w-7xl mx-auto px-(--spacing-margin-mobile) md:px-(--spacing-margin-desktop)">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-on-primary">
         <!-- ITEM 1 -->

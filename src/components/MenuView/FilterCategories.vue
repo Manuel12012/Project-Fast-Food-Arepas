@@ -10,7 +10,7 @@
         pb-2
         hide-scrollbar
         md:flex-wrap
-        md:justify-center
+        md:justify-start
       "
     >
 
@@ -49,9 +49,9 @@
 
 </template>
 
-<script setup>
-import categorias from "@/data/Categories.js";
-import { convertirAOracion } from "@/helpers/text.js";
+<script setup lang="ts">
+import categorias from "@/data/Categories.ts";
+import { convertirAOracion } from "@/helpers/text";
 
 defineProps({
   categoriaSeleccionada: String

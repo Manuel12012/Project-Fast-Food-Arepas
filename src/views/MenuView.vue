@@ -39,6 +39,7 @@ const categoriaSeleccionada = ref("arepas");
         md:px-(--spacing-margin-desktop)
         pt-24
         pb-16
+        bg-white
       "
     >
 
