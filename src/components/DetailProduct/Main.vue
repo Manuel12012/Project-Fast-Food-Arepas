@@ -41,7 +41,7 @@ const precioTotal = computed(() => {
         <!-- MAIN IMAGE -->
         <div class="group relative overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-sm">
           <img :src="producto.image" :alt="producto.nombre"
-            class="w-full h-[500px] object-contain transition-transform duration-500 group-hover:scale-105" />
+            class="w-full h-125 object-contain transition-transform duration-500 group-hover:scale-105" />
 
           <div
             class="absolute top-5 left-5 bg-primary text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg">

@@ -73,7 +73,7 @@
             <div
               class="
                 absolute inset-0
-                bg-gradient-to-t
+                bg-linear-to-t
                 from-black/60 via-black/10 to-transparent
                 opacity-70
                 group-hover:opacity-50
