@@ -46,7 +46,7 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
 <!-- Credit Card -->
 <label class="relative cursor-pointer group">
-<input checked="" class="peer sr-only" name="payment" type="radio" value="card"/>
+<input class="peer sr-only" name="payment" type="radio" value="card"/>
 <div class="flex flex-col items-center gap-sm p-md rounded-xl border-2 border-surface-variant bg-surface group-hover:border-primary-fixed transition-all peer-checked:border-primary peer-checked:bg-primary-container peer-checked:text-on-primary-container">
 <span class="material-symbols-outlined text-[32px]" data-icon="credit_card">credit_card</span>
 <span class="font-label-md text-label-md">Credit Card</span>
