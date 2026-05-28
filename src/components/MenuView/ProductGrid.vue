@@ -1,56 +1,80 @@
 <template>
-  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-xl">
-    <div
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <article
       v-for="item in productosFiltrados"
       :key="item.id"
-      class="product-card group bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.08)] transition-all duration-300"
+      @click="irAlProducto(item.id)"
+      class="group cursor-pointer rounded-3xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300"
     >
-      <div class="h-64 overflow-hidden">
+
+      <!-- IMAGE -->
+      <div class="h-64 bg-gray-50 overflow-hidden">
         <img
           :src="item.image"
           :alt="item.nombre"
-          class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
         />
       </div>
 
-      <div class="p-md flex flex-col h-full">
-        <!-- HEADER -->
+      <!-- CONTENT -->
+      <div class="p-5 flex flex-col gap-3">
 
-        <div class="flex justify-between items-start mb-xs">
-          <h3>{{ item.emoji }} {{ item.nombre }}</h3>
+        <!-- TITLE -->
+        <div class="flex justify-between items-start gap-3">
+          <h3 class="font-bold text-lg text-gray-900">
+            {{ item.emoji }} {{ item.nombre }}
+          </h3>
 
-          <span class="text-primary font-bold"> {{ item.precio }}€ </span>
+          <span class="font-bold text-primary whitespace-nowrap">
+            {{ item.precio }}€
+          </span>
         </div>
 
-        <!-- DESCRIPTION -->
-
-        <p class="mb-lg text-sm text-gray-600">
+        <!-- DESCRIPTION (safe null) -->
+        <p v-if="item.descripcion" class="text-sm text-gray-600 line-clamp-2">
           {{ item.descripcion }}
         </p>
 
         <!-- COMBO -->
+        <div
+          v-if="item.combo"
+          class="flex justify-between items-center mt-auto text-sm"
+        >
+          <span class="text-gray-500">
+            Combo {{ item.unidadCombo }}
+          </span>
 
-        <div v-if="item.combo" class="mt-auto flex justify-between">
-          <span> Combo {{ item.unidadCombo }} </span>
-
-          <span class="font-semibold text-primary"> {{ item.combo }}€ </span>
+          <span class="font-semibold text-primary">
+            {{ item.combo }}€
+          </span>
         </div>
+
       </div>
-    </div>
+
+    </article>
+
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import products from "@/data/Grid.ts";
+import { computed } from "vue"
+import { useRouter } from "vue-router"
+import products from "@/data/Grid.ts"
+
+const router = useRouter()
 
 const props = defineProps<{
-  categoria: string;
-}>();
+  categoria: string
+}>()
 
 const productosFiltrados = computed(() => {
-  return (products as import("@/types").Product[]).filter(
-    (item) => item.categoriaId === props.categoria,
-  );
-});
+  return products.filter(
+    (p) => p.categoriaId === props.categoria
+  )
+})
+
+const irAlProducto = (id: number) => {
+  router.push(`/product/${id}`)
+}
 </script>

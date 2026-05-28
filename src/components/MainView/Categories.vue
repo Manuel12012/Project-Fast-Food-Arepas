@@ -1,55 +1,38 @@
 <template>
-  <section class="py-12">
+  <section class="py-20 bg-surface">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <!-- HEADER -->
-
-      <div
-        class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10"
-      >
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
 
         <div>
-
-          <h2
-            class="text-2xl md:text-xl font-medium text-on-surface mb-2"
-          >
+          <h2 class="text-2xl sm:text-3xl font-semibold text-on-surface tracking-tight">
             Buscar por categoría
           </h2>
 
+          <p class="text-sm sm:text-base text-on-surface-variant mt-1">
+            Encuentra rápidamente lo que te apetece
+          </p>
         </div>
 
         <a
           href="/menu"
-          class="
-            flex items-center gap-2
-            text-primary font-semibold
-            hover:underline
-            transition-all
-            w-fit
-          "
+          class="group flex items-center gap-2 text-primary font-semibold transition"
         >
-          Ver todos
+          Ver todas
 
-          <svg
-            width="18"
-            height="18"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <span
+            class="transition-transform group-hover:translate-x-1"
           >
-            <path d="M5 12h14"/>
-            <path d="M13 5l7 7-7 7"/>
-          </svg>
-
+            →
+          </span>
         </a>
 
       </div>
 
       <!-- GRID -->
-
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
 
         <div
           v-for="categoria in categorias.slice(0,4)"
@@ -57,45 +40,59 @@
           class="group cursor-pointer"
         >
 
+          <!-- CARD -->
           <div
             class="
+              relative
               aspect-square
-              rounded-2xl
+              rounded-3xl
               overflow-hidden
-              bg-white
+              bg-neutral-50
+              border border-outline-variant/40
               shadow-sm
-              border border-gray-100
-              flex items-center justify-center
+
               transition-all duration-300
+              group-hover:-translate-y-2
               group-hover:shadow-xl
-              group-hover:-translate-y-1
             "
           >
 
+            <!-- IMAGE -->
             <img
               :src="getImage(categoria.id)"
               :alt="categoria.nombre"
               class="
-                w-full
-                h-full
-                object-cover
-                transition-transform duration-500
+                w-full h-full object-cover
+                transition-transform duration-700
                 group-hover:scale-110
               "
+              loading="lazy"
             />
 
-          </div>
+            <!-- OVERLAY -->
+            <div
+              class="
+                absolute inset-0
+                bg-gradient-to-t
+                from-black/60 via-black/10 to-transparent
+                opacity-70
+                group-hover:opacity-50
+                transition
+              "
+            ></div>
 
-          <p
-            class="
-              mt-4
-              text-center
-              font-semibold
-              text-sm md:text-base
-            "
-          >
-            {{ categoria.nombre }}
-          </p>
+            <!-- LABEL -->
+            <div
+              class="
+                absolute bottom-4 left-4 right-4
+              "
+            >
+              <p class="text-white font-semibold text-base sm:text-lg leading-tight">
+                {{ categoria.nombre }}
+              </p>
+            </div>
+
+          </div>
 
         </div>
 
