@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-import NavBar from "@/components/MainView/NavBar.vue";
+import NavBar from "@/components/core/NavBar.vue";
 import Footer from "@/components/core/Footer.vue";
 
-import FilterCategories from "@/components/MenuView/FilterCategories.vue";
-import ProductGrid from "@/components/MenuView/ProductGrid.vue";
+import FilterCategories from "@/components/Products/FilterCategories.vue";
+import ProductGrid from "@/components/Products/ProductGrid.vue";
 
+// por defecto arepas
 const categoriaSeleccionada = ref("arepas");
 </script>
 

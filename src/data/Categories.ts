@@ -1,6 +1,6 @@
-import type { Categorie } from "@/types";
+import type { Category} from "@/types";
 
-const categorias: Categorie[] = [
+const categorias: Category[] = [
 
   { id: "arepas", nombre: "Arepas" },
 

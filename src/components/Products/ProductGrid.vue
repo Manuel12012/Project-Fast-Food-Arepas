@@ -58,16 +58,20 @@
 </template>
 
 <script setup lang="ts">
+// importaciones
 import { computed } from "vue"
 import { useRouter } from "vue-router"
 import products from "@/data/Grid.ts"
 
+// funcion ruta
 const router = useRouter()
 
+// props
 const props = defineProps<{
   categoria: string
 }>()
 
+// funcion para filtrar
 const productosFiltrados = computed(() => {
   return products.filter(
     (p) => p.categoriaId === props.categoria

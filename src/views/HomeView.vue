@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import NavBar from "@/components/core/NavBar.vue";
-import Hero from "@/components/MainView/Hero.vue";
-import DeliverySpeedBaner from "@/components/MainView/DeliverySpeedBaner.vue";
-import Categories from "@/components/MainView/Categories.vue";
-import MostPopular from "@/components/MainView/MostPopular.vue";
-import NewsLetter from "@/components/MainView/NewsLetter.vue";
+import Hero from "@/components/Main/Hero.vue";
+import DeliverySpeedBaner from "@/components/Main/DeliverySpeedBaner.vue";
+import Categories from "@/components/Main/Categories.vue";
+import MostPopular from "@/components/Main/MostPopular.vue";
+import NewsLetter from "@/components/Main/NewsLetter.vue";
 import Footer from "@/components/core/Footer.vue";
 </script>
 
