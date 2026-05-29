@@ -38,8 +38,8 @@
         </div>
 
         <!-- CART -->
-        <button class="relative p-2 rounded-full hover:bg-surface-container transition">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <RouterLink to="/cart" class="relative p-2 rounded-full hover:bg-surface-container transition"> <svg width="24"
+            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M6 6h15l-1 7H7z" />
             <path d="M6 6L5 3H2" />
             <circle cx="9" cy="20" r="1" />
@@ -50,7 +50,7 @@
          w-5 h-5 rounded-full flex items-center justify-center font-bold">
             {{ totalItems }}
           </span>
-        </button>
+        </RouterLink>
 
         <!-- MOBILE MENU BUTTON -->
         <button @click="showMobileMenu = !showMobileMenu"

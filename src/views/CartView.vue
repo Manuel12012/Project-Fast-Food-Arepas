@@ -1,8 +1,14 @@
 <template>
 
     <NavBar/>
-    <section class="max-w-4xl mx-auto p-6">
+
+
+
+    <section class="max-w-4xl mx-auto p-6 mt-16">
   
+        <RouterLink to="/menu">
+            Volver a menu
+        </RouterLink>
       <h1 class="text-3xl font-bold mb-6">
         Carrito
       </h1>
