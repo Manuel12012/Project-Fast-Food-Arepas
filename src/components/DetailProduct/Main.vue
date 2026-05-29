@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-
+import { useCart } from '@/composables/useCart'
 import products from '@/data/Grid.ts'
 
+
+const { addToCart } = useCart();
 const route = useRoute()
 
 const productId = Number(route.params.id)
@@ -16,6 +18,17 @@ const cantidad = ref(1)
 
 const incrementar = () => {
   cantidad.value++
+}
+
+const handleAddToCart = () => {
+
+  if (!producto.value) return;
+
+  addToCart(
+    producto.value,
+    cantidad.value
+  );
+
 }
 
 const disminuir = () => {
@@ -144,7 +157,7 @@ const precioTotal = computed(() => {
         <!-- ACTIONS -->
         <div class="mt-10 flex flex-col sm:flex-row gap-4">
 
-          <button
+          <button @click="handleAddToCart"
             class="flex-1 bg-primary hover:opacity-90 text-white font-bold py-4 rounded-2xl transition shadow-lg shadow-primary/20">
             Añadir al carrito
           </button>

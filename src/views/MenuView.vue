@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 import NavBar from "@/components/MainView/NavBar.vue";
-import Footer from "@/components/MainView/Footer.vue";
+import Footer from "@/components/core/Footer.vue";
 
 import FilterCategories from "@/components/MenuView/FilterCategories.vue";
 import ProductGrid from "@/components/MenuView/ProductGrid.vue";
