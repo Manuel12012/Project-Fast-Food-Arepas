@@ -1,6 +1,6 @@
 import type { Product } from "@/types";
 
-const products : Product[] = [
+const products: Product[] = [
   // AREPAS
 
   {
@@ -115,10 +115,10 @@ const products : Product[] = [
     categoriaId: "pastelitos",
     nombre: "Frits/Au four",
     emoji: "🥐",
-    descripcion: "Viande hachée / fromage / pomme de terre fromage / poulet / pizza",
-    precio: 2.5,
-    combo: 40,
-    unidadCombo: "20 unid. + Salsa Tártara",
+    descripcion: "Combo de 10 unités + sauce tartare",
+    precio: 20,
+    combo: 35,
+    unidadCombo: "Combo de 20 unités + sauce tartare à",
     image: "/products/Pastelito1.png",
   },
 
@@ -129,10 +129,10 @@ const products : Product[] = [
     categoriaId: "tequeños",
     nombre: "Double Fromage",
     emoji: "🧀",
-    descripcion: "comprend sauce tartare",
+    descripcion: "Combo de 8 pièces + sauce tartare",
     precio: 18,
     combo: 30,
-    unidadCombo: "8 / 16 unités",
+    unidadCombo: "Combo de 20 pièces + sauce tartare a",
     image: "/products/Tequeño1.png",
   },
 
