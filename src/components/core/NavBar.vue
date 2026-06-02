@@ -52,6 +52,10 @@
           </span>
         </RouterLink>
 
+        <RouterLink to="/admin/login" class="text-on-surface hover:text-primary transition-colors font-medium">
+            Administrador
+        </RouterLink>
+
         <!-- MOBILE MENU BUTTON -->
         <button @click="showMobileMenu = !showMobileMenu"
           class="md:hidden p-2 rounded-full hover:bg-surface-container transition">

@@ -5,6 +5,9 @@ import MenuView from '@/views/MenuView.vue'
 import DetailProductView from '@/views/DetailProductView.vue'
 import PayView from '@/views/PayView.vue'
 import CartView from '@/views/CartView.vue'
+import AdminLogin from '@/views/admin/AdminLogin.vue'
+import AdminDashboard from '@/views/admin/AdminDashboard.vue'
+import AdminProducts from '@/views/admin/AdminProducts.vue'
 
 const routes = [
   {
@@ -34,6 +37,20 @@ const routes = [
     path: "/cart",
     name: "cart",
     component: CartView
+  },
+  {
+    path: "/admin/login",
+    component: AdminLogin
+  },
+
+  {
+    path: "/admin/dashboard",
+    component: AdminDashboard
+  },
+
+  {
+    path: "/admin/products",
+    component: AdminProducts
   }
 ]
 
