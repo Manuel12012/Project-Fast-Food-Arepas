@@ -1,12 +1,21 @@
 export interface Product {
-  id: number;
-  categoriaId: string;
-  nombre: string;
-  descripcion: string | null;
-  precio: number;
-  combo: number | null;
-  unidadCombo: string | null;
-  image: string;
+
+  id: number
+
+  categoriaId: string
+
+  nombre: string
+
+  descripcion: string | null
+
+  precio: number
+
+  combo: number | null
+
+  unidadCombo: string | null
+
+  image: string | null
+
 }
 
 export interface Category {

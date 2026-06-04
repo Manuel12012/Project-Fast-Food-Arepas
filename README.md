@@ -9,3 +9,7 @@
   image: string;
 }
 
+descripcion
+combo
+unidadCombo
+  

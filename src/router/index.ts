@@ -1,60 +1,55 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { useAuthStore } from '@/stores/authStore'
+import AdminDashboard from '@/views/admin/AdminDashboard.vue'
+import AdminProducts from '@/views/admin/AdminProducts.vue'
 import HomeView from '@/views/HomeView.vue'
 import MenuView from '@/views/MenuView.vue'
 import DetailProductView from '@/views/DetailProductView.vue'
 import PayView from '@/views/PayView.vue'
 import CartView from '@/views/CartView.vue'
 import AdminLogin from '@/views/admin/AdminLogin.vue'
-import AdminDashboard from '@/views/admin/AdminDashboard.vue'
-import AdminProducts from '@/views/admin/AdminProducts.vue'
+
+// ...tus imports de vistas
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
+  { path: '/', name: 'home', component: HomeView },
+  { path: '/menu', name: 'menu', component: MenuView },
+  { path: '/product/:id', name: 'product', component: DetailProductView },
+  { path: '/pay', name: 'pay', component: PayView },
+  { path: '/cart', name: 'cart', component: CartView },
+  { path: '/admin/login', name: 'admin-login', component: AdminLogin },
 
+  // ✅ rutas protegidas con meta
   {
-    path: '/menu',
-    name: 'menu',
-    component: MenuView
-  },
-
-  {
-    // detalle del producto
-    path: '/product/:id',
-    name: 'product',
-    component: DetailProductView
-  },
-
-  {
-    path: '/pay',
-    name: 'pay',
-    component: PayView
-  }, {
-    path: "/cart",
-    name: "cart",
-    component: CartView
+    path: '/admin/dashboard',
+    component: AdminDashboard,
+    meta: { requiresAuth: true }
   },
   {
-    path: "/admin/login",
-    component: AdminLogin
-  },
-
-  {
-    path: "/admin/dashboard",
-    component: AdminDashboard
-  },
-
-  {
-    path: "/admin/products",
-    component: AdminProducts
+    path: '/admin/products',
+    component: AdminProducts,
+    meta: { requiresAuth: true }
   }
 ]
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
+// ✅ guard global
+router.beforeEach(async (to) => {
+  if (!to.meta.requiresAuth) return true
+
+  const authStore = useAuthStore()
+
+  if (authStore.authenticated) return true
+
+  await authStore.fetchUser()
+
+  if (authStore.authenticated) return true
+
+  return { name: 'admin-login' }
+})
+
+export default router
