@@ -37,6 +37,8 @@
         </div>
       </div>
     </article>
+
+    
   </section>
 </template>
 
@@ -57,6 +59,7 @@ const props = defineProps<{
   categoria: string;
 }>();
 
+
 const productosFiltrados = computed(() => {
   return store.products.filter((item) => item.categoriaId === props.categoria);
 });
@@ -64,4 +67,5 @@ const productosFiltrados = computed(() => {
 const irAlProducto = (id: number) => {
   router.push(`/product/${id}`);
 };
+
 </script>

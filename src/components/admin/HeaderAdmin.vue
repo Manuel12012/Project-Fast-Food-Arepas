@@ -2,7 +2,7 @@
   <div class="flex justify-between items-end mb-xl">
     <div>
       <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight mb-xs">
-        Control de inventario
+        Inventario
       </h1>
       <p class="font-body-lg text-body-lg text-on-surface-variant">
         Gestiona tus auténticos sabores latinos y tus niveles de existencias.

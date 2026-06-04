@@ -30,10 +30,6 @@ export const useAuthStore = defineStore("auth", {
 
       } catch (error: any) {
 
-        console.log("STATUS:", error.response?.status);
-        console.log("DATA:", error.response?.data);
-        console.log("ERRORS:", error.response?.data?.errors);
-
         this.user = null;
         this.authenticated = false;
 
@@ -46,11 +42,14 @@ export const useAuthStore = defineStore("auth", {
     },
 
     async logout() {
+      try {
+        await api.post('/api/logout')
+      } catch (error) {
+        console.warn('Logout backend falló, limpiando igual:', error)
+      }
 
-      await api.post("/api/logout");
-
-      this.user = null;
-      this.authenticated = false;
+      this.user = null
+      this.authenticated = false
     },
 
     async fetchUser() {

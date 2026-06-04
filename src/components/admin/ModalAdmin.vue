@@ -39,14 +39,14 @@
             >
               <option value="">--- Seleccione una categoria ---</option>
               <option value="arepas">Arepas</option>
-              <option>Entradas</option>
+              <option value="empanadas">Empanadas</option>
               <option>Bebidas</option>
               <option>Postres</option>
             </select>
           </div>
           <div>
             <label class="block font-label-lg text-label-lg text-on-surface-variant mb-xs"
-              >Precio ($)</label
+              >Precio (EUR)</label
             >
             <input
               class="w-full bg-surface-container-low border border-outline rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md"
@@ -151,7 +151,7 @@ const submitProduct = async () => {
       formData.append("image", imageFile.value);
     }
 
-    const response = await api.post("/products", formData);
+    const response = await api.post("/api/products", formData);
 
     console.log(response.data);
   } catch (error: any) {

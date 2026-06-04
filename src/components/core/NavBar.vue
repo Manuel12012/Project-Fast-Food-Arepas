@@ -10,7 +10,7 @@
 
       <!-- DESKTOP NAV -->
       <div class="hidden md:flex items-center gap-8">
-        <a href="#carte" class="text-on-surface hover:text-primary transition-colors font-medium">
+        <a href="/menu" class="text-on-surface hover:text-primary transition-colors font-medium">
           Notre Carte
         </a>
 
@@ -18,9 +18,9 @@
           Ofertas
         </a>
 
-        <a href="/products" class="text-on-surface hover:text-primary transition-colors font-medium">
+        <!-- <a href="/products" class="text-on-surface hover:text-primary transition-colors font-medium">
           Seguimiento del pedido
-        </a>
+        </a> -->
       </div>
 
       <!-- ACTIONS -->
@@ -53,7 +53,7 @@
         </RouterLink>
 
         <RouterLink to="/admin/login" class="text-on-surface hover:text-primary transition-colors font-medium">
-            Administrador
+          Administrador
         </RouterLink>
 
         <!-- MOBILE MENU BUTTON -->

@@ -30,13 +30,25 @@
                 <span class="font-label-lg text-label-lg">Settings</span>
             </a>
         </nav>
-        <div class="pt-md border-t border-outline-variant">
+        <div class="pt-md border-t border-outline-variant flex-col">
             <button
-                class="w-full bg-primary-container text-on-primary-container font-bold py-sm px-md rounded-xl shadow-md hover:bg-primary transition-all flex items-center justify-center gap-xs active:scale-95"
-                onclick="toggleModal('productModal')">
-                <span class="material-symbols-outlined">add</span>
-                <span class="font-label-lg text-label-lg">Add New Product</span>
+            class="bg-primary-container text-white px-xl py-sm rounded-lg flex items-center gap-xs shadow-lg hover:shadow-primary-container/40 transition-all hover:-translate-y-0.5 active:scale-95"            @click="handleLogout">
+                Cerrar Sesion
             </button>
         </div>
     </aside>
 </template>
+
+<script setup lang="ts">
+import { useAuthStore } from '@/stores/authStore'
+import { useRouter } from 'vue-router'
+
+const auth = useAuthStore()
+const router = useRouter()
+
+const handleLogout = async () => {
+    await auth.logout()
+    router.push('/admin/login')
+}
+
+</script>
