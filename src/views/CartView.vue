@@ -3,11 +3,11 @@
 
   <section class="max-w-4xl mx-auto p-6 mt-16">
 
-    <RouterLink to="/menu">
-      Volver a menu
+    <RouterLink to="/menu" class="bg-[#EF6C22] text-white text-lg px-4 py-2 rounded-md">
+      Volver al menú
     </RouterLink>
 
-    <h1 class="text-3xl font-bold mb-6">
+    <h1 class="text-3xl font-bold mb-6 mt-6">
       Carrito
     </h1>
 
@@ -78,6 +78,10 @@
 
         <input v-model="phone" type="text" placeholder="Celular" class="border p-2 w-full rounded" />
 
+        <input v-model="name" type="text" placeholder="Nombre" class="border p-2 w-full rounded" />
+
+        <input v-model="delivery" type="text" placeholder="Tipo de entrega" class="border p-2 w-full rounded" />
+
         <button @click="checkout" class="bg-black text-white px-4 py-3 rounded w-full">
           Finalizar compra
         </button>
@@ -101,6 +105,8 @@ const cartStore = useCartStore()
 
 const email = ref("")
 const phone = ref("")
+const name = ref("")
+const delivery = ref("")
 
 const checkout = async () => {
   if (!email.value || !phone.value) {
@@ -108,7 +114,7 @@ const checkout = async () => {
     return
   }
 
-  await cartStore.checkout(email.value, phone.value)
+  await cartStore.checkout(email.value, phone.value, name.value, delivery.value)
 }
 
 </script>

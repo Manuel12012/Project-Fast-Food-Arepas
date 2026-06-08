@@ -52,11 +52,13 @@ export const useCartStore = defineStore("cart", {
             localStorage.removeItem("cart")
         },
 
-        async checkout(email: string, phone: string) {
+        async checkout(email: string, phone: string, name: string, delivery: string) {
             try {
                 const payload = {
                     email,
                     phone,
+                    name,
+                    delivery,
                     items: this.cart.map(p => ({
                         product_id: p.id,
                         name: p.nombre,
@@ -64,14 +66,10 @@ export const useCartStore = defineStore("cart", {
                         quantity: p.cantidad
                     }))
                 }
-                                const { data } = await api.post("/api/orders", payload)
-                console.log("✅ Order creada, limpiando carrito...")
+                const { data } = await api.post("/api/orders", payload)
                 this.clearCart()
-                console.log("🛒 Cart después de limpiar:", this.cart)
-                console.log("💾 LocalStorage después:", localStorage.getItem("cart"))
                 return data
             } catch (error) {
-                console.error("checkout error:", error)
             }
         }
     }
