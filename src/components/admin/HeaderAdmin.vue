@@ -15,7 +15,7 @@
         Filtros
       </button>
       <button
-        class="bg-primary-container text-white px-xl py-sm rounded-lg flex items-center gap-xs font-headline-md text-headline-md shadow-lg hover:shadow-primary-container/40 transition-all hover:-translate-y-0.5 active:scale-95"
+        class="bg-primary-container text-white px-xl py-sm rounded-lg cursor-pointer flex items-center gap-xs font-headline-md text-headline-md shadow-lg hover:shadow-primary-container/40 transition-all hover:-translate-y-0.5 active:scale-95"
         @click="$emit('open-modal')"
       >
         Nuevo Producto

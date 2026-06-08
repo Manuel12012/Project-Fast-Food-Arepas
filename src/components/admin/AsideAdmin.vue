@@ -6,9 +6,9 @@
         <span class="font-headline-lg text-primary font-black">Q'Bocao</span>
         <p class="text-on-surface-variant/70">Management Portal</p>
       </div>
-  
+
       <nav class="flex-1 space-y-xs">
-  
+
         <!-- PRODUCTS -->
         <RouterLink
           to="/admin/products"
@@ -19,7 +19,7 @@
         >
           Productos
         </RouterLink>
-  
+
         <!-- ORDERS -->
         <RouterLink
           to="/admin/orders"
@@ -30,12 +30,12 @@
         >
           Ordenes
         </RouterLink>
-  
+
       </nav>
-  
+
       <div class="pt-md border-t border-outline-variant">
         <button
-          class="bg-primary-container text-white px-xl py-sm rounded-lg w-full"
+          class="bg-primary-container text-white px-xl py-sm rounded-lg w-full cursor-pointer"
           @click="handleLogout"
         >
           Cerrar Sesion

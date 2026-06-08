@@ -16,6 +16,7 @@ export const useProductStore = defineStore("products", {
   state: () => ({
     products: [] as Product[],
     product: null as Product | null,
+    totalProducts: 0 as number,
     loading: false,
   }),
 
@@ -118,7 +119,21 @@ export const useProductStore = defineStore("products", {
         this.loading = false
       }
     },
+    // =========================
+    // TOTAL PRODUCTS
+    // =========================
+    async countProducts() {
+      this.loading = true
 
+      try {
+        const { data } = await api.get(`/api/products/total-productos`)
+        this.totalProducts = data.total
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.loading = false
+      }
+    },
     // =========================
     // HELPERS
     // =========================

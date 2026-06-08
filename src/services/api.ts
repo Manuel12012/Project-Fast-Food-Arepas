@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/", // ✅ mismo origen, sin dominio externo
+  baseURL: "/", 
   withCredentials: true,
   withXSRFToken: true,
 });
