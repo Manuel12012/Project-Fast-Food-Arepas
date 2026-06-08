@@ -8,6 +8,7 @@ import DetailProductView from '@/views/DetailProductView.vue'
 import PayView from '@/views/PayView.vue'
 import CartView from '@/views/CartView.vue'
 import AdminLogin from '@/views/admin/AdminLogin.vue'
+import AdminOrders from '@/views/admin/AdminOrders.vue'
 
 // ...tus imports de vistas
 
@@ -19,7 +20,8 @@ const routes = [
   { path: '/cart', name: 'cart', component: CartView },
   { path: '/admin/login', name: 'admin-login', component: AdminLogin },
 
-  // ✅ rutas protegidas con meta
+
+  // rutas protegidas con meta
   {
     path: '/admin/dashboard',
     component: AdminDashboard,
@@ -29,6 +31,10 @@ const routes = [
     path: '/admin/products',
     component: AdminProducts,
     meta: { requiresAuth: true }
+  },{
+    path: '/admin/orders',
+    component: AdminOrders,
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -37,7 +43,7 @@ const router = createRouter({
   routes
 })
 
-// ✅ guard global
+// guard global
 router.beforeEach(async (to) => {
   if (!to.meta.requiresAuth) return true
 

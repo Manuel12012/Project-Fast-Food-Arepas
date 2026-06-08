@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import { useCart } from "@/composables/useCart";
 import { useProductStore } from "@/stores/productStore";
+import { useCartStore } from "@/stores/carthStore"
+const cartStore = useCartStore()
 
 const store = useProductStore();
-const { addToCart } = useCart();
 const route = useRoute();
 
 const productId = Number(route.params.id);
@@ -23,10 +23,9 @@ const incrementar = () => {
 };
 
 const handleAddToCart = () => {
-  if (!producto.value) return;
-
-  addToCart(producto.value, cantidad.value);
-};
+  if (!producto.value) return
+  cartStore.addToCart(producto.value, cantidad.value) // ← pasa cantidad aparte
+}
 
 const disminuir = () => {
   if (cantidad.value > 1) {

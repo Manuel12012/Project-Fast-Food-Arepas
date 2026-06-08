@@ -1,161 +1,182 @@
 <template>
-  <div v-if="isModalOpen" class="fixed inset-0 z-60 flex items-center justify-center">
-    <div
-      class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm"
-      @click="$emit('close-modal')"
-    ></div>
-    <div
-      class="relative bg-surface p-8 rounded-2xl shadow-xl w-175 max-w-[95vw] border border-outline-variant/50 animate-in fade-in zoom-in duration-300"
-    >
-      <div class="flex justify-between items-center mb-md">
-        <h2 class="font-headline-lg text-headline-lg text-on-surface">Nuevo Producto</h2>
-        <button
-          class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant p-base rounded-full transition-all"
-          @click="$emit('close-modal')"
-        >
-          X
-        </button>
-      </div>
-      <form class="space-y-md" @submit.prevent="submitProduct">
-        <div>
-          <label class="block font-label-lg text-label-lg text-on-surface-variant mb-xs"
-            >Nombre del Producto</label
+    <div v-if="isModalOpen" class="fixed inset-0 z-60 flex items-center justify-center">
+      <div
+        class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm"
+        @click="close"
+      ></div>
+  
+      <div
+        class="relative bg-surface p-8 rounded-2xl shadow-xl w-175 max-w-[95vw] border border-outline-variant/50 animate-in fade-in zoom-in duration-300"
+      >
+        <!-- TITLE -->
+        <div class="flex justify-between items-center mb-md">
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">
+            {{ isEditMode ? "Editar Producto" : "Nuevo Producto" }}
+          </h2>
+  
+          <button
+            class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant p-base rounded-full transition-all"
+            @click="close"
           >
-          <input
-            class="w-full bg-surface-container-low border border-outline rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md text-body-md"
-            placeholder="Ej: Empanada de Pollo"
-            v-model="nombre"
-            type="text"
-          />
+            X
+          </button>
         </div>
-        <div class="grid grid-cols-2 gap-md">
+  
+        <!-- FORM -->
+        <form class="space-y-md" @submit.prevent="submitProduct">
+  
+          <!-- NOMBRE -->
           <div>
-            <label class="block font-label-lg text-label-lg text-on-surface-variant mb-xs"
-              >Categoría</label
-            >
-            <select
-              v-model="categoriaId"
-              class="w-full bg-surface-container-low border border-outline rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md"
-            >
-              <option value="">--- Seleccione una categoria ---</option>
-              <option value="arepas">Arepas</option>
-              <option value="empanadas">Empanadas</option>
-              <option>Bebidas</option>
-              <option>Postres</option>
-            </select>
+            <label class="block mb-xs">Nombre del Producto</label>
+            <input v-model="nombre" class="input" type="text" />
           </div>
+  
+          <!-- CATEGORIA + PRECIO -->
+          <div class="grid grid-cols-2 gap-md">
+            <div>
+              <label class="block mb-xs">Categoría</label>
+              <select v-model="categoriaId" class="input">
+                <option value="">Seleccione</option>
+                <option value="arepas">Arepas</option>
+                <option value="empanadas">Empanadas</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="postres">Postres</option>
+              </select>
+            </div>
+  
+            <div>
+              <label class="block mb-xs">Precio</label>
+              <input v-model="precio" type="number" class="input" />
+            </div>
+          </div>
+  
+          <!-- DESCRIPCION -->
           <div>
-            <label class="block font-label-lg text-label-lg text-on-surface-variant mb-xs"
-              >Precio (EUR)</label
-            >
-            <input
-              class="w-full bg-surface-container-low border border-outline rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md"
-              placeholder="0.00"
-              step="0.01"
-              type="number"
-              v-model="precio"
+            <label class="block mb-xs">Descripción</label>
+            <input v-model="descripcion" type="text" class="input" />
+          </div>
+  
+          <!-- IMAGE -->
+          <div>
+            <label class="block mb-xs">Imagen</label>
+            <input type="file" accept="image/*" @change="handleImage" />
+  
+            <img
+              v-if="previewImage"
+              :src="previewImage"
+              class="mt-4 w-40 h-40 object-cover rounded-lg border"
             />
           </div>
-        </div>
-        <div>
-          <label class="block font-label-lg text-label-lg text-on-surface-variant mb-xs"
-            >Descripcion</label
-          >
-          <input
-            type="text"
-            placeholder="Ingrese una descripcion"
-            v-model="descripcion"
-            class="w-full bg-surface-container-low border border-outline rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md"
-          />
-        </div>
-        <div>
-          <label class="block font-label-lg text-label-lg text-on-surface-variant mb-xs"
-            >Imagen del Producto</label
-          >
-          <input type="file" accept="image/*" @change="handleImage" />
-
-          <img
-            v-if="previewImage"
-            :src="previewImage"
-            class="mt-4 w-40 h-40 object-cover rounded-lg border"
-          />
-        </div>
-        <div class="pt-md flex gap-md">
-          <button
-            class="flex-1 px-md py-sm border border-outline text-on-surface font-bold rounded-lg hover:bg-surface-variant transition-all"
-            @click="$emit('close-modal')"
-            type="button"
-          >
-            Cancelar
-          </button>
-          <button
-            class="flex-1 px-md py-sm bg-primary-container text-white font-bold rounded-lg hover:bg-primary shadow-md hover:shadow-primary-container/40 transition-all"
-            type="submit"
-          >
-            Guardar Producto
-          </button>
-        </div>
-      </form>
+  
+          <!-- ACTIONS -->
+          <div class="flex gap-md pt-md">
+            <button type="button" class="btn-secondary" @click="close">
+              Cancelar
+            </button>
+  
+            <button type="submit" class="btn-primary">
+              {{ isEditMode ? "Actualizar" : "Guardar" }}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-</template>
-
-<script setup lang="ts">
-defineProps({
-  isModalOpen: Boolean,
-});
-
-defineEmits(["close-modal"]);
-
-import { ref } from "vue";
-import api from "@/services/api";
-
-const nombre = ref("");
-const categoriaId = ref("");
-const descripcion = ref("");
-const precio = ref("");
-const combo = ref("");
-const unidadCombo = ref("");
-const previewImage = ref("");
-const imageFile = ref<File | null>(null);
-
-const handleImage = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-
-  if (target.files) {
-    imageFile.value = target.files[0];
-
-    console.log(imageFile.value);
-
-    console.log(imageFile.value.type);
-  }
-};
-
-const submitProduct = async () => {
-  try {
-    const formData = new FormData();
-
-    formData.append("categoriaId", categoriaId.value);
-
-    formData.append("nombre", nombre.value);
-
-    formData.append("descripcion", descripcion.value);
-
-    formData.append("precio", precio.value);
-
-    formData.append("combo", combo.value);
-
-    formData.append("unidadCombo", unidadCombo.value);
-
-    if (imageFile.value) {
-      formData.append("image", imageFile.value);
+  </template>
+  
+  <script setup lang="ts">
+  import { ref, watch, computed } from "vue"
+  import { useProductStore } from "@/stores/productStore"
+  
+  const props = defineProps<{
+    isModalOpen: boolean
+    productToEdit?: any
+  }>()
+  
+  const emit = defineEmits(["close-modal"])
+  
+  const store = useProductStore()
+  
+  // FORM STATE
+  const nombre = ref("")
+  const categoriaId = ref("")
+  const descripcion = ref("")
+  const precio = ref("")
+  const imageFile = ref<File | null>(null)
+  const previewImage = ref("")
+  
+  // MODE
+  const isEditMode = computed(() => !!props.productToEdit)
+  
+  // FILL FORM WHEN EDITING
+  watch(
+    () => props.productToEdit,
+    (product) => {
+      if (product) {
+        nombre.value = product.nombre
+        categoriaId.value = product.categoriaId
+        descripcion.value = product.descripcion
+        precio.value = product.precio
+        previewImage.value = product.image
+      }
+    },
+    { immediate: true }
+  )
+  
+  // IMAGE
+  const handleImage = (event: Event) => {
+    const file = (event.target as HTMLInputElement).files?.[0]
+  
+    if (file) {
+      imageFile.value = file
+      previewImage.value = URL.createObjectURL(file)
     }
-
-    const response = await api.post("/api/products", formData);
-
-    console.log(response.data);
-  } catch (error: any) {
-    console.log(error.response.data.errors);
   }
-};
-</script>
+  
+  // CLOSE
+  const close = () => {
+    emit("close-modal")
+  }
+  
+  // SUBMIT (CREATE / UPDATE)
+  const submitProduct = async () => {
+    const payload = {
+      categoriaId: categoriaId.value,
+      nombre: nombre.value,
+      descripcion: descripcion.value,
+      precio: precio.value,
+      image: imageFile.value
+    }
+  
+    if (isEditMode.value) {
+      await store.updateProduct(props.productToEdit.id, payload)
+    } else {
+      await store.createProduct(payload)
+    }
+  
+    close()
+  }
+  </script>
+  
+  <style scoped>
+  .input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .btn-primary {
+    flex: 1;
+    padding: 10px;
+    background: black;
+    color: white;
+    border-radius: 8px;
+  }
+  
+  .btn-secondary {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  </style>

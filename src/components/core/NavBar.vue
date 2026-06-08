@@ -101,18 +101,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { useCart } from "@/composables/useCart";
+import { computed, ref } from "vue"
+import { useCartStore } from "@/stores/carthStore"
 
-const showMobileMenu = ref(false);
+const showMobileMenu = ref(false)
 
-const { cart } = useCart();
+const cartStore = useCartStore()
 
 const totalItems = computed(() => {
-  return cart.value.reduce(
-    (acc, item) => acc + item.cantidad,
-    0
-  );
-});
-
+  return cartStore.cart.reduce((acc, item) => acc + item.cantidad, 0)
+})
 </script>
