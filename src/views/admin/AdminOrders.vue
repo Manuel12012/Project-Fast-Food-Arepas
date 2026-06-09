@@ -154,6 +154,25 @@ onMounted(() => {
           </div>
         </div>
 
+        <div
+          class="flex items-center gap-3 bg-gray-50 rounded-xl p-3"
+        >
+          <div
+            class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center"
+          >
+            📱
+          </div>
+
+          <div>
+            <p class="text-xs text-gray-500">
+              Direccion
+            </p>
+            <p class="font-medium">
+              {{ order.address }}
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
 

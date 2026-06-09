@@ -80,7 +80,13 @@
 
         <input v-model="name" type="text" placeholder="Nombre" class="border p-2 w-full rounded" />
 
-        <input v-model="delivery" type="text" placeholder="Tipo de entrega" class="border p-2 w-full rounded" />
+        <select name="delivery" id="delivery" v-model="delivery" class="border p-2 w-full rounded">
+          <option value="">-- Seleccione Tipo de Entrega --</option>
+          <option value="delivery">Delivery</option>
+          <option value="tienda">Recojo en tienda</option>
+        </select>
+
+        <DeliveryLocationPicker @location-selected="handleLocation" />
 
         <button @click="checkout" class="bg-black text-white px-4 py-3 rounded w-full">
           Finalizar compra
@@ -100,6 +106,7 @@ import Footer from "@/components/core/Footer.vue"
 import NavBar from "@/components/core/NavBar.vue"
 import { onMounted, ref } from "vue"
 import { useCartStore } from "@/stores/carthStore"
+import DeliveryLocationPicker from "@/components/core/DeliveryLocationPicker.vue"
 
 const cartStore = useCartStore()
 
@@ -107,14 +114,53 @@ const email = ref("")
 const phone = ref("")
 const name = ref("")
 const delivery = ref("")
+const address = ref("")
+const latitude = ref<number | null>(null)
+const longitude = ref<number | null>(null)
 
 const checkout = async () => {
-  if (!email.value || !phone.value) {
-    alert("Completa tus datos")
+  // Validaciones
+  if (!email.value || !phone.value || !name.value) {
+    alert("Completa todos tus datos")
     return
   }
 
-  await cartStore.checkout(email.value, phone.value, name.value, delivery.value)
+  if (!delivery.value) {
+    alert("Selecciona un tipo de entrega")
+    return
+  }
+
+  if (latitude.value === null || longitude.value === null) {
+    alert("Selecciona una ubicación en el mapa")
+    return
+  }
+
+  try {
+    const data = await cartStore.checkout(
+      email.value,
+      phone.value,
+      name.value,
+      delivery.value,
+      address.value,
+      latitude.value,
+      longitude.value
+    )
+
+    if (data) {
+      alert(`✅ Orden #${data.order.id} creada exitosamente`)
+      // Opcional: redirigir
+      // router.push("/menu")
+    }
+  } catch (error) {
+    alert("Error al procesar la orden")
+    console.error(error)
+  }
+}
+const handleLocation = (location: any) => {
+  console.log("RECIBIDO DEL MAPA", location)
+  address.value = location.address
+  latitude.value = location.latitude
+  longitude.value = location.longitude
 }
 
 </script>
