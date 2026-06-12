@@ -20,7 +20,6 @@ const categorias: Category[] = [
 
   { id: "mini-desserts", nombre: "Mini Desserts" },
 
-
   { id: "menu", nombre: "Menu" },
 
   { id: "noel", nombre: "Noël" }

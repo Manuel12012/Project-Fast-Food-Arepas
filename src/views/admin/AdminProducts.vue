@@ -11,13 +11,13 @@ import TableAdmin from '@/components/admin/TableAdmin.vue'
 const isModalOpen = ref(false)
 const selectedProduct = ref(null)
 
-// 🔥 abrir modal en modo CREATE
+// abrir modal en modo CREATE
 const openCreateModal = () => {
   selectedProduct.value = null
   isModalOpen.value = true
 }
 
-// 🔥 abrir modal en modo EDIT
+// abrir modal en modo EDIT
 const editProduct = (product) => {
   selectedProduct.value = product
   isModalOpen.value = true
@@ -36,7 +36,7 @@ const closeModal = () => {
   <div class="flex pt-16 min-h-screen">
     <AsideAdmin />
 
-    <main class="ml-64 flex-1 p-margin-desktop">
+    <main class="flex-1 ml-64 p-6 bg-gray-50">
 
       <!-- HEADER -->
       <HeaderAdmin @open-modal="openCreateModal" />
@@ -47,11 +47,7 @@ const closeModal = () => {
       <TableAdmin @edit-product="editProduct" />
 
       <!-- MODAL -->
-      <ModalAdmin
-        :isModalOpen="isModalOpen"
-        :productToEdit="selectedProduct"
-        @close-modal="closeModal"
-      />
+      <ModalAdmin :isModalOpen="isModalOpen" :productToEdit="selectedProduct" @close-modal="closeModal" />
 
     </main>
   </div>

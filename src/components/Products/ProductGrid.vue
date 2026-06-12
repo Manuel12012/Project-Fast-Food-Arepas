@@ -11,7 +11,7 @@
         <img
           :src="`http://127.0.0.1:8000/storage/${item.image}`"
           :alt="item.nombre"
-          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
       </div>
 

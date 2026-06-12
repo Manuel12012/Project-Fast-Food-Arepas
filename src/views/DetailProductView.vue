@@ -19,7 +19,7 @@ console.log(id);
     <div>
         <NavBar />
         <Main />
-        <Reccomendation />
+        <!-- <Reccomendation /> -->
         <Footer />
     </div>
 </template>

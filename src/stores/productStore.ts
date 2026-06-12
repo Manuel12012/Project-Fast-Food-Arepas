@@ -17,6 +17,7 @@ export const useProductStore = defineStore("products", {
     products: [] as Product[],
     product: null as Product | null,
     totalProducts: 0 as number,
+    totalCategories: 0 as number,
     loading: false,
   }),
 
@@ -134,6 +135,22 @@ export const useProductStore = defineStore("products", {
         this.loading = false
       }
     },
+    // =========================
+    // TOTAL CATEGORIES
+    // =========================
+    async countCategories() {
+      this.loading = true
+
+      try {
+        const { data } = await api.get(`/api/products/count-categorias`)
+        this.totalCategories = data.total
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.loading = false
+      }
+    },
+
     // =========================
     // HELPERS
     // =========================

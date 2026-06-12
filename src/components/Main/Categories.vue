@@ -37,7 +37,7 @@
         <div
           v-for="categoria in categorias.slice(0,4)"
           :key="categoria.id"
-          class="group cursor-pointer"
+          class="group"
         >
 
           <!-- CARD -->

@@ -53,7 +53,7 @@
         </RouterLink>
 
         <RouterLink to="/admin/login" class="text-on-surface hover:text-primary transition-colors font-medium">
-          Administrador
+          Admin
         </RouterLink>
 
         <!-- MOBILE MENU BUTTON -->

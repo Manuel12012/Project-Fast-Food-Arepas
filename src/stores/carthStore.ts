@@ -3,7 +3,8 @@ import api from "@/services/api"
 
 export const useCartStore = defineStore("cart", {
     state: () => ({
-        cart: JSON.parse(localStorage.getItem("cart") ?? "[]") as any[]
+        cart: JSON.parse(localStorage.getItem("cart") ?? "[]") as any[],
+        loading: false
     }),
 
     getters: {
@@ -34,6 +35,7 @@ export const useCartStore = defineStore("cart", {
 
         decrementQuantity(id: number) {
             const item = this.cart.find(p => p.id === id)
+
             if (!item) return
             item.cantidad--
             if (item.cantidad <= 0) {
@@ -52,16 +54,21 @@ export const useCartStore = defineStore("cart", {
             localStorage.removeItem("cart")
         },
 
-        async checkout(email: string, phone: string, name: string, delivery: string, address: string,
-            latitude: number, longitude: number
+        async checkout(
+            email: string,
+            phone: string,
+            name: string,
+            delivery: string,
+            latitude: number,
+            longitude: number
         ) {
             try {
+
                 const payload = {
                     email,
                     phone,
                     name,
                     delivery,
-                    address,
                     latitude,
                     longitude,
                     items: this.cart.map(p => ({
@@ -71,12 +78,24 @@ export const useCartStore = defineStore("cart", {
                         quantity: p.cantidad
                     }))
                 }
-                console.log("PAYLOAD", payload)
-                const { data } = await api.post("/api/orders", payload)
+
+                const { data } = await api.post(
+                    "/api/orders",
+                    payload
+                )
+
                 this.clearCart()
+
                 return data
+
             } catch (error) {
-                console.log("FULL ERROR:", error)
+
+                console.error(error)
+                throw error
+
+            } finally {
+
+            }
         }
     }
-}})
+})

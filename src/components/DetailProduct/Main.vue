@@ -58,7 +58,7 @@ const precioTotal = computed(() => {
           <img
             :src="imageUrl"
             :alt="producto.nombre || ''"
-            class="w-full h-125 object-contain transition-transform duration-500 group-hover:scale-105"
+            class="w-full h-125 object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
 
@@ -159,9 +159,7 @@ const precioTotal = computed(() => {
             Añadir al carrito
           </button>
 
-          <button class="px-6 py-4 rounded-2xl border border-gray-300 hover:bg-gray-50 transition">
-            ❤️
-          </button>
+
         </div>
 
         <!-- EXTRA INFO -->

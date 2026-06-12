@@ -19,6 +19,17 @@ export const useOrderStore = defineStore("orders", {
       } finally {
         this.loading = false
       }
+    },
+    async updateOrderStatus(
+      orderId: number,
+      status: string
+    ) {
+      await api.put(`/api/orders/${orderId}`, {
+        status
+      })
+
+      await this.fetchOrders()
     }
+
   }
 })
