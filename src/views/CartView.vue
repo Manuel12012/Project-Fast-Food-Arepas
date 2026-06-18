@@ -159,6 +159,23 @@
                 </option>
               </select>
 
+              <div class="border rounded-xl p-4 bg-gray-50">
+
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" v-model="isScheduled" />
+
+                  <span>
+                    Programar pedido
+                  </span>
+                </label>
+
+                <div v-if="isScheduled" class="mt-3">
+                  <input v-model="scheduledFor" type="datetime-local"
+                    class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+                </div>
+
+              </div>
+
             </div>
 
           </div>
@@ -213,6 +230,8 @@ const name = ref("")
 const delivery = ref("")
 const latitude = ref<number | null>(null)
 const longitude = ref<number | null>(null)
+const isScheduled = ref(false)
+const scheduledFor = ref("")
 
 const checkout = async () => {
   if (!email.value || !phone.value || !name.value) {
@@ -230,6 +249,18 @@ const checkout = async () => {
     alert("Selecciona una ubicación en el mapa")
     return
   }
+  // validacion fecha programada
+  if (isScheduled.value && !scheduledFor.value) {
+    alert("Selecciona una fecha y hora para el pedido")
+    return
+  }
+  if (
+    isScheduled.value &&
+    new Date(scheduledFor.value) <= new Date()
+  ) {
+    alert("La fecha programada debe ser futura")
+    return
+  }
 
   loading.value = true  // ← activas aquí
 
@@ -241,7 +272,10 @@ const checkout = async () => {
         name.value,
         delivery.value,
         latitude.value!,
-        longitude.value!
+        longitude.value!,
+        isScheduled.value
+          ? scheduledFor.value
+          : null
       ),
       new Promise(resolve => setTimeout(resolve, 3000))
     ])

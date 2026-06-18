@@ -60,7 +60,8 @@ export const useCartStore = defineStore("cart", {
             name: string,
             delivery: string,
             latitude: number,
-            longitude: number
+            longitude: number,
+            scheduledFor: string | null
         ) {
             try {
 
@@ -71,6 +72,7 @@ export const useCartStore = defineStore("cart", {
                     delivery,
                     latitude,
                     longitude,
+                    scheduled_for: scheduledFor,
                     items: this.cart.map(p => ({
                         product_id: p.id,
                         name: p.nombre,
@@ -78,6 +80,8 @@ export const useCartStore = defineStore("cart", {
                         quantity: p.cantidad
                     }))
                 }
+
+                console.log(payload)
 
                 const { data } = await api.post(
                     "/api/orders",

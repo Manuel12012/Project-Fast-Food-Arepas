@@ -252,6 +252,14 @@ const statusClass = (status: string) => {
                 </div>
                 <!-- FIN RECOJO CONDICIONAL-->
 
+                <div v-if="order.scheduled_for" class="bg-blue-50 text-blue-700 p-2 rounded-lg">
+                  📅 Programado para:
+                  {{ formatDate(order.scheduled_for) }}
+                </div>
+
+                <div v-else class="bg-green-50 text-green-700 p-2 rounded-lg">
+                  🚚 Entrega inmediata
+                </div>
               </div>
             </div>
 
