@@ -12,7 +12,7 @@ const categoriaSeleccionada = ref("arepas");
 </script>
 
 <template>
-  <div class="min-h-screen bg-background text-on-surface overflow-x-hidden">
+  <div class="min-h-screen bg-background text-on-surface overflow-x-hidden font-">
     <!-- HEADER -->
 
     <header>

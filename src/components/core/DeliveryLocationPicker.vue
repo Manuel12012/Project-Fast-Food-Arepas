@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue"
+import { ref, onMounted, watch } from "vue"
 import L from "leaflet"
+
 
 const emit = defineEmits<{
     (
@@ -15,7 +16,8 @@ const emit = defineEmits<{
 
 const query = ref("")
 const suggestions = ref<any[]>([])
-
+const radiusKm = ref(5)
+let coverageCircle: L.Circle | null = null
 const selectedAddress = ref("")
 const latitude = ref<number | null>(null)
 const longitude = ref<number | null>(null)
@@ -44,6 +46,40 @@ const searchAddress = () => {
     }, 500)
 }
 
+function drawCoverageCircle(
+    lat: number,
+    lng: number
+) {
+
+    if (coverageCircle) {
+        map.removeLayer(coverageCircle)
+    }
+
+    coverageCircle = L.circle(
+        [lat, lng],
+        {
+            radius: radiusKm.value * 1000,
+            color: "#EF6C22",
+            fillColor: "#EF6C22",
+            fillOpacity: 0.15,
+            weight: 2
+        }
+    ).addTo(map)
+}
+watch(radiusKm, () => {
+
+    if (
+        latitude.value === null ||
+        longitude.value === null
+    ) {
+        return
+    }
+
+    drawCoverageCircle(
+        latitude.value,
+        longitude.value
+    )
+})
 const selectSuggestion = (place: any) => {
     selectedAddress.value = place.display_name
 
@@ -66,6 +102,10 @@ const selectSuggestion = (place: any) => {
         longitude.value
     ]).addTo(map)
 
+    drawCoverageCircle(
+        latitude.value,
+        longitude.value
+    )
     emit("location-selected", {
         address: selectedAddress.value,
         latitude: latitude.value,
@@ -90,14 +130,14 @@ onMounted(() => {
 
     map.on("click", async (e) => {
 
-        
+
         const lat = e.latlng.lat
         const lng = e.latlng.lng
 
         console.log("Lat:", lat)
         console.log("Lng:", lng)
 
-        
+
         latitude.value = lat
         longitude.value = lng
 
@@ -107,6 +147,7 @@ onMounted(() => {
 
         marker = L.marker([lat, lng]).addTo(map)
 
+        drawCoverageCircle(lat, lng)
         try {
             const response = await fetch(
                 `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query.value)}&countrycodes=pe&limit=5`
@@ -132,12 +173,25 @@ onMounted(() => {
         })
         console.log("Emit ejecutado")
     })
+
 })
 </script>
 
 <template>
     <div class="space-y-4">
 
+        <div class="mb-3">
+            <label class="block text-sm font-medium mb-2">
+                Radio de cobertura
+            </label>
+
+            <select v-model="radiusKm" class="w-full border rounded-lg p-2">
+                <option :value="1">1 km</option>
+                <option :value="5">5 km</option>
+                <option :value="10">10 km</option>
+                <option :value="20">20 km</option>
+            </select>
+        </div>
         <div>
             <label class="block mb-2 font-medium">
                 Dirección de entrega
@@ -163,6 +217,15 @@ onMounted(() => {
 
             <p class="text-sm text-gray-600">
                 {{ selectedAddress }}
+            </p>
+        </div>
+        <div v-if="latitude && longitude" class="bg-orange-50 border border-orange-200 p-3 rounded-xl">
+            <p class="font-medium text-orange-700">
+                📍 Cobertura visual seleccionada
+            </p>
+
+            <p class="text-sm text-gray-700 mt-1">
+                {{ radiusKm }} km a la redonda
             </p>
         </div>
 
