@@ -190,7 +190,7 @@
                 <DeliveryLocationPicker @location-selected="handleLocation" />
               </div>
             </div>
-            
+
           </div>
 
           <!-- Botón -->

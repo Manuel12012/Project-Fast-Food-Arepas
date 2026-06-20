@@ -179,19 +179,6 @@ onMounted(() => {
 
 <template>
     <div class="space-y-4">
-
-        <div class="mb-3">
-            <label class="block text-sm font-medium mb-2">
-                Radio de cobertura
-            </label>
-
-            <select v-model="radiusKm" class="w-full border rounded-lg p-2">
-                <option :value="1">1 km</option>
-                <option :value="5">5 km</option>
-                <option :value="10">10 km</option>
-                <option :value="20">20 km</option>
-            </select>
-        </div>
         <div>
             <label class="block mb-2 font-medium">
                 Dirección de entrega
@@ -217,15 +204,6 @@ onMounted(() => {
 
             <p class="text-sm text-gray-600">
                 {{ selectedAddress }}
-            </p>
-        </div>
-        <div v-if="latitude && longitude" class="bg-orange-50 border border-orange-200 p-3 rounded-xl">
-            <p class="font-medium text-orange-700">
-                📍 Cobertura visual seleccionada
-            </p>
-
-            <p class="text-sm text-gray-700 mt-1">
-                {{ radiusKm }} km a la redonda
             </p>
         </div>
 

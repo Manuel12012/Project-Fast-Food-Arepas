@@ -31,6 +31,16 @@
           Ordenes
         </RouterLink>
 
+        <RouterLink
+          to="/admin/settings"
+          class="flex items-center gap-base px-md py-sm rounded-lg transition-all active:scale-95"
+          :class="isActive('/admin/settings')
+            ? 'bg-primary-container text-on-primary-container font-bold'
+            : 'text-on-surface-variant hover:bg-surface-variant'"
+        >
+          Configuración
+        </RouterLink>
+
       </nav>
 
       <div class="pt-md border-t border-outline-variant">

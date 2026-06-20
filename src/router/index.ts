@@ -9,6 +9,7 @@ import PayView from '@/views/PayView.vue'
 import CartView from '@/views/CartView.vue'
 import AdminLogin from '@/views/admin/AdminLogin.vue'
 import AdminOrders from '@/views/admin/AdminOrders.vue'
+import AdminSettings from '@/views/admin/AdminSettings.vue'
 
 // ...tus imports de vistas
 
@@ -31,9 +32,13 @@ const routes = [
     path: '/admin/products',
     component: AdminProducts,
     meta: { requiresAuth: true }
-  },{
+  }, {
     path: '/admin/orders',
     component: AdminOrders,
+    meta: { requiresAuth: true }
+  }, {
+    path: '/admin/settings',
+    component: AdminSettings,
     meta: { requiresAuth: true }
   }
 ]
