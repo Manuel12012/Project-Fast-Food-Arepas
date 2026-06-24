@@ -1,111 +1,113 @@
 <template>
-    <div
-      class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden"
-    >
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-surface-container border-b border-outline-variant">
-              <th class="px-md py-md font-label-lg text-label-lg text-on-surface-variant text-center">
-                ID
-              </th>
-  
-              <th class="px-md py-md font-label-lg text-label-lg text-on-surface-variant text-center">
-                Categoría
-              </th>
-  
-              <th class="px-md py-md font-label-lg text-label-lg text-on-surface-variant text-center">
-                Nombre
-              </th>
-  
-              <th class="px-md py-md font-label-lg text-label-lg text-on-surface-variant text-center">
-                Descripción
-              </th>
-  
-              <th class="px-md py-md font-label-lg text-label-lg text-on-surface-variant text-center">
-                Precio
-              </th>
-  
-              <th class="px-md py-md font-label-lg text-label-lg text-on-surface-variant text-center">
-                Imagen
-              </th>
-  
-              <th class="px-md py-md font-label-lg text-label-lg text-on-surface-variant text-center">
-                Acciones
-              </th>
-            </tr>
-          </thead>
-  
-          <tbody>
-            <tr
-              v-for="item in store.products"
-              :key="item.id"
-              class="border-b border-outline-variant/20 hover:bg-primary/5 transition-all duration-200 text-center"
-            >
-              <td class="px-md py-md font-medium">
-                {{ item.id }}
-              </td>
-  
-              <td class="px-md py-md">
+  <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 shadow-sm overflow-hidden">
+
+    <div class="overflow-x-auto">
+
+      <table class="w-full text-sm">
+
+        <!-- HEADER -->
+        <thead class="bg-surface-container border-b border-outline-variant">
+          <tr class="text-left">
+            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">ID</th>
+            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Categoría</th>
+            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Nombre</th>
+            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Descripción</th>
+            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Precio</th>
+            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Imagen</th>
+            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant text-center">Acciones</th>
+          </tr>
+        </thead>
+
+        <!-- BODY -->
+        <tbody>
+
+          <tr
+            v-for="item in store.products"
+            :key="item.id"
+            class="border-b border-outline-variant/20 hover:bg-primary/5 transition-colors"
+          >
+
+            <!-- ID -->
+            <td class="px-5 py-4 text-on-surface-variant font-medium">
+              #{{ item.id }}
+            </td>
+
+            <!-- CATEGORÍA -->
+            <td class="px-5 py-4">
+              <span class="px-2.5 py-1 text-xs rounded-full bg-surface-container text-on-surface-variant border border-outline-variant/30">
                 {{ item.categoriaId }}
-              </td>
-  
-              <td class="px-md py-md font-medium">
-                {{ item.nombre }}
-              </td>
-  
-              <td class="px-md py-md max-w-xs truncate">
-                {{ item.descripcion }}
-              </td>
-  
-              <td class="px-md py-md font-semibold text-primary">
-                S/ {{ item.precio }}
-              </td>
-  
-              <td class="px-md py-md">
-                <div class="flex justify-center">
-                  <img
-                    :src="`http://localhost:8000/storage/${item.image}`"
-                    :alt="item.nombre"
-                    class="w-16 h-16 object-cover rounded-xl shadow-md border border-outline-variant/20 hover:scale-110 transition-transform duration-200"
-                  />
-                </div>
-              </td>
-  
-              <td class="px-md py-md">
-                <div class="flex justify-center gap-3">
-  
-                  <!-- EDIT -->
-                  <button
-                    class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors"
-                    @click="emit('edit-product', item)"
-                  >
-                    Editar
-                  </button>
-  
-                  <!-- DELETE -->
-                  <button
-                    class="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors"
-                    @click="handleDelete(item.id)"
-                  >
-                    Eliminar
-                  </button>
-  
-                </div>
-              </td>
-            </tr>
-  
-            <tr v-if="!store.products.length">
-              <td colspan="7" class="text-center py-10 text-on-surface-variant">
-                No hay productos registrados
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+              </span>
+            </td>
+
+            <!-- NOMBRE -->
+            <td class="px-5 py-4 font-medium text-on-surface">
+              {{ item.nombre }}
+            </td>
+
+            <!-- DESCRIPCIÓN -->
+            <td class="px-5 py-4 max-w-[220px] truncate text-on-surface-variant">
+              {{ item.descripcion }}
+            </td>
+
+            <!-- PRECIO -->
+            <td class="px-5 py-4 font-semibold text-primary">
+              S/ {{ Number(item.precio).toFixed(2) }}
+            </td>
+
+            <!-- IMAGEN -->
+            <td class="px-5 py-4">
+              <div class="flex items-center justify-center">
+                <img
+                  :src="`http://localhost:8000/storage/${item.image}`"
+                  :alt="item.nombre"
+                  class="w-12 h-12 rounded-xl object-cover border border-outline-variant/20 shadow-sm hover:scale-110 transition-transform"
+                />
+              </div>
+            </td>
+
+            <!-- ACCIONES -->
+            <td class="px-5 py-4">
+              <div class="flex items-center justify-center gap-2">
+
+                <!-- EDIT -->
+                <button
+                  @click="emit('edit-product', item)"
+                  class="p-2 rounded-lg bg-blue-500/10 text-blue-600 hover:bg-blue-500 hover:text-white transition-all"
+                >
+                  <i class="ti ti-edit text-lg" />
+                </button>
+
+                <!-- DELETE -->
+                <button
+                  @click="handleDelete(item.id)"
+                  class="p-2 rounded-lg bg-red-500/10 text-red-600 hover:bg-red-500 hover:text-white transition-all"
+                >
+                  <i class="ti ti-trash text-lg" />
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+
+          <!-- EMPTY STATE -->
+          <tr v-if="!store.products.length">
+            <td colspan="7" class="text-center py-12 text-on-surface-variant">
+              <div class="flex flex-col items-center gap-2">
+                <i class="ti ti-package-off text-3xl" />
+                <p>No hay productos registrados</p>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
     </div>
-  </template>
-  
+
+  </div>
+</template>  
   <script setup lang="ts">
   import { onMounted } from "vue"
   import { useProductStore } from "@/stores/productStore"

@@ -1,29 +1,40 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-md mb-xl">
-    <div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30">
-      <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">
-        Total Productos
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+
+    <!-- TOTAL PRODUCTOS -->
+    <div
+      class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
+    >
+      <div class="flex items-center justify-between mb-3">
+        <p class="text-xs font-medium uppercase tracking-wider text-on-surface-variant">
+          Total productos
+        </p>
+
+        <i class="ti ti-package text-primary text-lg" />
+      </div>
+
+      <p class="text-3xl font-bold text-primary">
+        {{ productStore.totalProducts }}
       </p>
-      <p class="font-headline-lg text-headline-lg text-primary"> {{ productStore.totalProducts }}</p>
     </div>
-    <!-- <div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30">
-      <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">
-        Low Stock
+
+    <!-- CATEGORÍAS -->
+    <div
+      class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
+    >
+      <div class="flex items-center justify-between mb-3">
+        <p class="text-xs font-medium uppercase tracking-wider text-on-surface-variant">
+          Categorías
+        </p>
+
+        <i class="ti ti-category text-secondary text-lg" />
+      </div>
+
+      <p class="text-3xl font-bold text-secondary">
+        {{ productStore.totalCategories }}
       </p>
-      <p class="font-headline-lg text-headline-lg text-tertiary">8 Items</p>
-    </div> -->
-    <div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30">
-      <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">
-        Categories
-      </p>
-      <p class="font-headline-lg text-headline-lg text-secondary">{{ productStore.totalCategories }}</p>
     </div>
-    <!-- <div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30">
-      <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">
-        Avg Price
-      </p>
-      <p class="font-headline-lg text-headline-lg text-on-surface">$12.50</p>
-    </div> -->
+
   </div>
 </template>
 

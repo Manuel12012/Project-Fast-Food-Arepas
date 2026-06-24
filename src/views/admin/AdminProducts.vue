@@ -33,22 +33,39 @@ const closeModal = () => {
 <template>
   <NavBarAdmin />
 
-  <div class="flex pt-16 min-h-screen">
-    <AsideAdmin />
+  <div class="min-h-screen bg-surface-container pt-16">
 
-    <main class="flex-1 ml-64 p-6 bg-gray-50">
+    <div class="grid grid-cols-[256px_1fr]">
 
-      <!-- HEADER -->
-      <HeaderAdmin @open-modal="openCreateModal" />
+      <!-- SIDEBAR -->
+      <AsideAdmin class="h-[calc(100vh-4rem)] sticky top-16 z-40" />
 
-      <DashboardAdmin />
+      <!-- CONTENT -->
+      <main class="p-6 lg:p-8">
 
-      <!-- TABLE -->
-      <TableAdmin @edit-product="editProduct" />
+        <div class="max-w-7xl mx-auto flex flex-col gap-6">
 
-      <!-- MODAL -->
-      <ModalAdmin :isModalOpen="isModalOpen" :productToEdit="selectedProduct" @close-modal="closeModal" />
+          <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5">
+            <HeaderAdmin @open-modal="openCreateModal" />
+          </div>
 
-    </main>
+          <DashboardAdmin />
+
+          <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden">
+            <TableAdmin @edit-product="editProduct" />
+          </div>
+
+        </div>
+
+        <ModalAdmin
+          :isModalOpen="isModalOpen"
+          :productToEdit="selectedProduct"
+          @close-modal="closeModal"
+        />
+
+      </main>
+
+    </div>
+
   </div>
 </template>

@@ -1,84 +1,121 @@
 <template>
-  <div v-if="isModalOpen" class="fixed inset-0 z-60 flex items-center justify-center">
-    <div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" @click="close"></div>
+  <div v-if="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center">
 
+    <!-- BACKDROP -->
     <div
-      class="relative bg-surface p-8 rounded-2xl shadow-xl w-175 max-w-[95vw] border border-outline-variant/50 animate-in fade-in zoom-in duration-300">
-      <!-- TITLE -->
-      <div class="flex justify-between items-center mb-md">
-        <h2 class="font-headline-lg text-headline-lg text-on-surface">
-          {{ isEditMode ? "Editar Producto" : "Nuevo Producto" }}
-        </h2>
+      class="absolute inset-0 bg-black/40 backdrop-blur-sm"
+      @click="close"
+    />
+
+    <!-- MODAL -->
+    <div
+      class="relative w-full max-w-2xl mx-4 bg-surface rounded-2xl border border-outline-variant/50 shadow-2xl animate-in fade-in zoom-in duration-200"
+    >
+
+      <!-- HEADER -->
+      <div class="flex items-center justify-between px-6 py-5 border-b border-outline-variant/30">
+
+        <div>
+          <h2 class="text-xl font-semibold text-on-surface">
+            {{ isEditMode ? "Editar producto" : "Nuevo producto" }}
+          </h2>
+
+          <p class="text-sm text-on-surface-variant mt-1">
+            Completa la información del producto
+          </p>
+        </div>
 
         <button
-          class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant p-base rounded-full transition-all cursor-pointer"
-          @click="close">
-          X
+          @click="close"
+          class="p-2 rounded-full hover:bg-surface-container transition-colors"
+        >
+          <i class="ti ti-x text-xl text-on-surface-variant" />
         </button>
+
       </div>
 
       <!-- FORM -->
-      <form class="space-y-md" @submit.prevent="submitProduct">
+      <form class="p-6 space-y-5" @submit.prevent="submitProduct">
 
         <!-- NOMBRE -->
         <div>
-          <label class="block mb-xs">Nombre del Producto</label>
-          <input v-model="nombre" class="input" type="text" />
+          <label class="text-sm text-on-surface-variant">Nombre</label>
+          <input v-model="nombre" type="text" class="input" placeholder="Ej: Arepa reina pepiada" />
         </div>
 
-        <!-- CATEGORIA + PRECIO -->
-        <div class="grid grid-cols-2 gap-md">
+        <!-- GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- CATEGORÍA -->
           <div>
-            <label class="block mb-xs">Categoría</label>
+            <label class="text-sm text-on-surface-variant">Categoría</label>
             <select v-model="categoriaId" class="input">
-              <option value="">Seleccione</option>
+              <option value="">Seleccione categoría</option>
               <option value="arepas">Arepas</option>
               <option value="empanadas">Empanadas</option>
               <option value="bebidas">Bebidas</option>
               <option value="postres">Postres</option>
-              <option value="pastelitos">Pastelitos</option>
               <option value="tequeños">Tequeños</option>
-              <option value="cachitos">Cachitos</option>
-              <option value="sauces">Sauces</option>
-              <option value="desserts">Desserts</option>
-              <option value="mini-bouchees">Mini-bouchees</option>
-              <option value="mini-desserts">Mini-desserts</option>
-              <option value="menu">Menu</option>
-              <option value="noel">Noël</option>
             </select>
           </div>
 
+          <!-- PRECIO -->
           <div>
-            <label class="block mb-xs">Precio</label>
-            <input v-model="precio" type="number" class="input" />
+            <label class="text-sm text-on-surface-variant">Precio</label>
+            <input v-model="precio" type="number" class="input" placeholder="0.00" />
+          </div>
+
+        </div>
+
+        <!-- DESCRIPCIÓN -->
+        <div>
+          <label class="text-sm text-on-surface-variant">Descripción</label>
+          <input v-model="descripcion" type="text" class="input" placeholder="Descripción del producto" />
+        </div>
+
+        <!-- IMAGEN -->
+        <div>
+          <label class="text-sm text-on-surface-variant">Imagen</label>
+
+          <input
+            type="file"
+            accept="image/*"
+            @change="handleImage"
+            class="mt-2 block w-full text-sm text-on-surface-variant"
+          />
+
+          <div v-if="previewImage" class="mt-4">
+            <p class="text-xs text-on-surface-variant mb-2">Vista previa</p>
+
+            <img
+              :src="previewImage"
+              class="w-40 h-40 object-cover rounded-xl border border-outline-variant/30 shadow-sm hover:scale-105 transition-transform"
+            />
           </div>
         </div>
 
-        <!-- DESCRIPCION -->
-        <div>
-          <label class="block mb-xs">Descripción</label>
-          <input v-model="descripcion" type="text" class="input" />
-        </div>
-
-        <!-- IMAGE -->
-        <div>
-          <label class="block mb-xs">Imagen</label>
-          <input type="file" accept="image/*" @change="handleImage" />
-
-          <img v-if="previewImage" :src="previewImage" class="mt-4 w-40 h-40 object-cover rounded-lg border" />
-        </div>
-
         <!-- ACTIONS -->
-        <div class="flex gap-md pt-md">
-          <button type="button" class="btn-secondary cursor-pointer" @click="close">
+        <div class="flex justify-end gap-3 pt-2 border-t border-outline-variant/30">
+
+          <button
+            type="button"
+            @click="close"
+            class="px-4 py-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors"
+          >
             Cancelar
           </button>
 
-          <button type="submit" class="btn-primary cursor-pointer">
+          <button
+            type="submit"
+            class="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-sm transition-all active:scale-95"
+          >
             {{ isEditMode ? "Actualizar" : "Guardar" }}
           </button>
+
         </div>
+
       </form>
+
     </div>
   </div>
 </template>

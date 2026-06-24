@@ -1,110 +1,117 @@
 <template>
-    <NavBarAdmin />
-    <AsideAdmin />
-  
-    <main class="ml-64 pt-20 p-6 min-h-screen bg-gray-50">
-  
-      <h1 class="text-3xl font-bold mb-6">
-        Configuración Delivery
-      </h1>
-  
-      <div class="grid lg:grid-cols-3 gap-6">
-  
-        <!-- MAPA -->
-        <div class="lg:col-span-2 bg-white rounded-xl shadow p-4">
-  
-          <div
-            id="delivery-settings-map"
-            class="w-full h-[500px] rounded-xl border"
-          />
-  
-        </div>
-  
-        <!-- CONFIGURACIÓN -->
-        <div class="bg-white rounded-xl shadow p-6">
-  
-          <h2 class="text-xl font-semibold mb-4">
-            Zona de Delivery
-          </h2>
-  
-          <div class="space-y-4">
-  
-            <div>
-              <label class="block mb-2 font-medium">
-                Radio gratuito (km)
-              </label>
-  
-              <input
-                v-model.number="freeRadiusKm"
-                type="number"
-                min="1"
-                class="w-full border rounded-lg p-3"
-              />
-            </div>
-  
-            <div>
-              <label class="block mb-2 font-medium">
-                Costo delivery fuera de zona
-              </label>
-  
-              <input
-                v-model.number="deliveryCost"
-                type="number"
-                min="0"
-                step="0.01"
-                class="w-full border rounded-lg p-3"
-              />
-            </div>
-  
-            <div class="border rounded-lg p-4 bg-gray-50">
-  
-              <p class="font-medium">
-                Ubicación de la tienda
-              </p>
-  
-              <p class="text-sm text-gray-600 mt-1">
-                Lat: {{ storeLatitude }}
-              </p>
-  
-              <p class="text-sm text-gray-600">
-                Lng: {{ storeLongitude }}
-              </p>
-  
-            </div>
-  
-            <div class="border rounded-lg p-4 bg-green-50">
-  
-              <p class="font-medium text-green-700">
-                Delivery gratuito
-              </p>
-  
-              <p class="text-sm mt-1">
-                Dentro de {{ freeRadiusKm }} km
-              </p>
-  
-              <p class="text-sm">
-                Fuera del radio: S/ {{ deliveryCost }}
-              </p>
-  
-            </div>
-  
-            <button
-              @click="saveSettings"
-              class="w-full bg-primary text-white py-3 rounded-lg"
-            >
-              Guardar configuración
-            </button>
-  
-          </div>
-  
-        </div>
-  
-      </div>
-  
-    </main>
-  </template>
+  <NavBarAdmin />
 
-<script setup lang="ts">
+  <div class="flex min-h-screen pt-16 bg-gray-50">
+
+    <!-- SIDEBAR -->
+    <AsideAdmin class="w-64 shrink-0" />
+
+    <!-- CONTENT -->
+    <main class="flex-1 ml-64 p-6 min-w-0">
+
+      <div class="max-w-7xl mx-auto flex flex-col gap-6">
+
+        <!-- HEADER (igual estilo órdenes) -->
+        <div class="bg-white border border-gray-200 rounded-xl p-5">
+          <h1 class="text-2xl font-semibold text-gray-900">
+            Configuración Delivery
+          </h1>
+          <p class="text-sm text-gray-500 mt-1">
+            Define zona de cobertura, radio gratuito y costos de envío
+          </p>
+        </div>
+
+        <!-- GRID -->
+        <div class="grid lg:grid-cols-3 gap-6">
+
+          <!-- MAPA (card principal) -->
+          <div class="lg:col-span-2 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+            <div class="p-4 border-b border-gray-100 bg-gray-50">
+              <h2 class="text-lg font-semibold text-gray-900">
+                Mapa de zona de delivery
+              </h2>
+            </div>
+
+            <div class="p-4">
+              <div class="w-full h-[520px] rounded-xl border overflow-hidden">
+                <div id="delivery-settings-map" class="w-full h-full" />
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SETTINGS (igual estilo sidebar cards órdenes) -->
+          <div class="flex flex-col gap-4">
+
+            <!-- CARD 1 -->
+            <div class="bg-white border border-gray-200 rounded-xl p-5">
+              <h3 class="text-sm font-semibold text-gray-900 mb-4">
+                Zona de Delivery
+              </h3>
+
+              <div class="space-y-4">
+
+                <div>
+                  <label class="text-xs text-gray-500">Radio gratuito (km)</label>
+                  <input v-model.number="freeRadiusKm" class="input" type="number" min="1" />
+                </div>
+
+                <div>
+                  <label class="text-xs text-gray-500">Costo fuera de zona</label>
+                  <input v-model.number="deliveryCost" class="input" type="number" min="0" step="0.01" />
+                </div>
+
+                <button
+                  @click="saveSettings"
+                  class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2.5 rounded-lg transition-colors"
+                >
+                  Guardar configuración
+                </button>
+
+              </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="bg-white border border-gray-200 rounded-xl p-5">
+
+              <h3 class="text-sm font-semibold text-gray-900 mb-3">
+                Ubicación tienda
+              </h3>
+
+              <div class="text-sm text-gray-600 space-y-1">
+                <p>Lat: {{ storeLatitude }}</p>
+                <p>Lng: {{ storeLongitude }}</p>
+              </div>
+
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="bg-green-50 border border-green-200 rounded-xl p-5">
+
+              <p class="text-sm font-semibold text-green-700">
+                Resumen delivery
+              </p>
+
+              <p class="text-xs text-green-600 mt-2">
+                Gratis dentro de {{ freeRadiusKm }} km
+              </p>
+
+              <p class="text-xs text-green-600">
+                Fuera: S/ {{ deliveryCost }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+</template><script setup lang="ts">
 import { ref, onMounted, nextTick, watch } from "vue"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"          // ← aquí en el componente, no solo en main.ts
