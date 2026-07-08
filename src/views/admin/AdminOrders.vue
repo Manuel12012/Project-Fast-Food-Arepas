@@ -69,14 +69,14 @@ const statusIcon = (status: string) => {
 
               <!-- PRICING -->
               <div class="text-right">
-                <p class="text-xl font-semibold text-blue-600">S/ {{ Number(order.total).toFixed(2) }}</p>
+                <p class="text-xl font-semibold text-blue-600">EUR {{ Number(order.total).toFixed(2) }}</p>
                 <div class="flex flex-col gap-0.5 text-xs text-gray-400 mt-0.5">
-                  <span>Subtotal: S/ {{ (Number(order.total) - Number(order.delivery_cost)).toFixed(2) }}</span>
+                  <span>Subtotal: EUR {{ (Number(order.total) - Number(order.delivery_cost)).toFixed(2) }}</span>
                   <span :class="order.free_delivery ? 'text-green-600' : 'text-amber-600'"
                     class="flex items-center gap-1 justify-end">
                     <i :class="order.free_delivery ? 'ti-gift' : 'ti-motorbike'" class="ti" />
                     <template v-if="order.free_delivery">Delivery gratis</template>
-                    <template v-else>Delivery: S/ {{ Number(order.delivery_cost).toFixed(2) }}</template>
+                    <template v-else>Delivery: EUR {{ Number(order.delivery_cost).toFixed(2) }}</template>
                   </span>
                   <span class="flex items-center gap-1 justify-end text-gray-400">
                     <i class="ti ti-route" />
@@ -227,7 +227,7 @@ const statusIcon = (status: string) => {
                         ×{{ item.quantity }}
                       </span>
                     </td>
-                    <td class="py-2.5 text-right text-gray-500">S/ {{ Number(item.price_snapshot).toFixed(2) }}</td>
+                    <td class="py-2.5 text-right text-gray-500">EUR {{ Number(item.price_snapshot).toFixed(2) }}</td>
                     <td class="py-2.5 text-right text-gray-400 text-xs">{{ formatDate(item.created_at) }}</td>
                   </tr>
                 </tbody>

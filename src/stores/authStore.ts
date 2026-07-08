@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import api from "@/services/api"
+import {authApi} from "@/services/api"
 export const useAuthStore = defineStore("auth", {
 
   state: () => ({
@@ -16,9 +16,9 @@ export const useAuthStore = defineStore("auth", {
 
       try {
 
-        await api.get("/sanctum/csrf-cookie")
+        await authApi.get("/sanctum/csrf-cookie")
 
-        const response = await api.post("/api/login", {
+        const response = await authApi.post("/api/login", {
           email,
           password
         });
@@ -43,7 +43,7 @@ export const useAuthStore = defineStore("auth", {
 
     async logout() {
       try {
-        await api.post('/api/logout')
+        await authApi.post('/api/logout')
       } catch (error) {
         console.warn('Logout backend falló, limpiando igual:', error)
       }
@@ -54,7 +54,7 @@ export const useAuthStore = defineStore("auth", {
 
     async fetchUser() {
       try {
-        const response = await api.get('/api/me') // ✅ cambia /api/user por /api/me
+        const response = await authApi.get('/api/me') // ✅ cambia /api/user por /api/me
         console.log('fetchUser OK:', response.data)
         this.user = response.data
         this.authenticated = true

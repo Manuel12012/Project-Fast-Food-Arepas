@@ -10,6 +10,8 @@ import CartView from '@/views/CartView.vue'
 import AdminLogin from '@/views/admin/AdminLogin.vue'
 import AdminOrders from '@/views/admin/AdminOrders.vue'
 import AdminSettings from '@/views/admin/AdminSettings.vue'
+import ResetPasswordView from '@/views/ResetPasswordView.vue'
+import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 
 // ...tus imports de vistas
 
@@ -20,8 +22,17 @@ const routes = [
   { path: '/pay', name: 'pay', component: PayView },
   { path: '/cart', name: 'cart', component: CartView },
   { path: '/admin/login', name: 'admin-login', component: AdminLogin },
+  {
+    path: '/reset-password',
+    name: 'reset-password',
+    component: ResetPasswordView
+  },
 
-
+{
+  path: "/forgot-password",
+  name: "forgot-password",
+  component: ForgotPasswordView
+},
   // rutas protegidas con meta
   {
     path: '/admin/dashboard',

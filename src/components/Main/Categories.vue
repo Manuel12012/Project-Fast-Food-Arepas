@@ -16,15 +16,10 @@
           </p>
         </div>
 
-        <a
-          href="/menu"
-          class="group flex items-center gap-2 text-primary font-semibold transition"
-        >
+        <a href="/menu" class="group flex items-center gap-2 text-primary font-semibold transition">
           Ver todas
 
-          <span
-            class="transition-transform group-hover:translate-x-1"
-          >
+          <span class="transition-transform group-hover:translate-x-1">
             →
           </span>
         </a>
@@ -34,15 +29,10 @@
       <!-- GRID -->
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
 
-        <div
-          v-for="categoria in categorias.slice(0,4)"
-          :key="categoria.id"
-          class="group"
-        >
-
+        <div v-for="categoria in categorias.slice(0, 4)" :key="categoria.id" class="group cursor-pointer"
+          @click="irAlMenu(categoria)">
           <!-- CARD -->
-          <div
-            class="
+          <div class="
               relative
               aspect-square
               rounded-3xl
@@ -54,39 +44,29 @@
               transition-all duration-300
               group-hover:-translate-y-2
               group-hover:shadow-xl
-            "
-          >
+            ">
 
             <!-- IMAGE -->
-            <img
-              :src="getImage(categoria.id)"
-              :alt="categoria.nombre"
-              class="
+            <img :src="getImage(categoria.id)" :alt="categoria.nombre" class="
                 w-full h-full object-cover
                 transition-transform duration-700
                 group-hover:scale-110
-              "
-              loading="lazy"
-            />
+              " loading="lazy" />
 
             <!-- OVERLAY -->
-            <div
-              class="
+            <div class="
                 absolute inset-0
                 bg-linear-to-t
                 from-black/60 via-black/10 to-transparent
                 opacity-70
                 group-hover:opacity-50
                 transition
-              "
-            ></div>
+              "></div>
 
             <!-- LABEL -->
-            <div
-              class="
+            <div class="
                 absolute bottom-4 left-4 right-4
-              "
-            >
+              ">
               <p class="text-white font-semibold text-base sm:text-lg leading-tight">
                 {{ categoria.nombre }}
               </p>
@@ -103,9 +83,11 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import categorias from "@/data/Categories.js";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const images = import.meta.glob(
   "../../assets/categories/*",
   {
@@ -113,6 +95,14 @@ const images = import.meta.glob(
     import: "default"
   }
 );
+const irAlMenu = (categoria: any) => {
+  router.push({
+    path: "/menu",
+    query: {
+      categoria: categoria.nombre.toLowerCase(), // o categoria.id si prefieres
+    },
+  });
+};
 
 const getImage = (id) => {
 
@@ -125,4 +115,5 @@ const getImage = (id) => {
     : "/placeholder-category.png";
 
 };
+
 </script>

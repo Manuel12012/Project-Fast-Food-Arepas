@@ -50,16 +50,16 @@
                 Zona de Delivery
               </h3>
 
-              <div class="space-y-4">
+              <div class="space-y-4 ">
 
-                <div>
+                <div class="flex items-center  justify-around">
                   <label class="text-xs text-gray-500">Radio gratuito (km)</label>
-                  <input v-model.number="freeRadiusKm" class="input" type="number" min="1" />
+                  <input v-model.number="freeRadiusKm" class="border border-gray-200" type="number" min="1" />
                 </div>
 
-                <div>
+                <div class="flex items-center  justify-around">
                   <label class="text-xs text-gray-500">Costo fuera de zona</label>
-                  <input v-model.number="deliveryCost" class="input" type="number" min="0" step="0.01" />
+                  <input v-model.number="deliveryCost" class="border border-gray-200" type="number" min="0" step="0.01" />
                 </div>
 
                 <button
@@ -98,7 +98,7 @@
               </p>
 
               <p class="text-xs text-green-600">
-                Fuera: S/ {{ deliveryCost }}
+                Fuera: EUR {{ deliveryCost }}
               </p>
 
             </div>
@@ -115,7 +115,7 @@
 import { ref, onMounted, nextTick, watch } from "vue"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"          // ← aquí en el componente, no solo en main.ts
-import api from "@/services/api"
+import {api} from "@/services/api"
 
 // Fix de íconos para Vite
 import markerIcon from "leaflet/dist/images/marker-icon.png"

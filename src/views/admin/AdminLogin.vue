@@ -54,7 +54,14 @@ const handleLogin = async () => {
             <input v-model="password" id="password" type="password" placeholder="••••••••"
               class="w-full px-4 py-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest" />
           </div>
-          <button type="submit" class="w-full bg-primary-container text-on-primary-container py-4 rounded-xl cursor-pointer">
+
+          <div class="text-right mt-2">
+            <button type="button" class="text-sm text-primary underline cursor-pointer" @click="router.push('/forgot-password')">
+              ¿Olvidaste tu contraseña?
+            </button>
+          </div>
+          <button type="submit"
+            class="w-full bg-primary-container text-on-primary-container py-4 rounded-xl cursor-pointer">
             Iniciar Sesión
           </button>
         </form>

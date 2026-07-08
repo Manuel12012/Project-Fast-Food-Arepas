@@ -1,14 +1,27 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
+import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import NavBar from "@/components/core/NavBar.vue";
 import Footer from "@/components/core/Footer.vue";
-
 import FilterCategories from "@/components/Products/FilterCategories.vue";
 import ProductGrid from "@/components/Products/ProductGrid.vue";
 
+const route = useRoute();
+const router = useRouter();
+
 // por defecto arepas
-const categoriaSeleccionada = ref("arepas");
+const categoriaSeleccionada = computed(() => {
+  return (route.query.categoria as string) || "arepas";
+});
+
+const cambiarCategoria = (categoria: string) => {
+  router.replace({
+    query: {
+      ...route.query,
+      categoria,
+    },
+  });
+};
 </script>
 
 <template>
@@ -21,14 +34,9 @@ const categoriaSeleccionada = ref("arepas");
 
     <!-- MAIN -->
 
-    <main
-      class="max-w-7xl mx-auto px-(--spacing-margin-mobile) md:px-(--spacing-margin-desktop) pt-24 pb-16 bg-white"
-    >
+    <main class="max-w-7xl mx-auto px-(--spacing-margin-mobile) md:px-(--spacing-margin-desktop) pt-24 pb-16 bg-white">
       <section class="space-y-10">
-        <FilterCategories
-          :categoriaSeleccionada="categoriaSeleccionada"
-          @change-category="categoriaSeleccionada = $event"
-        />
+        <FilterCategories :categoriaSeleccionada="categoriaSeleccionada" @change-category="cambiarCategoria" />
 
         <ProductGrid :categoria="categoriaSeleccionada" />
       </section>

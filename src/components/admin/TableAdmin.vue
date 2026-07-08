@@ -51,7 +51,7 @@
 
             <!-- PRECIO -->
             <td class="px-5 py-4 font-semibold text-primary">
-              S/ {{ Number(item.precio).toFixed(2) }}
+              EUR {{ Number(item.precio).toFixed(2) }}
             </td>
 
             <!-- IMAGEN -->
