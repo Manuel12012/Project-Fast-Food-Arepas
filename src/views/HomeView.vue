@@ -9,22 +9,19 @@ import Footer from "@/components/core/Footer.vue";
 
 <template>
 
-  <div class="
+  <div
+    class="
       min-h-screen
-      bg-background
+      bg-surface
       text-on-surface
       overflow-x-hidden
-    ">
-
-    <!-- HEADER -->
+    "
+  >
 
     <header>
-
       <NavBar />
-
     </header>
 
-    <!-- MAIN CONTENT -->
 
     <main>
 
@@ -36,20 +33,17 @@ import Footer from "@/components/core/Footer.vue";
 
         <Categories />
 
-
         <NewsLetter />
 
       </section>
 
     </main>
 
-    <!-- FOOTER -->
 
     <footer>
-
       <Footer />
-
     </footer>
+
 
   </div>
 

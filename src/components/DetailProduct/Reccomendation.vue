@@ -1,6 +1,5 @@
 <template>
-  <section class="mt-xl pt-xl border-t border-surface-variant">
-    <h2 class="font-display-lg text-display-lg-mobile md:text-headline-md mb-lg">
+<section class="mt-xl pt-xl border-t border-surface-variant bg-surface min-h-screen">    <h2 class="font-display-lg text-display-lg-mobile md:text-headline-md mb-lg">
       Customers also bought
     </h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">

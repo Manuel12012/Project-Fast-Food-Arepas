@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import {api} from "@/services/api"
+import {api, authApi} from "@/services/api"
 import type { Product } from "@/types"
 
 type ProductPayload = {
@@ -29,7 +29,7 @@ export const useProductStore = defineStore("products", {
       this.loading = true
 
       try {
-        const { data } = await api.get("/api/products")
+        const { data } = await authApi.get("/api/products")
         this.products = data
       } catch (error) {
         console.error("fetchProducts error:", error)
@@ -45,7 +45,7 @@ export const useProductStore = defineStore("products", {
       this.loading = true
 
       try {
-        const { data } = await api.get(`/api/products/${id}`)
+        const { data } = await authApi.get(`/api/products/${id}`)
         this.product = data
       } catch (error) {
         console.error("fetchProductById error:", error)
@@ -63,7 +63,7 @@ export const useProductStore = defineStore("products", {
       try {
         const formData = this.buildFormData(payload)
 
-        const { data } = await api.post("/api/products", formData)
+        const { data } = await authApi.post("/api/products", formData)
 
         this.products.unshift(data)
         return data
@@ -86,7 +86,7 @@ export const useProductStore = defineStore("products", {
         // Laravel requirement
         formData.append("_method", "PUT")
 
-        const { data } = await api.post(`/api/products/${id}`, formData)
+        const { data } = await authApi.post(`/api/products/${id}`, formData)
 
         const index = this.products.findIndex(p => p.id === id)
 
@@ -111,7 +111,7 @@ export const useProductStore = defineStore("products", {
       this.loading = true
 
       try {
-        await api.delete(`/api/products/${id}`)
+        await authApi.delete(`/api/products/${id}`)
 
         this.products = this.products.filter(p => p.id !== id)
       } catch (error) {
@@ -127,7 +127,7 @@ export const useProductStore = defineStore("products", {
       this.loading = true
 
       try {
-        const { data } = await api.get(`/api/products/total-productos`)
+        const { data } = await authApi.get(`/api/products/total-productos`)
         this.totalProducts = data.total
       } catch (error) {
         console.error(error)
@@ -142,7 +142,7 @@ export const useProductStore = defineStore("products", {
       this.loading = true
 
       try {
-        const { data } = await api.get(`/api/products/count-categorias`)
+        const { data } = await authApi.get(`/api/products/count-categorias`)
         this.totalCategories = data.total
       } catch (error) {
         console.error(error)

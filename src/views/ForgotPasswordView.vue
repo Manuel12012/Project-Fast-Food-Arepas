@@ -21,25 +21,40 @@ const sendReset = async () => {
 </script>
 
 <template>
-<div class="flex items-center justify-center min-h-screen"> <div class="w-full max-w-2xl p-6 bg-white rounded-xl shadow">      <!-- Encabezado -->
-      <div class="text-center mb-8">
-        <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-blue-100">
+  <main
+    class="min-h-screen flex items-center justify-center bg-background px-(--spacing-margin-mobile) md:px-(--spacing-margin-desktop)"
+  >
+    <section
+      class="w-full max-w-2xl rounded-3xl bg-surface-container-lowest border border-outline-variant shadow-xl p-8 md:p-10"
+    >
+      <!-- HEADER -->
+      <div class="text-center mb-10">
+        <div
+          class="w-18 h-18 mx-auto mb-5 flex items-center justify-center rounded-full bg-primary-container text-on-primary-container text-3xl"
+        >
           🔒
         </div>
 
-        <h1 class="text-3xl font-bold text-gray-800">
+        <h1
+          class="font-headline-md text-headline-md text-on-surface font-bold"
+        >
           ¿Olvidaste tu contraseña?
         </h1>
 
-        <p class="mt-2 text-gray-500">
-          Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
+        <p
+          class="mt-3 text-body-md text-on-surface-variant max-w-2xl mx-auto"
+        >
+          Ingresa tu correo electrónico y te enviaremos un enlace para
+          restablecer tu contraseña.
         </p>
       </div>
 
-      <!-- Formulario -->
-      <div class="space-y-5">
+      <!-- FORM -->
+      <div class="space-y-6">
         <div>
-          <label class="block mb-2 text-sm font-medium text-gray-700">
+          <label
+            class="block mb-2 text-label-md font-medium text-on-surface"
+          >
             Correo electrónico
           </label>
 
@@ -47,27 +62,29 @@ const sendReset = async () => {
             v-model="email"
             type="email"
             placeholder="ejemplo@correo.com"
-            class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+            class="w-full rounded-xl border border-outline-variant bg-surface px-4 py-3 text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-2 focus:ring-primary/30 outline-none transition-all"
           />
         </div>
 
         <button
           @click="sendReset"
           :disabled="loading"
-          class="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed"
+          class="w-full rounded-xl bg-primary text-on-primary py-3 font-semibold transition-all hover:brightness-95 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {{ loading ? "Enviando..." : "Enviar enlace de recuperación" }}
         </button>
 
         <transition name="fade">
-          <p
+          <div
             v-if="message"
-            class="rounded-xl bg-gray-100 p-3 text-center text-sm text-gray-700"
+            class="rounded-xl border border-outline-variant bg-surface-container p-4"
           >
-            {{ message }}
-          </p>
+            <p class="text-center text-body-md text-on-surface">
+              {{ message }}
+            </p>
+          </div>
         </transition>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 </template>

@@ -47,18 +47,23 @@ const precioTotal = computed(() => {
 </script>
 
 <template>
-  <main v-if="producto" class="max-w-7xl mx-auto px-6 lg:px-10 py-10 mt-24">
+  <main
+    v-if="producto"
+    class="max-w-7xl mx-auto px-(--spacing-margin-mobile) md:px-(--spacing-margin-desktop) py-10 pt-28 bg-background"
+  >
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
       <!-- LEFT -->
       <section class="space-y-5">
+
         <!-- MAIN IMAGE -->
         <div
-          class="group relative overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-sm"
+          class="group relative overflow-hidden rounded-3xl bg-surface-container-lowest border border-outline-variant shadow-sm"
         >
           <img
             :src="imageUrl"
             :alt="producto.nombre || ''"
-            class="w-full h-125 object-cover transition-transform duration-500 group-hover:scale-105"
+            class="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
 
@@ -67,7 +72,7 @@ const precioTotal = computed(() => {
           <div
             v-for="n in 3"
             :key="n"
-            class="rounded-2xl overflow-hidden border border-gray-200 bg-white h-28"
+            class="rounded-2xl overflow-hidden border border-outline-variant bg-surface-container-lowest h-28"
           >
             <img
               :src="imageUrl"
@@ -76,57 +81,86 @@ const precioTotal = computed(() => {
             />
           </div>
         </div>
+
       </section>
 
       <!-- RIGHT -->
       <section class="sticky top-28">
-        <!-- CATEGORY -->
+
+        <!-- CHIP -->
         <span
-          class="inline-flex items-center rounded-full bg-primary/10 text-primary px-4 py-1 text-sm font-medium mb-5"
+          class="inline-flex items-center rounded-full bg-primary-container text-on-primary-container px-4 py-1 text-sm font-medium mb-5"
         >
           Producto destacado
         </span>
 
         <!-- TITLE -->
-        <h1 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900">
+        <h1
+          class="text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface"
+        >
           {{ producto.nombre }}
         </h1>
 
         <!-- DESCRIPTION -->
-        <p class="mt-5 text-lg leading-relaxed text-gray-600">
+        <p
+          class="mt-5 text-lg leading-relaxed text-on-surface-variant"
+        >
           {{ producto.descripcion }}
         </p>
 
         <!-- PRICE -->
         <div class="mt-8 flex items-end gap-3">
-          <span class="text-5xl font-black text-primary"> {{ producto.precio }}€ </span>
 
-          <span class="text-gray-400 line-through text-lg">
+          <span class="text-5xl font-black text-primary">
+            {{ producto.precio }}€
+          </span>
+
+          <span
+            class="text-on-surface-variant line-through text-lg opacity-70"
+          >
             {{ (Number(producto.precio) + 4).toFixed(2) }}€
           </span>
+
         </div>
 
         <!-- FEATURES -->
         <div class="mt-10 grid grid-cols-2 gap-4">
-          <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-            <p class="text-sm text-gray-500">Calidad</p>
 
-            <h4 class="font-bold text-lg mt-1">Premium</h4>
+          <div
+            class="rounded-2xl border border-outline-variant p-4 bg-surface-container-lowest"
+          >
+            <p class="text-sm text-on-surface-variant">
+              Calidad
+            </p>
+
+            <h4 class="font-bold text-lg mt-1 text-on-surface">
+              Premium
+            </h4>
           </div>
 
-          <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-            <p class="text-sm text-gray-500">Entrega</p>
+          <div
+            class="rounded-2xl border border-outline-variant p-4 bg-surface-container-lowest"
+          >
+            <p class="text-sm text-on-surface-variant">
+              Entrega
+            </p>
 
-            <h4 class="font-bold text-lg mt-1">15-25 min</h4>
+            <h4 class="font-bold text-lg mt-1 text-on-surface">
+              15–25 min
+            </h4>
           </div>
+
         </div>
 
         <!-- QUANTITY -->
         <div class="mt-10 flex items-center gap-5">
-          <div class="flex items-center bg-gray-100 rounded-full p-2">
+
+          <div
+            class="flex items-center bg-surface-container rounded-full p-2"
+          >
             <button
               @click="disminuir"
-              class="w-10 h-10 rounded-full hover:bg-white transition font-bold text-xl"
+              class="w-10 h-10 rounded-full hover:bg-surface-container-high transition font-bold text-xl"
             >
               −
             </button>
@@ -137,68 +171,109 @@ const precioTotal = computed(() => {
 
             <button
               @click="incrementar"
-              class="w-10 h-10 rounded-full hover:bg-white transition font-bold text-xl"
+              class="w-10 h-10 rounded-full hover:bg-surface-container-high transition font-bold text-xl"
             >
               +
             </button>
           </div>
 
           <div>
-            <p class="text-sm text-gray-500">Total</p>
 
-            <p class="text-2xl font-extrabold text-primary">{{ precioTotal }}€</p>
+            <p class="text-sm text-on-surface-variant">
+              Total
+            </p>
+
+            <p class="text-2xl font-extrabold text-primary">
+              {{ precioTotal }}€
+            </p>
+
           </div>
+
         </div>
 
-        <!-- ACTIONS -->
-        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+        <!-- BUTTON -->
+        <div class="mt-10">
+
           <button
             @click="handleAddToCart"
-            class="flex-1 bg-primary hover:opacity-90 text-white font-bold py-4 rounded-2xl transition shadow-lg shadow-primary/20"
+            class="w-full bg-primary hover:brightness-95 text-on-primary font-bold py-4 rounded-2xl transition shadow-lg"
           >
             Añadir al carrito
           </button>
 
-
         </div>
 
-        <!-- EXTRA INFO -->
-        <div class="mt-12 border-t border-gray-200 pt-8 space-y-5">
-          <details class="group border border-gray-200 rounded-2xl p-5 bg-white">
-            <summary class="flex items-center justify-between cursor-pointer font-semibold">
+        <!-- ACCORDION -->
+        <div
+          class="mt-12 border-t border-outline-variant pt-8 space-y-5"
+        >
+
+          <details
+            class="group border border-outline-variant rounded-2xl p-5 bg-surface-container-lowest"
+          >
+            <summary
+              class="flex items-center justify-between cursor-pointer font-semibold text-on-surface"
+            >
               Información del producto
 
-              <span class="transition-transform group-open:rotate-180"> ▼ </span>
+              <span class="transition-transform group-open:rotate-180">
+                ▼
+              </span>
             </summary>
 
-            <div class="mt-4 text-gray-600 leading-relaxed">
-              Elaborado con ingredientes frescos y seleccionado para garantizar la mejor experiencia
-              gastronómica.
+            <div
+              class="mt-4 text-on-surface-variant leading-relaxed"
+            >
+                       {{ producto.descripcion }}
             </div>
+
           </details>
 
-          <details class="group border border-gray-200 rounded-2xl p-5 bg-white">
-            <summary class="flex items-center justify-between cursor-pointer font-semibold">
+          <details
+            class="group border border-outline-variant rounded-2xl p-5 bg-surface-container-lowest"
+          >
+            <summary
+              class="flex items-center justify-between cursor-pointer font-semibold text-on-surface"
+            >
               Envío y entrega
 
-              <span class="transition-transform group-open:rotate-180"> ▼ </span>
+              <span class="transition-transform group-open:rotate-180">
+                ▼
+              </span>
             </summary>
 
-            <div class="mt-4 text-gray-600 leading-relaxed">
+            <div
+              class="mt-4 text-on-surface-variant leading-relaxed"
+            >
               Tiempo estimado de entrega entre 15 y 25 minutos dependiendo de tu ubicación.
             </div>
+
           </details>
+
         </div>
+
       </section>
+
     </div>
   </main>
 
   <!-- NOT FOUND -->
-  <section v-else class="min-h-[60vh] flex flex-col items-center justify-center text-center px-6">
-    <h2 class="text-5xl font-black text-gray-900">Producto no encontrado</h2>
 
-    <p class="mt-4 text-gray-500 max-w-md">
+  <section
+    v-else
+    class="min-h-[60vh] flex flex-col items-center justify-center text-center px-(--spacing-margin-mobile)"
+  >
+    <h2
+      class="text-5xl font-black text-on-surface"
+    >
+      Producto no encontrado
+    </h2>
+
+    <p
+      class="mt-4 max-w-md text-on-surface-variant"
+    >
       El producto que intentas visualizar no existe o fue eliminado.
     </p>
+
   </section>
 </template>

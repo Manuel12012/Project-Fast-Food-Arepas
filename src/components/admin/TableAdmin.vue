@@ -1,40 +1,70 @@
 <template>
-  <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 shadow-sm overflow-hidden">
-
+  <div
+    class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 shadow-sm overflow-hidden"
+  >
     <div class="overflow-x-auto">
-
       <table class="w-full text-sm">
-
         <!-- HEADER -->
         <thead class="bg-surface-container border-b border-outline-variant">
           <tr class="text-left">
-            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">ID</th>
-            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Categoría</th>
-            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Nombre</th>
-            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Descripción</th>
-            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Precio</th>
-            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Imagen</th>
-            <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant text-center">Acciones</th>
+            <th
+              class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              ID
+            </th>
+            <th
+              class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              Categoría
+            </th>
+            <th
+              class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              Nombre
+            </th>
+            <th
+              class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              Descripción
+            </th>
+            <th
+              class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              Precio
+            </th>
+            <th
+              class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              Imagen
+            </th>
+            <th
+              class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant"
+            >
+              Estado
+            </th>
+            <th
+              class="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-on-surface-variant text-center"
+            >
+              Acciones
+            </th>
           </tr>
         </thead>
 
         <!-- BODY -->
         <tbody>
-
           <tr
             v-for="item in store.products"
             :key="item.id"
             class="border-b border-outline-variant/20 hover:bg-primary/5 transition-colors"
           >
-
             <!-- ID -->
-            <td class="px-5 py-4 text-on-surface-variant font-medium">
-              #{{ item.id }}
-            </td>
+            <td class="px-5 py-4 text-on-surface-variant font-medium">#{{ item.id }}</td>
 
             <!-- CATEGORÍA -->
             <td class="px-5 py-4">
-              <span class="px-2.5 py-1 text-xs rounded-full bg-surface-container text-on-surface-variant border border-outline-variant/30">
+              <span
+                class="px-2.5 py-1 text-xs rounded-full bg-surface-container text-on-surface-variant border border-outline-variant/30"
+              >
                 {{ item.categoriaId }}
               </span>
             </td>
@@ -64,11 +94,13 @@
                 />
               </div>
             </td>
+            <td>
+              <div>En oferta</div>
+            </td>
 
             <!-- ACCIONES -->
             <td class="px-5 py-4">
               <div class="flex items-center justify-center gap-2">
-
                 <!-- EDIT -->
                 <button
                   @click="emit('edit-product', item)"
@@ -80,14 +112,20 @@
                 <!-- DELETE -->
                 <button
                   @click="handleDelete(item.id)"
+                  
                   class="p-2 rounded-lg bg-red-500/10 text-red-600 hover:bg-red-500 hover:text-white transition-all"
                 >
                   <i class="ti ti-trash text-lg" />
                 </button>
 
+                <button
+                  @click="emit('create-offer')"
+                  class="p-2 rounded-lg bg-yellow-500/10 text-yellow-600 hover:bg-yellow-500 hover:text-white transition-all"
+                >
+                  <i class="ti ti-discount-2 text-lg"></i>
+                </button>
               </div>
             </td>
-
           </tr>
 
           <!-- EMPTY STATE -->
@@ -99,30 +137,37 @@
               </div>
             </td>
           </tr>
-
         </tbody>
-
       </table>
-
     </div>
+  </div>
+
+  <div v-if="deleteModal">
 
   </div>
-</template>  
-  <script setup lang="ts">
-  import { onMounted } from "vue"
-  import { useProductStore } from "@/stores/productStore"
+</template>
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
+import { useProductStore } from "@/stores/productStore";
+
+const store = useProductStore();
+const deleteModal = ref(false);
+
+const emit = defineEmits<{
+  (e: "edit-product", product: any): void;
+  (e: "create-offer"): void;
+}>();
+
+onMounted(async () => {
+  await store.fetchProducts();
+});
+
+const handleDelete = async (id: number) => {
+  await store.deleteProduct(id);
+};
+
+const isModalDeleteOpen = ()=>{
+  deleteModal.value = true
   
-  const store = useProductStore()
-  
-  const emit = defineEmits<{
-    (e: "edit-product", product: any): void
-  }>()
-  
-  onMounted(async () => {
-    await store.fetchProducts()
-  })
-  
-  const handleDelete = async (id: number) => {
-    await store.deleteProduct(id)
-  }
-  </script>
+}
+</script>

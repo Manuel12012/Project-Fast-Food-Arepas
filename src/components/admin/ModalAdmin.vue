@@ -205,23 +205,60 @@ const submitProduct = async () => {
 <style scoped>
 .input {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+
+  background: var(--color-surface-container-lowest);
+  color: var(--color-on-surface);
+
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.75rem;
+
+  transition:
+    background-color .2s,
+    border-color .2s,
+    color .2s,
+    box-shadow .2s;
 }
 
-.btn-primary {
-  flex: 1;
-  padding: 10px;
-  background: black;
-  color: white;
-  border-radius: 8px;
+.input::placeholder {
+  color: var(--color-on-surface-variant);
 }
 
-.btn-secondary {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.input:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+select.input {
+  cursor: pointer;
+}
+
+input[type="file"] {
+  color: var(--color-on-surface-variant);
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: .75rem;
+  padding: .55rem 1rem;
+
+  border: none;
+  border-radius: .6rem;
+
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+
+  cursor: pointer;
+  transition: opacity .2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  opacity: .9;
 }
 </style>

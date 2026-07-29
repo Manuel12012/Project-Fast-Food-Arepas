@@ -19,18 +19,13 @@
         <a href="/ofertas" class="text-on-surface hover:text-primary transition-colors font-medium">
           Ofertas
         </a>
-
-        <!-- <a href="/products" class="text-on-surface hover:text-primary transition-colors font-medium">
-          Seguimiento del pedido
-        </a> -->
       </div>
 
       <!-- ACTIONS -->
       <div class="flex items-center gap-3">
-        <!-- SEARCH (desktop) -->
-        <div ref="searchContainer" class="relative hidden lg:flex">
+        <!-- DESKTOP SEARCH -->
+        <div ref="desktopSearchContainer" class="relative hidden sm:flex">
           <div class="flex items-center gap-2 bg-surface-container px-4 py-2 rounded-full">
-            <!-- lupa -->
             <svg
               class="w-5 h-5 text-on-surface-variant"
               fill="none"
@@ -40,6 +35,7 @@
               <circle cx="11" cy="11" r="7" stroke-width="2" />
               <path d="M20 20l-3.5-3.5" stroke-width="2" />
             </svg>
+
             <input
               v-model="search"
               type="text"
@@ -48,7 +44,7 @@
             />
           </div>
 
-          <!-- Aquí irá el dropdown -->
+          <!-- RESULTADOS -->
           <Transition
             enter-active-class="transition duration-200 ease-out"
             enter-from-class="opacity-0 -translate-y-2 scale-95"
@@ -59,7 +55,7 @@
           >
             <div
               v-if="search && filteredProducts.length"
-              class="absolute top-14 left-0 w-[420px] rounded-2xl bg-surface border border-outline-variant/30 shadow-2xl backdrop-blur-xl overflow-hidden z-50"
+              class="absolute top-14 left-0 w-105 rounded-2xl bg-surface border border-outline-variant/30 shadow-2xl overflow-hidden z-50"
             >
               <div
                 class="px-4 py-2 text-xs uppercase tracking-wider bg-surface-container flex justify-between"
@@ -70,19 +66,20 @@
                   {{ filteredProducts.length }}
                 </span>
               </div>
+
               <div
                 v-for="product in filteredProducts"
                 :key="product.id"
                 @click="goToProduct(product.id)"
-                class="group flex items-center gap-4 px-4 py-3 cursor-pointer transition-all duration-200 hover:bg-surface-container hover:scale-[1.01] active:scale-[0.99]"
+                class="group flex items-center gap-4 px-4 py-3 cursor-pointer hover:bg-surface-container transition"
               >
                 <img
                   :src="`http://127.0.0.1:8000/storage/${product.image}`"
-                  class="w-14 h-14 rounded-xl object-cover border border-outline-variant/20 flex-shrink-0"
+                  class="w-14 h-14 rounded-xl object-cover"
                 />
 
                 <div class="flex-1 min-w-0">
-                  <h4 class="font-semibold text-on-surface truncate">
+                  <h4 class="font-semibold truncate">
                     {{ product.nombre }}
                   </h4>
 
@@ -91,20 +88,7 @@
                   </p>
                 </div>
 
-                <span class="text-primary font-bold text-base"> S/. {{ product.precio }} </span>
-                <svg
-                  class="w-5 h-5 opacity-0 group-hover:opacity-100 transition"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
+                <span class="text-primary font-bold"> S/. {{ product.precio }} </span>
               </div>
             </div>
           </Transition>
@@ -117,7 +101,34 @@
           </div>
         </div>
 
+        <!-- MOBILE SEARCH BUTTON -->
+
+        <button
+          @click="showMobileSearch = !showMobileSearch"
+          class="sm:hidden p-2 rounded-full hover:bg-surface-container transition"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20l-3.5-3.5" />
+          </svg>
+        </button>
+
         <!-- CART -->
+        <button
+          @click="themeStore.toggleTheme"
+          class="p-2 rounded-full hover:bg-surface-container transition"
+        >
+          <span class="material-symbols-outlined">
+            {{ themeStore.darkMode ? "light_mode" : "dark_mode" }}
+          </span>
+        </button>
         <RouterLink
           to="/cart"
           class="relative p-2 rounded-full hover:bg-surface-container transition"
@@ -132,6 +143,7 @@
           >
             <path d="M6 6h15l-1 7H7z" />
             <path d="M6 6L5 3H2" />
+
             <circle cx="9" cy="20" r="1" />
             <circle cx="18" cy="20" r="1" />
           </svg>
@@ -144,14 +156,8 @@
           </span>
         </RouterLink>
 
-        <RouterLink
-          to="/admin/login"
-          class="text-on-surface hover:text-primary transition-colors font-medium"
-        >
-          Admin
-        </RouterLink>
-
         <!-- MOBILE MENU BUTTON -->
+
         <button
           @click="showMobileMenu = !showMobileMenu"
           class="md:hidden p-2 rounded-full hover:bg-surface-container transition"
@@ -186,7 +192,64 @@
       </div>
     </div>
 
+    <!-- MOBILE SEARCH -->
+
+    <Transition name="fade">
+      <div v-if="showMobileSearch" class="sm:hidden px-4 pb-4 bg-surface">
+        <div
+          ref="mobileSearchContainer"
+          class="flex items-center gap-2 bg-surface-container px-4 py-3 rounded-full"
+        >
+          <svg
+            class="w-5 h-5 text-on-surface-variant"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="7" stroke-width="2" />
+
+            <path d="M20 20l-3.5-3.5" stroke-width="2" />
+          </svg>
+
+          <input
+            v-model="search"
+            type="text"
+            placeholder="Buscar productos..."
+            class="bg-transparent outline-none text-sm w-full"
+          />
+        </div>
+
+        <!-- RESULTADOS MOBILE -->
+
+        <div
+          v-if="search && filteredProducts.length"
+          class="mt-3 rounded-2xl bg-surface border border-outline-variant/30 shadow-xl overflow-hidden"
+        >
+          <div
+            v-for="product in filteredProducts"
+            :key="product.id"
+            @click="goToProduct(product.id)"
+            class="flex items-center gap-3 p-3 hover:bg-surface-container cursor-pointer"
+          >
+            <img
+              :src="`http://127.0.0.1:8000/storage/${product.image}`"
+              class="w-12 h-12 rounded-xl object-cover"
+            />
+
+            <div class="flex-1">
+              <p class="font-semibold text-sm">
+                {{ product.nombre }}
+              </p>
+
+              <p class="text-xs text-on-surface-variant">S/. {{ product.precio }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
+
     <!-- MOBILE MENU -->
+
     <Transition name="fade">
       <div
         v-if="showMobileMenu"
@@ -194,7 +257,7 @@
       >
         <div class="px-6 py-6 flex flex-col gap-4">
           <a
-            href="#carte"
+            href="/menu"
             class="font-medium text-on-surface hover:text-primary"
             @click="showMobileMenu = false"
           >
@@ -202,7 +265,7 @@
           </a>
 
           <a
-            href="#ofertas"
+            href="/ofertas"
             class="font-medium text-on-surface hover:text-primary"
             @click="showMobileMenu = false"
           >
@@ -223,18 +286,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { useCartStore } from "@/stores/carthStore";
 import { useProductStore } from "@/stores/productStore";
-import { onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
-
+import { useThemeStore } from "@/stores/themStore";
 const productStore = useProductStore();
-const showMobileMenu = ref(false);
-const searchContainer = ref<HTMLElement | null>(null);
-const search = ref("");
 const cartStore = useCartStore();
 const router = useRouter();
+
+const showMobileMenu = ref(false);
+const showMobileSearch = ref(false);
+const themeStore = useThemeStore();
+const search = ref("");
+
+const desktopSearchContainer = ref<HTMLElement | null>(null);
+const mobileSearchContainer = ref<HTMLElement | null>(null);
 
 const totalItems = computed(() => {
   return cartStore.cart.reduce((acc, item) => acc + item.cantidad, 0);
@@ -250,29 +317,39 @@ const filteredProducts = computed(() => {
 
 const goToProduct = async (id: number) => {
   search.value = "";
-  (document.activeElement as HTMLElement)?.blur();
+  showMobileSearch.value = false;
 
   await router.push({
     name: "product",
-    params: { id },
+
+    params: {
+      id,
+    },
   });
 };
 
 const handleClickOutside = (event: MouseEvent) => {
-  if (!searchContainer.value) return;
-
   const target = event.target as Node;
 
-  if (!searchContainer.value.contains(target)) {
+  const insideDesktop = desktopSearchContainer.value?.contains(target);
+
+  const insideMobile = mobileSearchContainer.value?.contains(target);
+
+  if (!insideDesktop && !insideMobile) {
     search.value = "";
   }
 };
+
 watch(
   () => productStore.products,
+
   (products) => {
     console.log("Productos:", products);
   },
-  { immediate: true },
+
+  {
+    immediate: true,
+  },
 );
 
 onMounted(() => {
