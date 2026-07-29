@@ -111,8 +111,7 @@
 
                 <!-- DELETE -->
                 <button
-                  @click="handleDelete(item.id)"
-                  
+                  @click="openModalDelete(item.id)"
                   class="p-2 rounded-lg bg-red-500/10 text-red-600 hover:bg-red-500 hover:text-white transition-all"
                 >
                   <i class="ti ti-trash text-lg" />
@@ -140,10 +139,26 @@
         </tbody>
       </table>
     </div>
-  </div>
+    <div v-if="deleteModal" class="fixed inset-0 z-[9999] flex items-center justify-center">
+      <!-- Fondo -->
+      <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="close"></div>
 
-  <div v-if="deleteModal">
+      <!-- Modal -->
+      <div
+        class="relative z-10 w-full max-w-2xl mx-4 rounded-2xl bg-surface p-6 shadow-2xl"
+        @click.stop
+      >
+        <h2 class="text-lg font-semibold">¿Estás seguro que quieres eliminar el producto?</h2>
 
+        <div class="mt-6 flex justify-end gap-3">
+          <button @click="close" class="px-4 py-2 rounded-lg border">Cancelar</button>
+
+          <button @click="handleDelete(itemId)" class="px-4 py-2 rounded-lg bg-red-600 text-white">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -152,7 +167,7 @@ import { useProductStore } from "@/stores/productStore";
 
 const store = useProductStore();
 const deleteModal = ref(false);
-
+const itemId = ref<number | null>(null);
 const emit = defineEmits<{
   (e: "edit-product", product: any): void;
   (e: "create-offer"): void;
@@ -162,12 +177,21 @@ onMounted(async () => {
   await store.fetchProducts();
 });
 
-const handleDelete = async (id: number) => {
+const handleDelete = async (id: number | null) => {
+  if (id === null) return;
+
   await store.deleteProduct(id);
+
+  deleteModal.value = false;
+  itemId.value = null;
 };
 
-const isModalDeleteOpen = ()=>{
-  deleteModal.value = true
-  
-}
+const openModalDelete = (id: number) => {
+  deleteModal.value = true;
+  itemId.value = id;
+};
+
+const close = () => {
+  deleteModal.value = false;
+};
 </script>

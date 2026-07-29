@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// 🔐 AUTH (Sanctum)
+// AUTH (Sanctum)
 export const authApi = axios.create({
   baseURL: "http://localhost:8000",
   withCredentials: true,
@@ -10,7 +10,7 @@ export const authApi = axios.create({
   }
 });
 
-// 🌐 API pública
+// API pública
 export const api = axios.create({
   baseURL: "http://localhost:8000",
   withCredentials: true,
