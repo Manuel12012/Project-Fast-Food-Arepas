@@ -12,6 +12,7 @@ import AdminOrders from '@/views/admin/AdminOrders.vue'
 import AdminSettings from '@/views/admin/AdminSettings.vue'
 import ResetPasswordView from '@/views/ResetPasswordView.vue'
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
+import Ofertas from '@/views/Ofertas.vue'
 
 // ...tus imports de vistas
 
@@ -26,6 +27,11 @@ const routes = [
     path: '/reset-password',
     name: 'reset-password',
     component: ResetPasswordView
+  },
+  {
+    path: "/ofertas",
+    name: "/ofertas",
+    component: Ofertas
   },
 
 {
