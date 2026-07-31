@@ -25,7 +25,7 @@
 
       <div class="flex">
         <button
-          @click="$emit('open-modal')"
+          @click="$emit('open-modal-category')"
           class="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-label-md font-medium text-on-primary shadow-sm transition-all duration-200 hover:opacity-90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary/30"
         >
           <i class="ti ti-plus text-lg"></i>
@@ -37,5 +37,5 @@
 </template>
 
 <script setup lang="ts">
-defineEmits(["open-modal"]);
+defineEmits(["open-modal", "open-modal-category"]);
 </script>

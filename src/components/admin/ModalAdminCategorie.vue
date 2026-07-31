@@ -1,0 +1,213 @@
+<template>
+  <div v-if="isModalCategoryOpen" class="fixed inset-0 z-50 flex items-center justify-center">
+    <!-- BACKDROP -->
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="close" />
+    <!-- MODAL -->
+    <div
+      class="relative w-full max-w-2xl mx-4 bg-surface rounded-2xl border border-outline-variant/50 shadow-2xl animate-in fade-in zoom-in duration-200"
+    >
+      <!-- HEADER -->
+      <div class="flex items-center justify-between px-6 py-5 border-b border-outline-variant/30">
+        <div>
+          <h2 class="text-xl font-semibold text-on-surface">
+            {{ isEditMode ? "Editar categoria" : "Nueva categoria" }}
+          </h2>
+
+          <p class="text-sm text-on-surface-variant mt-1">
+            Completa la información de la categoria
+          </p>
+        </div>
+
+        <button
+          @click="close"
+          class="p-2 rounded-full hover:bg-surface-container transition-colors"
+        >
+          <i class="ti ti-x text-xl text-on-surface-variant" />
+        </button>
+      </div>
+
+      <!--FORM-->
+
+      <form class="p-6 space-y-5" @submit.prevent="submitCategory">
+        <div>
+          <label class="text-sm text-on-surface-variant">Nombre</label>
+          <input
+            v-model="nombre"
+            type="text"
+            class="input"
+            placeholder="Ej: Arepa, Desserts, Postres, etc"
+          />
+        </div>
+
+        <!-- IMAGEN -->
+        <div>
+          <label class="text-sm text-on-surface-variant">Imagen</label>
+
+          <input
+            type="file"
+            accept="image/*"
+            @change="handleImage"
+            class="mt-2 block w-full text-sm text-on-surface-variant"
+          />
+
+          <div v-if="previewImage" class="mt-4">
+            <p class="text-xs text-on-surface-variant mb-2">Vista previa</p>
+
+            <img
+              :src="previewImage"
+              class="w-40 h-40 object-cover rounded-xl border border-outline-variant/30 shadow-sm hover:scale-105 transition-transform"
+            />
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="flex justify-end gap-3 pt-2 border-t border-outline-variant/30">
+          <button
+            type="button"
+            @click="close"
+            class="px-4 py-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-sm transition-all active:scale-95"
+          >
+            {{ isEditMode ? "Actualizar" : "Guardar" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useCategorieStore } from "@/stores/categorieStore";
+import { computed, ref, watch } from "vue";
+
+const props = defineProps<{
+  isModalCategoryOpen: boolean;
+  categoryToEdit: any;
+}>();
+
+const emit = defineEmits(["close-modal-category"]);
+
+const store = useCategorieStore();
+
+//FORM STATE
+const nombre = ref("");
+const imageFile = ref<File | null>(null);
+const previewImage = ref("");
+
+// CLOSE
+const close = () => {
+  emit("close-modal-category");
+};
+
+// MODE
+const isEditMode = computed(() => !!props.categoryToEdit);
+
+// IMAGE
+const handleImage = (event: Event) => {
+  const file = (event.target as HTMLInputElement).files?.[0];
+
+  if (file) {
+    imageFile.value = file;
+    previewImage.value = URL.createObjectURL(file);
+  }
+};
+
+// SUBMIT OR CREATE
+const submitCategory = async () => {
+  const payload = {
+    nombre: nombre.value,
+    image: imageFile.value,
+  };
+
+  if (isEditMode.value) {
+    await store.updateCategorie(props.categoryToEdit.id, payload);
+  } else {
+    await store.createProduct(payload);
+  }
+
+  close()
+};
+
+// FILL FORM WHEN EDITING
+watch(
+  () => props.categoryToEdit,
+  (category) => {
+    if (category) {
+      nombre.value = category.nombre;
+      imageFile.value = null;
+      previewImage.value = category.image;
+    } else {
+      nombre.value = "";
+      previewImage.value = "";
+      imageFile.value = null;
+    }
+  },
+);
+</script>
+
+<style scoped>
+.input {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+
+  background: var(--color-surface-container-lowest);
+  color: var(--color-on-surface);
+
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.75rem;
+
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+
+.input::placeholder {
+  color: var(--color-on-surface-variant);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+select.input {
+  cursor: pointer;
+}
+
+input[type="file"] {
+  color: var(--color-on-surface-variant);
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: 0.75rem;
+  padding: 0.55rem 1rem;
+
+  border: none;
+  border-radius: 0.6rem;
+
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  opacity: 0.9;
+}
+</style>

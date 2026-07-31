@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import {api, authApi} from "@/services/api"
+import {authApi} from "@/services/api"
 import type { Product } from "@/types"
 
 type ProductPayload = {
