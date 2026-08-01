@@ -8,43 +8,25 @@ import Footer from "@/components/core/Footer.vue";
 </script>
 
 <template>
-
-  <div
-    class="
-      min-h-screen
-      bg-surface
-      text-on-surface
-      overflow-x-hidden
-    "
-  >
-
+  <div class="min-h-screen bg-surface text-on-surface overflow-x-hidden">
     <header>
       <NavBar />
     </header>
 
-
     <main>
-
       <Hero />
 
       <section class="space-y-12 md:space-y-20">
-
         <DeliverySpeedBaner />
 
         <Categories />
 
         <NewsLetter />
-
       </section>
-
     </main>
-
 
     <footer>
       <Footer />
     </footer>
-
-
   </div>
-
 </template>

@@ -1,28 +1,20 @@
 <template>
   <div v-if="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center">
-
     <!-- BACKDROP -->
-    <div
-      class="absolute inset-0 bg-black/40 backdrop-blur-sm"
-      @click="close"
-    />
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="close" />
 
     <!-- MODAL -->
     <div
       class="relative w-full max-w-2xl mx-4 bg-surface rounded-2xl border border-outline-variant/50 shadow-2xl animate-in fade-in zoom-in duration-200"
     >
-
       <!-- HEADER -->
       <div class="flex items-center justify-between px-6 py-5 border-b border-outline-variant/30">
-
         <div>
           <h2 class="text-xl font-semibold text-on-surface">
             {{ isEditMode ? "Editar producto" : "Nuevo producto" }}
           </h2>
 
-          <p class="text-sm text-on-surface-variant mt-1">
-            Completa la información del producto
-          </p>
+          <p class="text-sm text-on-surface-variant mt-1">Completa la información del producto</p>
         </div>
 
         <button
@@ -31,12 +23,10 @@
         >
           <i class="ti ti-x text-xl text-on-surface-variant" />
         </button>
-
       </div>
 
       <!-- FORM -->
       <form class="p-6 space-y-5" @submit.prevent="submitProduct">
-
         <!-- NOMBRE -->
         <div>
           <label class="text-sm text-on-surface-variant">Nombre</label>
@@ -45,7 +35,6 @@
 
         <!-- GRID -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
           <!-- CATEGORÍA -->
           <div>
             <label class="text-sm text-on-surface-variant">Categoría</label>
@@ -64,13 +53,17 @@
             <label class="text-sm text-on-surface-variant">Precio</label>
             <input v-model="precio" type="number" class="input" placeholder="0.00" />
           </div>
-
         </div>
 
         <!-- DESCRIPCIÓN -->
         <div>
           <label class="text-sm text-on-surface-variant">Descripción</label>
-          <input v-model="descripcion" type="text" class="input" placeholder="Descripción del producto" />
+          <input
+            v-model="descripcion"
+            type="text"
+            class="input"
+            placeholder="Descripción del producto"
+          />
         </div>
 
         <!-- IMAGEN -->
@@ -96,7 +89,6 @@
 
         <!-- ACTIONS -->
         <div class="flex justify-end gap-3 pt-2 border-t border-outline-variant/30">
-
           <button
             type="button"
             @click="close"
@@ -111,76 +103,74 @@
           >
             {{ isEditMode ? "Actualizar" : "Guardar" }}
           </button>
-
         </div>
-
       </form>
-
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from "vue"
-import { useProductStore } from "@/stores/productStore"
+import { ref, watch, computed } from "vue";
+import { useProductStore } from "@/stores/productStore";
+import { useCategorieStore } from "@/stores/categorieStore";
 
 const props = defineProps<{
-  isModalOpen: boolean
-  productToEdit?: any
-}>()
+  isModalOpen: boolean;
+  productToEdit?: any;
+}>();
 
-const emit = defineEmits(["close-modal"])
+const emit = defineEmits(["close-modal"]);
 
-const store = useProductStore()
-
+const store = useProductStore();
+const categories = useCategorieStore();
 // FORM STATE
-const nombre = ref("")
-const categoriaId = ref("")
-const descripcion = ref("")
-const precio = ref("")
-const imageFile = ref<File | null>(null)
-const previewImage = ref("")
+const nombre = ref("");
+const categoriaId = ref("");
+const descripcion = ref("");
+const precio = ref("");
+const imageFile = ref<File | null>(null);
+const previewImage = ref("");
 
 // MODE
-const isEditMode = computed(() => !!props.productToEdit)
+const isEditMode = computed(() => !!props.productToEdit);
 
 // FILL FORM WHEN EDITING
 watch(
   () => props.productToEdit,
   (product) => {
     if (product) {
-      nombre.value = product.nombre
-      categoriaId.value = product.categoriaId
-      descripcion.value = product.descripcion
-      precio.value = product.precio
-      previewImage.value = product.image
-      imageFile.value = null
+      nombre.value = product.nombre;
+      categoriaId.value = product.categoriaId;
+      descripcion.value = product.descripcion;
+      precio.value = product.precio;
+      previewImage.value = product.image;
+      imageFile.value = null;
     } else {
-      nombre.value = ""
-      categoriaId.value = ""
-      descripcion.value = ""
-      precio.value = ""
-      previewImage.value = ""
-      imageFile.value = null
+      nombre.value = "";
+      categoriaId.value = "";
+      descripcion.value = "";
+      precio.value = "";
+      previewImage.value = "";
+      imageFile.value = null;
     }
   },
-  { immediate: true }
-)
+  { immediate: true },
+);
 
 // IMAGE
 const handleImage = (event: Event) => {
-  const file = (event.target as HTMLInputElement).files?.[0]
+  const file = (event.target as HTMLInputElement).files?.[0];
 
   if (file) {
-    imageFile.value = file
-    previewImage.value = URL.createObjectURL(file)
+    imageFile.value = file;
+    previewImage.value = URL.createObjectURL(file);
   }
-}
+};
 
 // CLOSE
 const close = () => {
-  emit("close-modal")
-}
+  emit("close-modal");
+};
 
 // SUBMIT (CREATE / UPDATE)
 const submitProduct = async () => {
@@ -189,17 +179,17 @@ const submitProduct = async () => {
     nombre: nombre.value,
     descripcion: descripcion.value,
     precio: precio.value,
-    image: imageFile.value
-  }
+    image: imageFile.value,
+  };
 
   if (isEditMode.value) {
-    await store.updateProduct(props.productToEdit.id, payload)
+    await store.updateProduct(props.productToEdit.id, payload);
   } else {
-    await store.createProduct(payload)
+    await store.createProduct(payload);
   }
 
-  close()
-}
+  close();
+};
 </script>
 
 <style scoped>
@@ -215,10 +205,10 @@ const submitProduct = async () => {
   border-radius: 0.75rem;
 
   transition:
-    background-color .2s,
-    border-color .2s,
-    color .2s,
-    box-shadow .2s;
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
 }
 
 .input::placeholder {
@@ -232,7 +222,7 @@ const submitProduct = async () => {
 }
 
 .input:disabled {
-  opacity: .6;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
@@ -245,20 +235,20 @@ input[type="file"] {
 }
 
 input[type="file"]::file-selector-button {
-  margin-right: .75rem;
-  padding: .55rem 1rem;
+  margin-right: 0.75rem;
+  padding: 0.55rem 1rem;
 
   border: none;
-  border-radius: .6rem;
+  border-radius: 0.6rem;
 
   background: var(--color-primary);
   color: var(--color-on-primary);
 
   cursor: pointer;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
 }
 
 input[type="file"]::file-selector-button:hover {
-  opacity: .9;
+  opacity: 0.9;
 }
 </style>

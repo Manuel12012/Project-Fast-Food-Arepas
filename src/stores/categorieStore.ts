@@ -1,4 +1,5 @@
 import { authApi } from "@/services/api";
+import type { Category } from "@/types";
 import { defineStore } from "pinia";
 
 type CategoriePayload = {
@@ -6,16 +7,10 @@ type CategoriePayload = {
   image?: File | null;
 };
 
-type Categorie = {
-  id?: number;
-  nombre: string;
-  image?: string | null;
-};
-
 export const useCategorieStore = defineStore("categories", {
   state: () => ({
-    categories: [] as Categorie[],
-    categorie: null as Categorie | null,
+    categories: [] as Category[],
+    categorie: null as Category | null,
     loading: false as boolean,
     totalCategories: 0 as number,
   }),
@@ -103,14 +98,13 @@ export const useCategorieStore = defineStore("categories", {
         // Laravel requirement
         formData.append("_method", "PUT");
 
-        const {data}= await authApi.post(`/api/categories/${id}`, formData)
+        const { data } = await authApi.post(`/api/categories/${id}`, formData);
 
         return data;
       } catch (error) {
-                console.error("updateProduct error:", error)
-
-      } finally{
-        this.loading=false;
+        console.error("updateProduct error:", error);
+      } finally {
+        this.loading = false;
       }
     },
 

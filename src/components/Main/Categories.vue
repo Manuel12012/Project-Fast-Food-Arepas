@@ -66,13 +66,14 @@ import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useCategorieStore } from "@/stores/categorieStore";
+import type { Category } from "@/types";
 
 const router = useRouter();
 
 const categorieStore = useCategorieStore();
 
 // Primero creas las referencias
-const { categories, loading } = storeToRefs(categorieStore);
+const { categories } = storeToRefs(categorieStore);
 
 // Ahora sí puedes usarlas
 console.log("Store:", categorieStore);
@@ -82,20 +83,20 @@ onMounted(() => {
   categorieStore.fetchCategories();
 });
 
-const irAlMenu = (categoria: any) => {
+const irAlMenu = (categoria: Category) => {
   router.push({
     path: "/menu",
     query: {
-      categoria: categoria.nombre.toLowerCase(),
+      categoria: categoria.id.toString(),
     },
   });
 };
 
-const images = import.meta.glob("../../assets/categories/*", {
-  eager: true,
-  import: "default",
-});
-const getImage = (categoria: any) => {
+// const images = import.meta.glob("../../assets/categories/*", {
+//   eager: true,
+//   import: "default",
+// });
+const getImage = (categoria: Category) => {
   if (!categoria.image) {
     return "/placeholder-category.png";
   }

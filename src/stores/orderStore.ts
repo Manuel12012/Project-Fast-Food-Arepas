@@ -1,9 +1,10 @@
 import { defineStore } from "pinia"
 import {api} from "@/services/api"
+import type { Order } from "@/types"
 
 export const useOrderStore = defineStore("orders", {
   state: () => ({
-    orders: [],
+    orders: [] as Order[],
     loading: false
   }),
 

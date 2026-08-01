@@ -10,6 +10,7 @@ import TableAdmin from "@/components/admin/TableAdmin.vue";
 import ModalAdminOffer from "@/components/admin/ModalAdminOffer.vue";
 import ModalAdminCategorie from "@/components/admin/ModalAdminCategorie.vue";
 import TableAdminCategory from "@/components/admin/TableAdminCategory.vue";
+import type { Category, Product } from "@/types";
 
 // MODALES
 const isModalOpen = ref(false);
@@ -17,9 +18,9 @@ const isModalOffer = ref(false);
 const isModalCategoryOpen = ref(false);
 
 // REFERENCES
-const selectedProduct = ref(null);
-const selectedPrice = ref(null);
-const selectedCategory = ref(null);
+const selectedProduct = ref<Product | null>(null);
+const selectedPrice = ref<number | null>(null);
+const selectedCategory = ref<Category | null>(null);
 // abrir modal en modo CREATE
 const openCreateModal = () => {
   selectedProduct.value = null;
@@ -27,7 +28,7 @@ const openCreateModal = () => {
 };
 
 // abrir modal en modo EDIT
-const editProduct = (product) => {
+const editProduct = (product: Product) => {
   selectedProduct.value = product;
   isModalOpen.value = true;
 };
@@ -61,7 +62,7 @@ const openModalCategory = () => {
 };
 
 // ABRIR EDIT MODAL CATEGORY
-const editCategory = (category) => {
+const editCategory = (category: Category) => {
   selectedCategory.value = category;
   isModalCategoryOpen.value = true;
 };
@@ -78,17 +79,12 @@ const editCategory = (category) => {
       <!-- CONTENT -->
       <main class="p-6 lg:p-8">
         <div class="space-y-6">
-
           <!-- HEADER -->
           <section
             class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5"
           >
-            <HeaderAdmin
-              @open-modal="openCreateModal"
-              @open-modal-category="openModalCategory"
-            />
+            <HeaderAdmin @open-modal="openCreateModal" @open-modal-category="openModalCategory" />
           </section>
-
 
           <!-- DASHBOARD -->
           <DashboardAdmin />
@@ -97,56 +93,41 @@ const editCategory = (category) => {
           <section class="pt-4">
             <div class="flex items-center justify-between">
               <div>
-                <h2 class="text-xl font-bold text-on-surface">
-                  Productos
-                </h2>
+                <h2 class="text-xl font-bold text-on-surface">Productos</h2>
 
                 <p class="text-sm text-on-surface-variant mt-1">
                   Administra los productos disponibles
                 </p>
               </div>
-
             </div>
           </section>
           <!-- PRODUCTS -->
           <section
             class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden"
           >
-            <TableAdmin
-              @edit-product="editProduct"
-              @create-offer="openOfferModal"
-            />
+            <TableAdmin @edit-product="editProduct" @create-offer="openOfferModal" />
           </section>
-
 
           <!-- CATEGORIES HEADER -->
           <section class="pt-4">
             <div class="flex items-center justify-between">
               <div>
-                <h2 class="text-xl font-bold text-on-surface">
-                  Categorías
-                </h2>
+                <h2 class="text-xl font-bold text-on-surface">Categorías</h2>
 
                 <p class="text-sm text-on-surface-variant mt-1">
                   Administra las categorías disponibles de tus productos
                 </p>
               </div>
-
             </div>
           </section>
-
 
           <!-- CATEGORIES TABLE -->
           <section
             class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden"
           >
-            <TableAdminCategory
-              @edit-category="editCategory"
-            />
+            <TableAdminCategory @edit-category="editCategory" />
           </section>
-
         </div>
-
 
         <!-- MODALS -->
 
@@ -156,20 +137,17 @@ const editCategory = (category) => {
           @close-modal="closeModal"
         />
 
-
         <ModalAdminOffer
           :isModalOffer="isModalOffer"
           :offerToEdit="selectedPrice"
           @close-modal-offer="closeModalOffer"
         />
 
-
         <ModalAdminCategorie
           :isModalCategoryOpen="isModalCategoryOpen"
           :categoryToEdit="selectedCategory"
           @close-modal-category="closeModalCategory"
         />
-
       </main>
     </div>
   </div>

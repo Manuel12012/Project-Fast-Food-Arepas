@@ -16,18 +16,20 @@ onMounted(async () => {
 
 const statusDraft = reactive<Record<number, string>>({});
 
-const updateStatus = async (orderId: number, status: string) => {
+const updateStatus = async (orderId: number, status: string | undefined) => {
+  if (!status) return;
+
   await orderStore.updateOrderStatus(orderId, status);
   statusDraft[orderId] = status;
 };
 
-const statusClass = (status: string) => {
-  if (status === "Entregado") return "status-entregado";
-  if (status === "Cancelado") return "status-cancelado";
-  return "status-sin";
-};
+// const statusClass = (status: string) => {
+//   if (status === "Entregado") return "status-entregado";
+//   if (status === "Cancelado") return "status-cancelado";
+//   return "status-sin";
+// };
 
-const statusIcon = (status: string) => {
+const statusIcon = (status: string | undefined) => {
   if (status === "Entregado") return "ti-circle-check";
   if (status === "Cancelado") return "ti-circle-x";
   return "ti-clock";
@@ -173,7 +175,7 @@ const statusIcon = (status: string) => {
                   <div>
                     <p class="text-xs text-outline">Correo</p>
 
-                    <p class="text-sm font-medium text-on-surface truncate max-w-[120px]">
+                    <p class="text-sm font-medium text-on-surface truncate max-w-30">
                       {{ order.email }}
                     </p>
                   </div>
