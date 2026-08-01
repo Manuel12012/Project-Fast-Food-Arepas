@@ -54,6 +54,8 @@ export const useCategorieStore = defineStore("categories", {
         const { data } = await authApi.post("/api/categories", formData);
 
         this.categories.unshift(data);
+
+        
         return data;
       } catch (error) {
         console.error("createCategori error:", error);

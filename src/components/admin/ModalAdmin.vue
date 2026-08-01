@@ -38,13 +38,16 @@
           <!-- CATEGORÍA -->
           <div>
             <label class="text-sm text-on-surface-variant">Categoría</label>
-            <select v-model="categoriaId" class="input">
-              <option value="">Seleccione categoría</option>
-              <option value="arepas">Arepas</option>
-              <option value="empanadas">Empanadas</option>
-              <option value="bebidas">Bebidas</option>
-              <option value="postres">Postres</option>
-              <option value="tequeños">Tequeños</option>
+            <select v-model="category_id" class="input">
+              <option value="null">-- Seleccione una categoría --</option>
+
+              <option
+                v-for="category in categories.categories"
+                :key="category.id"
+                :value="category.id"
+              >
+                {{ category.nombre }}
+              </option>
             </select>
           </div>
 
@@ -110,7 +113,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from "vue";
+import { ref, watch, computed, onMounted } from "vue";
 import { useProductStore } from "@/stores/productStore";
 import { useCategorieStore } from "@/stores/categorieStore";
 
@@ -125,7 +128,7 @@ const store = useProductStore();
 const categories = useCategorieStore();
 // FORM STATE
 const nombre = ref("");
-const categoriaId = ref("");
+const category_id = ref<number | null>(null);
 const descripcion = ref("");
 const precio = ref("");
 const imageFile = ref<File | null>(null);
@@ -140,14 +143,14 @@ watch(
   (product) => {
     if (product) {
       nombre.value = product.nombre;
-      categoriaId.value = product.categoriaId;
+      category_id.value = product.category_id;
       descripcion.value = product.descripcion;
       precio.value = product.precio;
       previewImage.value = product.image;
       imageFile.value = null;
     } else {
       nombre.value = "";
-      categoriaId.value = "";
+      category_id.value = null;
       descripcion.value = "";
       precio.value = "";
       previewImage.value = "";
@@ -175,10 +178,10 @@ const close = () => {
 // SUBMIT (CREATE / UPDATE)
 const submitProduct = async () => {
   const payload = {
-    categoriaId: categoriaId.value,
+    category_id: category_id.value,
     nombre: nombre.value,
     descripcion: descripcion.value,
-    precio: precio.value,
+    precio: Number(precio.value),
     image: imageFile.value,
   };
 
@@ -190,6 +193,11 @@ const submitProduct = async () => {
 
   close();
 };
+
+// ONMOUNTED
+onMounted(async () => {
+  await categories.fetchCategories();
+});
 </script>
 
 <style scoped>

@@ -1,16 +1,16 @@
-import { defineStore } from "pinia"
-import {authApi} from "@/services/api"
-import type { Product } from "@/types"
+import { defineStore } from "pinia";
+import { authApi } from "@/services/api";
+import type { Product } from "@/types";
 
 type ProductPayload = {
-  categoriaId: string
-  nombre: string
-  descripcion?: string
-  precio: number | string
-  combo?: string
-  unidadCombo?: string
-  image?: File | null
-}
+  category_id: number | null;
+  nombre: string;
+  descripcion?: string;
+  precio: number | string;
+  combo?: string;
+  unidadCombo?: string;
+  image?: File | null;
+};
 
 export const useProductStore = defineStore("products", {
   state: () => ({
@@ -26,15 +26,15 @@ export const useProductStore = defineStore("products", {
     // GET ALL
     // =========================
     async fetchProducts() {
-      this.loading = true
+      this.loading = true;
 
       try {
-        const { data } = await authApi.get("/api/products")
-        this.products = data
+        const { data } = await authApi.get("/api/products");
+        this.products = data;
       } catch (error) {
-        console.error("fetchProducts error:", error)
+        console.error("fetchProducts error:", error);
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
 
@@ -42,15 +42,15 @@ export const useProductStore = defineStore("products", {
     // GET BY ID
     // =========================
     async fetchProductById(id: number) {
-      this.loading = true
+      this.loading = true;
 
       try {
-        const { data } = await authApi.get(`/api/products/${id}`)
-        this.product = data
+        const { data } = await authApi.get(`/api/products/${id}`);
+        this.product = data;
       } catch (error) {
-        console.error("fetchProductById error:", error)
+        console.error("fetchProductById error:", error);
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
 
@@ -58,19 +58,21 @@ export const useProductStore = defineStore("products", {
     // CREATE
     // =========================
     async createProduct(payload: ProductPayload) {
-      this.loading = true
+      this.loading = true;
 
       try {
-        const formData = this.buildFormData(payload)
+        const formData = this.buildFormData(payload);
 
-        const { data } = await authApi.post("/api/products", formData)
+        const { data } = await authApi.post("/api/products", formData);
 
-        this.products.unshift(data)
-        return data
+        this.products.unshift(data);
+
+        this.totalProducts++;
+        return data;
       } catch (error) {
-        console.error("createProduct error:", error)
+        console.error("createProduct error:", error);
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
 
@@ -78,29 +80,28 @@ export const useProductStore = defineStore("products", {
     // UPDATE
     // =========================
     async updateProduct(id: number, payload: ProductPayload) {
-      this.loading = true
+      this.loading = true;
 
       try {
-        const formData = this.buildFormData(payload)
+        const formData = this.buildFormData(payload);
 
-        // Laravel requirement
-        formData.append("_method", "PUT")
+        formData.append("_method", "PUT");
 
-        const { data } = await authApi.post(`/api/products/${id}`, formData)
+        const { data } = await authApi.post(`/api/products/${id}`, formData);
 
-        const index = this.products.findIndex(p => p.id === id)
+        const index = this.products.findIndex((p) => p.id === id);
 
         if (index !== -1) {
-          this.products[index] = data
+          this.products[index] = data;
         }
 
-        this.product = data
+        this.product = data;
 
-        return data
+        return data;
       } catch (error) {
-        console.error("updateProduct error:", error)
+        console.error("updateProduct error:", error);
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
 
@@ -108,46 +109,48 @@ export const useProductStore = defineStore("products", {
     // DELETE
     // =========================
     async deleteProduct(id: number) {
-      this.loading = true
+      this.loading = true;
 
       try {
-        await authApi.delete(`/api/products/${id}`)
+        await authApi.delete(`/api/products/${id}`);
 
-        this.products = this.products.filter(p => p.id !== id)
+        this.products = this.products.filter((p) => p.id !== id);
+
+        this.totalProducts--;
       } catch (error) {
-        console.error("deleteProduct error:", error)
+        console.error("deleteProduct error:", error);
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
     // =========================
     // TOTAL PRODUCTS
     // =========================
     async countProducts() {
-      this.loading = true
+      this.loading = true;
 
       try {
-        const { data } = await authApi.get(`/api/products/total-productos`)
-        this.totalProducts = data.total
+        const { data } = await authApi.get(`/api/products/total-productos`);
+        this.totalProducts = data.total;
       } catch (error) {
-        console.error(error)
+        console.error(error);
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
     // =========================
     // TOTAL CATEGORIES
     // =========================
     async countCategories() {
-      this.loading = true
+      this.loading = true;
 
       try {
-        const { data } = await authApi.get(`/api/products/count-categorias`)
-        this.totalCategories = data.total
+        const { data } = await authApi.get(`/api/products/count-categorias`);
+        this.totalCategories = data.total;
       } catch (error) {
-        console.error(error)
+        console.error(error);
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
 
@@ -155,26 +158,26 @@ export const useProductStore = defineStore("products", {
     // HELPERS
     // =========================
     buildFormData(payload: ProductPayload) {
-      const formData = new FormData()
+      const formData = new FormData();
 
-      formData.append("categoriaId", payload.categoriaId)
-      formData.append("nombre", payload.nombre)
-      formData.append("descripcion", payload.descripcion ?? "")
-      formData.append("precio", String(payload.precio))
+      formData.append("category_id", payload.category_id ? String(payload.category_id) : "");
+      formData.append("nombre", payload.nombre);
+      formData.append("descripcion", payload.descripcion ?? "");
+      formData.append("precio", String(payload.precio));
 
       if (payload.combo) {
-        formData.append("combo", payload.combo)
+        formData.append("combo", payload.combo);
       }
 
       if (payload.unidadCombo) {
-        formData.append("unidadCombo", payload.unidadCombo)
+        formData.append("unidadCombo", payload.unidadCombo);
       }
 
       if (payload.image instanceof File) {
-        formData.append("image", payload.image)
+        formData.append("image", payload.image);
       }
 
-      return formData
+      return formData;
     },
   },
-})
+});

@@ -65,7 +65,7 @@
               <span
                 class="px-2.5 py-1 text-xs rounded-full bg-surface-container text-on-surface-variant border border-outline-variant/30"
               >
-                {{ item.categoriaId }}
+                {{ item.category?.nombre ?? "Sin categoría" }}
               </span>
             </td>
 
@@ -86,7 +86,7 @@
 
             <!-- IMAGEN -->
             <td class="px-5 py-4">
-              <div class="flex items-center ">
+              <div class="flex items-center">
                 <img
                   :src="`http://localhost:8000/storage/${item.image}`"
                   :alt="item.nombre"
@@ -139,7 +139,7 @@
         </tbody>
       </table>
     </div>
-    <div v-if="deleteModal" class="fixed inset-0 z-[9999] flex items-center justify-center">
+    <div v-if="deleteModal" class="fixed inset-0 z-9999 flex items-center justify-center">
       <!-- Fondo -->
       <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="close"></div>
 
