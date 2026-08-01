@@ -7,7 +7,8 @@ export interface Product {
   combo: number | null;
   unidadCombo: string | null;
   image: string | null;
-  category_id: number
+  category_id: number;
+  category: Category
 }
 
 export interface Category {

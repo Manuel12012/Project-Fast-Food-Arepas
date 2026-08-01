@@ -75,7 +75,7 @@
             </td>
 
             <!-- DESCRIPCIÓN -->
-            <td class="px-5 py-4 max-w-[220px] truncate text-on-surface-variant">
+            <td class="px-5 py-4 max-w-55 truncate text-on-surface-variant">
               {{ item.descripcion }}
             </td>
 
@@ -164,12 +164,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useProductStore } from "@/stores/productStore";
+import type { Product } from "@/types";
 
 const store = useProductStore();
 const deleteModal = ref(false);
 const itemId = ref<number | null>(null);
 const emit = defineEmits<{
-  (e: "edit-product", product: any): void;
+  (e: "edit-product", product: Product): void;
   (e: "create-offer"): void;
 }>();
 
