@@ -6,15 +6,15 @@ export interface Product {
   precio: number;
   combo: number | null;
   unidadCombo: string | null;
-  image: string | null;
+  image: string;
   category_id: number;
-  category: Category
+  category: Category;
 }
 
 export interface Category {
   id: number;
   nombre: string;
-  image: string | null;
+  image: string;
 }
 
 export interface CartItem {

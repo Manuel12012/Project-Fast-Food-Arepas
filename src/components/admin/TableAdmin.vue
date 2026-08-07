@@ -88,7 +88,7 @@
             <td class="px-5 py-4">
               <div class="flex items-center">
                 <img
-                  :src="`http://localhost:8000/storage/${item.image}`"
+                  :src="item.image"
                   :alt="item.nombre"
                   class="w-12 h-12 rounded-xl object-cover border border-outline-variant/20 shadow-sm hover:scale-110 transition-transform"
                 />
