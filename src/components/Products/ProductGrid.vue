@@ -10,7 +10,7 @@
 
       <div class="h-64 bg-surface-container overflow-hidden">
         <img
-          :src="`http://127.0.0.1:8000/storage/${item.image}`"
+          :src="item.image"
           :alt="item.nombre"
           class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />

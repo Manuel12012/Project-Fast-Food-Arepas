@@ -36,7 +36,7 @@
             <!-- IMAGE -->
 
             <img
-              :src="getImage(categoria)"
+              :src="categoria.image"
               :alt="categoria.nombre"
               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -96,11 +96,5 @@ const irAlMenu = (categoria: Category) => {
 //   eager: true,
 //   import: "default",
 // });
-const getImage = (categoria: Category) => {
-  if (!categoria.image) {
-    return "/placeholder-category.png";
-  }
 
-  return `http://localhost:8000/storage/${categoria.image}`;
-};
 </script>
