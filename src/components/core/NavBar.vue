@@ -74,7 +74,7 @@
                 class="group flex items-center gap-4 px-4 py-3 cursor-pointer hover:bg-surface-container transition"
               >
                 <img
-                  :src="`http://127.0.0.1:8000/storage/${product.image}`"
+                  :src="product.image"
                   class="w-14 h-14 rounded-xl object-cover"
                 />
 
@@ -232,7 +232,7 @@
             class="flex items-center gap-3 p-3 hover:bg-surface-container cursor-pointer"
           >
             <img
-              :src="`http://127.0.0.1:8000/storage/${product.image}`"
+              :src="product.image"
               class="w-12 h-12 rounded-xl object-cover"
             />
 
