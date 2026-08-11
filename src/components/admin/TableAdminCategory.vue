@@ -81,7 +81,7 @@
             <td colspan="4" class="text-center py-12 text-on-surface-variant">
               <div class="flex flex-col items-center gap-2">
                 <i class="ti ti-package-off text-3xl" />
-                <p>No hay productos registrados</p>
+                <p>No hay categorias registradas</p>
               </div>
             </td>
           </tr>

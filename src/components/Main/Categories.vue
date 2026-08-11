@@ -75,10 +75,6 @@ const categorieStore = useCategorieStore();
 // Primero creas las referencias
 const { categories } = storeToRefs(categorieStore);
 
-// Ahora sí puedes usarlas
-console.log("Store:", categorieStore);
-console.log("Categories:", categories.value);
-
 onMounted(() => {
   categorieStore.fetchCategories();
 });
@@ -96,5 +92,4 @@ const irAlMenu = (categoria: Category) => {
 //   eager: true,
 //   import: "default",
 // });
-
 </script>

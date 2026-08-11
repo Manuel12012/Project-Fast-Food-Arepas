@@ -31,7 +31,7 @@
       </div>
 
       <p class="text-3xl font-bold text-secondary">
-        {{ productStore.totalCategories }}
+        {{ categorieStore.totalCategories }}
       </p>
     </div>
 
@@ -39,13 +39,14 @@
 </template>
 
 <script setup lang="ts">
+import { useCategorieStore } from "@/stores/categorieStore";
 import { useProductStore } from "@/stores/productStore";
 import { onMounted } from "vue";
 
 const productStore = useProductStore();
-
+const categorieStore = useCategorieStore();
 onMounted(async () => {
   await productStore.countProducts();
-  await productStore.countCategories();
+  await categorieStore.countCategorie();
 });
 </script>

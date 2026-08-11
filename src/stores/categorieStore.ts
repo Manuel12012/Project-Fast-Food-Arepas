@@ -55,7 +55,7 @@ export const useCategorieStore = defineStore("categories", {
 
         this.categories.unshift(data);
 
-        
+
         return data;
       } catch (error) {
         console.error("createCategori error:", error);
@@ -71,6 +71,8 @@ export const useCategorieStore = defineStore("categories", {
         await authApi.delete(`/api/categories/${id}`);
 
         this.categories = this.categories.filter((p) => p.id !== id);
+
+        await this.countCategorie();
       } catch (error) {
         console.error("deleteCategory error:", error);
       } finally {
@@ -78,12 +80,13 @@ export const useCategorieStore = defineStore("categories", {
       }
     },
 
-    async countProducts() {
+    async countCategorie() {
       this.loading = true;
 
       try {
         const { data } = await authApi.get(`/api/categories/count`);
         this.totalCategories = data.total;
+
       } catch (error) {
         console.error(error);
       } finally {

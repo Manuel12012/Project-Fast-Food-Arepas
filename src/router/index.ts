@@ -1,83 +1,85 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from '@/stores/authStore'
-import AdminDashboard from '@/views/admin/AdminDashboard.vue'
-import AdminProducts from '@/views/admin/AdminProducts.vue'
-import HomeView from '@/views/HomeView.vue'
-import MenuView from '@/views/MenuView.vue'
-import DetailProductView from '@/views/DetailProductView.vue'
-import PayView from '@/views/PayView.vue'
-import CartView from '@/views/CartView.vue'
-import AdminLogin from '@/views/admin/AdminLogin.vue'
-import AdminOrders from '@/views/admin/AdminOrders.vue'
-import AdminSettings from '@/views/admin/AdminSettings.vue'
-import ResetPasswordView from '@/views/ResetPasswordView.vue'
-import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
-import Ofertas from '@/views/Ofertas.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import { useAuthStore } from "@/stores/authStore";
+import AdminDashboard from "@/views/admin/AdminDashboard.vue";
+import AdminProducts from "@/views/admin/AdminProducts.vue";
+import HomeView from "@/views/HomeView.vue";
+import MenuView from "@/views/MenuView.vue";
+import DetailProductView from "@/views/DetailProductView.vue";
+import PayView from "@/views/PayView.vue";
+import CartView from "@/views/CartView.vue";
+import AdminLogin from "@/views/admin/AdminLogin.vue";
+import AdminOrders from "@/views/admin/AdminOrders.vue";
+import AdminSettings from "@/views/admin/AdminSettings.vue";
+import ResetPasswordView from "@/views/ResetPasswordView.vue";
+import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
+import Ofertas from "@/views/Ofertas.vue";
 
 // ...tus imports de vistas
 
 const routes = [
-  { path: '/', name: 'home', component: HomeView },
-  { path: '/menu', name: 'menu', component: MenuView },
-  { path: '/product/:id', name: 'product', component: DetailProductView },
-  { path: '/pay', name: 'pay', component: PayView },
-  { path: '/cart', name: 'cart', component: CartView },
-  { path: '/admin/login', name: 'admin-login', component: AdminLogin },
+  { path: "/", name: "home", component: HomeView },
+  { path: "/menu", name: "menu", component: MenuView },
+  { path: "/product/:id", name: "product", component: DetailProductView },
+  { path: "/pay", name: "pay", component: PayView },
+  { path: "/cart", name: "cart", component: CartView },
+  { path: "/admin/login", name: "admin-login", component: AdminLogin },
   {
-    path: '/reset-password',
-    name: 'reset-password',
-    component: ResetPasswordView
+    path: "/reset-password",
+    name: "reset-password",
+    component: ResetPasswordView,
   },
   {
     path: "/ofertas",
     name: "/ofertas",
-    component: Ofertas
+    component: Ofertas,
   },
 
-{
-  path: "/forgot-password",
-  name: "forgot-password",
-  component: ForgotPasswordView
-},
+  {
+    path: "/forgot-password",
+    name: "forgot-password",
+    component: ForgotPasswordView,
+  },
   // rutas protegidas con meta
   {
-    path: '/admin/dashboard',
+    path: "/admin/dashboard",
     component: AdminDashboard,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
   },
   {
-    path: '/admin/products',
+    path: "/admin/products",
     component: AdminProducts,
-    meta: { requiresAuth: true }
-  }, {
-    path: '/admin/orders',
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/orders",
     component: AdminOrders,
-    meta: { requiresAuth: true }
-  }, {
-    path: '/admin/settings',
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/settings",
     component: AdminSettings,
-    meta: { requiresAuth: true }
-  }
-]
+    meta: { requiresAuth: true },
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
+  routes,
+});
 
 // guard global
 router.beforeEach(async (to) => {
-  if (!to.meta.requiresAuth) return true
+  if (!to.meta.requiresAuth) return true;
 
-  const authStore = useAuthStore()
+  const authStore = useAuthStore();
 
-  if (authStore.authenticated) return true
+  if (authStore.authenticated) return true;
 
-  await authStore.fetchUser()
+  await authStore.fetchUser();
 
-  if (authStore.authenticated) return true
+  if (authStore.authenticated) return true;
 
-  return { name: 'admin-login' }
-})
+  return { name: "admin-login" };
+});
 
-export default router
+export default router;

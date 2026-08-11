@@ -33,12 +33,6 @@ const disminuir = () => {
   }
 };
 
-const imageUrl = computed(() => {
-  if (!producto.value?.image) return "";
-
-  return `http://localhost:8000/storage/${producto.value.image}`;
-});
-
 const precioTotal = computed(() => {
   if (!producto.value) return 0;
 
@@ -61,7 +55,7 @@ const precioTotal = computed(() => {
           class="group relative overflow-hidden rounded-3xl bg-surface-container-lowest border border-outline-variant shadow-sm"
         >
           <img
-            :src="imageUrl"
+            :src="producto.image"
             :alt="producto.nombre || ''"
             class="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-105"
           />
@@ -75,7 +69,7 @@ const precioTotal = computed(() => {
             class="rounded-2xl overflow-hidden border border-outline-variant bg-surface-container-lowest h-28"
           >
             <img
-              :src="imageUrl"
+              :src="producto.image"
               :alt="producto.nombre || ''"
               class="w-full h-full object-contain"
             />
