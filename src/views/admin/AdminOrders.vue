@@ -20,6 +20,8 @@ const nextPage = async () => {
   }
 };
 
+const statusDraft = reactive<Record<number, string>>({});
+
 watch(
   () => orderStore.orders,
   (orders) => {
@@ -39,7 +41,6 @@ const prevPage = async () => {
     await orderStore.fetchOrders(orderStore.currentPage - 1);
   }
 };
-const statusDraft = reactive<Record<number, string>>({});
 
 const updateStatus = async (orderId: number, status: string | undefined) => {
   if (!status) return;
