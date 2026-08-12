@@ -11,7 +11,7 @@ export const useOrderStore = defineStore("orders", {
   }),
 
   actions: {
-    async fetchOrders(page: number) {
+    async fetchOrders(page?: number) {
       this.loading = true;
 
       try {
@@ -29,12 +29,13 @@ export const useOrderStore = defineStore("orders", {
         this.loading = false;
       }
     },
-    async updateOrderStatus(orderId: number, status: string, page: number) {
+
+    async updateOrderStatus(orderId: number, status: string, page?: number) {
       await api.put(`/api/orders/${orderId}`, {
         status,
       });
 
-      await this.fetchOrders(page);
+      await this.fetchOrders(page ?? this.currentPage);
     },
   },
 });

@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive } from "vue";
+import { computed, onMounted, reactive, watch } from "vue";
 import { useOrderStore } from "@/stores/orderStore";
 import NavBarAdmin from "@/components/admin/NavBarAdmin.vue";
 import AsideAdmin from "@/components/admin/AsideAdmin.vue";
 import { formatDate } from "@/helpers/formatDate";
-import { ref } from "vue";
 
 const orderStore = useOrderStore();
-const currentPage = ref(1);
+
 onMounted(async () => {
-  await orderStore.fetchOrders(currentPage);
-  orderStore.orders.forEach((order) => {
-    statusDraft[order.id] = order.status;
-  });
+  await orderStore.fetchOrders(orderStore.currentPage);
 });
 
 const pages = computed(() => {
@@ -20,10 +16,19 @@ const pages = computed(() => {
 });
 const nextPage = async () => {
   if (orderStore.currentPage < orderStore.lastPage) {
-    orderStore.currentPage++;
-    await orderStore.fetchOrders(orderStore.currentPage);
+    await orderStore.fetchOrders(orderStore.currentPage + 1);
   }
 };
+
+watch(
+  () => orderStore.orders,
+  (orders) => {
+    orders.forEach((order) => {
+      statusDraft[order.id] = order.status;
+    });
+  },
+  { immediate: true },
+);
 
 const goToPage = async (page: number) => {
   await orderStore.fetchOrders(page);
@@ -31,16 +36,15 @@ const goToPage = async (page: number) => {
 
 const prevPage = async () => {
   if (orderStore.currentPage > 1) {
-    orderStore.currentPage--;
-    await orderStore.fetchOrders(orderStore.currentPage);
+    await orderStore.fetchOrders(orderStore.currentPage - 1);
   }
 };
 const statusDraft = reactive<Record<number, string>>({});
 
-const updateStatus = async (orderId: number, status: string | undefined, page: number) => {
+const updateStatus = async (orderId: number, status: string | undefined) => {
   if (!status) return;
 
-  await orderStore.updateOrderStatus(orderId, status, page);
+  await orderStore.updateOrderStatus(orderId, status);
   statusDraft[orderId] = status;
 };
 
