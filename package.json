@@ -17,6 +17,7 @@
   "dependencies": {
     "@tabler/icons-webfont": "^3.44.0",
     "axios": "^1.16.1",
+    "flag-icons": "^7.5.0",
     "leaflet": "^1.9.4",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",

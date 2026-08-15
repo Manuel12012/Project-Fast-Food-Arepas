@@ -94,8 +94,15 @@
                 />
               </div>
             </td>
-            <td>
-              <div>En oferta</div>
+            <td class="px-5 py-4">
+              <span
+                v-if="item.offer"
+                class="px-2.5 py-1 text-xs rounded-full bg-yellow-500/10 text-yellow-600"
+              >
+                -{{ item.offer.descuento }}%
+              </span>
+
+              <span v-else class="text-on-surface-variant"> Sin oferta </span>
             </td>
 
             <!-- ACCIONES -->
@@ -118,7 +125,7 @@
                 </button>
 
                 <button
-                  @click="emit('create-offer')"
+                  @click="emit('create-offer', item)"
                   class="p-2 rounded-lg bg-yellow-500/10 text-yellow-600 hover:bg-yellow-500 hover:text-white transition-all"
                 >
                   <i class="ti ti-discount-2 text-lg"></i>
@@ -169,9 +176,10 @@ import type { Product } from "@/types";
 const store = useProductStore();
 const deleteModal = ref(false);
 const itemId = ref<number | null>(null);
+
 const emit = defineEmits<{
   (e: "edit-product", product: Product): void;
-  (e: "create-offer"): void;
+  (e: "create-offer", product: Product): void;
 }>();
 
 onMounted(async () => {

@@ -54,7 +54,7 @@
           <!-- PRECIO -->
           <div>
             <label class="text-sm text-on-surface-variant">Precio</label>
-            <input v-model="precio" type="number" class="input" placeholder="0.00" />
+            <input v-model="precio" type="number" class="input" placeholder="0.00" min="0" step="0.01" />
           </div>
         </div>
 
@@ -197,6 +197,7 @@ const submitProduct = async () => {
 // ONMOUNTED
 onMounted(async () => {
   await categories.fetchCategories();
+  await store.fetchProducts();
 });
 </script>
 

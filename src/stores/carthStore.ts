@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import { api, getCsrfCookie } from "@/services/api";
+import type { Product } from "@/types";
+import { calculateDiscountedPrice } from "@/helpers/Pricing";
 
 export const useCartStore = defineStore("cart", {
   state: () => ({
@@ -8,7 +10,17 @@ export const useCartStore = defineStore("cart", {
   }),
 
   getters: {
-    total: (state) => state.cart.reduce((sum, p) => sum + p.precio * p.cantidad, 0),
+    total: (state) => {
+      return state.cart.reduce((sum, item) => {
+        return sum + Number(item.precioFinal) * Number(item.cantidad);
+      }, 0);
+    },
+
+    totalItems: (state) => {
+      return state.cart.reduce((sum, item) => {
+        return sum + Number(item.cantidad);
+      }, 0);
+    },
   },
 
   actions: {
@@ -16,19 +28,42 @@ export const useCartStore = defineStore("cart", {
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
 
-    addToCart(product: any, cantidad: number = 1) {
+    addToCart(product: Product, cantidad: number = 1) {
       const exists = this.cart.find((p) => p.id === product.id);
+
+      // Precio original
+      const precioOriginal = Number(product.precio ?? 0);
+
+      // Descuento del producto
+      const descuento = Number(product.offer?.descuento ?? 0);
+
+      // Precio final de UNA unidad
+      const precioFinal = calculateDiscountedPrice(precioOriginal, descuento);
       if (exists) {
-        exists.cantidad += cantidad; // ← suma la cantidad seleccionada
+        exists.cantidad += cantidad;
       } else {
-        this.cart.push({ ...product, cantidad }); // ← usa la cantidad recibida
+        this.cart.push({
+          ...product,
+
+          // Guardamos los precios como números
+          precio: precioOriginal,
+          descuento,
+          precioFinal,
+
+          cantidad,
+        });
       }
+
       this._saveToStorage();
     },
 
     incrementQuantity(id: number) {
       const item = this.cart.find((p) => p.id === id);
-      if (item) item.cantidad++;
+
+      if (item) {
+        item.cantidad++;
+      }
+
       this._saveToStorage();
     },
 
@@ -36,20 +71,25 @@ export const useCartStore = defineStore("cart", {
       const item = this.cart.find((p) => p.id === id);
 
       if (!item) return;
+
       item.cantidad--;
+
       if (item.cantidad <= 0) {
         this.cart = this.cart.filter((p) => p.id !== id);
       }
+
       this._saveToStorage();
     },
 
     removeItem(id: number) {
       this.cart = this.cart.filter((p) => p.id !== id);
+
       this._saveToStorage();
     },
 
     clearCart() {
       this.cart = [];
+
       localStorage.removeItem("cart");
     },
 
@@ -71,11 +111,16 @@ export const useCartStore = defineStore("cart", {
           latitude,
           longitude,
           scheduled_for: scheduledFor,
+
           items: this.cart.map((p) => ({
             product_id: p.id,
             name: p.nombre,
-            price: p.precio,
-            quantity: p.cantidad,
+
+            // IMPORTANTE:
+            // Enviamos el precio YA DESCONTADO
+            price: Number(p.precioFinal),
+
+            quantity: Number(p.cantidad),
           })),
         };
 
@@ -89,7 +134,6 @@ export const useCartStore = defineStore("cart", {
       } catch (error) {
         console.error(error);
         throw error;
-      } finally {
       }
     },
   },

@@ -9,6 +9,8 @@ export interface Product {
   image: string;
   category_id: number;
   category: Category;
+  offer_id: number,
+  offer: Offer
 }
 
 export interface Category {
@@ -17,6 +19,13 @@ export interface Category {
   image: string;
 }
 
+
+export interface Offer {
+  id: number;
+  inicio: Date;
+  fin: Date;
+  descuento: number;
+}
 export interface CartItem {
   id: number;
   nombre: string;

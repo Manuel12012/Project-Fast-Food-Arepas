@@ -19,7 +19,6 @@ const isModalCategoryOpen = ref(false);
 
 // REFERENCES
 const selectedProduct = ref<Product | null>(null);
-const selectedPrice = ref<number | null>(null);
 const selectedCategory = ref<Category | null>(null);
 // abrir modal en modo CREATE
 const openCreateModal = () => {
@@ -34,11 +33,11 @@ const editProduct = (product: Product) => {
 };
 
 // abrir modal en modo OFERTA
-const openOfferModal = () => {
-  console.log("abriendo oferta");
-  selectedPrice.value = null;
+const openOfferModal = (product: Product) => {
+  selectedProduct.value = product;
   isModalOffer.value = true;
 };
+
 // cerrar
 const closeModal = () => {
   isModalOpen.value = false;
@@ -47,7 +46,7 @@ const closeModal = () => {
 
 const closeModalOffer = () => {
   isModalOffer.value = false;
-  selectedPrice.value = null;
+  selectedProduct.value = null;
 };
 
 const closeModalCategory = () => {
@@ -136,10 +135,9 @@ const editCategory = (category: Category) => {
           :productToEdit="selectedProduct"
           @close-modal="closeModal"
         />
-
         <ModalAdminOffer
           :isModalOffer="isModalOffer"
-          :offerToEdit="selectedPrice"
+          :selectedProduct="selectedProduct"
           @close-modal-offer="closeModalOffer"
         />
 

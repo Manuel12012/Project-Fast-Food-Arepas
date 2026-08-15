@@ -15,18 +15,14 @@ console.log(id);
 </script>
 
 <template>
-  <div
-    class="min-h-screen bg-background text-on-surface overflow-x-hidden"
-  >
+  <div class="min-h-screen bg-background text-on-surface overflow-x-hidden">
     <!-- HEADER -->
     <header>
       <NavBar />
     </header>
 
     <!-- MAIN -->
-    <main
-      class="pt-20 bg-background"
-    >
+    <main class="pt-20 bg-background">
       <Main />
 
       <!-- <Recommendation /> -->

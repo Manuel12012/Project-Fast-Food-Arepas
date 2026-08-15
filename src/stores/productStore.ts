@@ -30,6 +30,7 @@ export const useProductStore = defineStore("products", {
 
       try {
         const { data } = await authApi.get("/api/products");
+
         this.products = data;
       } catch (error) {
         console.error("fetchProducts error:", error);
@@ -68,6 +69,8 @@ export const useProductStore = defineStore("products", {
         this.products.unshift(data);
 
         this.totalProducts++;
+        await this.fetchProducts();
+
         return data;
       } catch (error) {
         console.error("createProduct error:", error);
@@ -88,7 +91,6 @@ export const useProductStore = defineStore("products", {
         formData.append("_method", "PUT");
 
         const { data } = await authApi.post(`/api/products/${id}`, formData);
-
         const index = this.products.findIndex((p) => p.id === id);
 
         if (index !== -1) {
@@ -96,6 +98,7 @@ export const useProductStore = defineStore("products", {
         }
 
         this.product = data;
+        await this.fetchProducts();
 
         return data;
       } catch (error) {
