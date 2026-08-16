@@ -344,7 +344,6 @@ watch(
   () => productStore.products,
 
   (products) => {
-    console.log("Productos:", products);
   },
 
   {
