@@ -82,10 +82,7 @@ export const useOfferStore = defineStore("offers", {
       }
     },
 
-    async createOfferForProduct(
-      productId: number,
-      payload: OfferPayload,
-    ) {
+    async createOfferForProduct(productId: number, payload: OfferPayload) {
       this.loading = true;
 
       try {
@@ -101,11 +98,8 @@ export const useOfferStore = defineStore("offers", {
         await this.fetchOffers();
 
         return offer;
-      } catch (error: any) {
-        console.error("createOfferForProduct error:", error);
-        console.error("Backend:", error.response?.data);
-
-        throw error;
+      } catch (error) {
+        console.log(error);
       } finally {
         this.loading = false;
       }

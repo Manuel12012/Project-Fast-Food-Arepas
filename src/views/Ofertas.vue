@@ -1,18 +1,3 @@
-<script setup lang="ts">
-import { onMounted } from "vue";
-import Footer from "@/components/core/Footer.vue";
-import NavBar from "@/components/core/NavBar.vue";
-import { useOfferStore } from "@/stores/OfferStore";
-
-const ofertas = useOfferStore();
-
-onMounted(async () => {
-  await ofertas.fetchOffers();
-
-  console.log("Ofertas:", ofertas.activeOffers);
-});
-</script>
-
 <template>
   <NavBar />
 
@@ -45,8 +30,8 @@ onMounted(async () => {
         <!-- IMAGEN -->
         <div class="relative">
           <img
-            :src="offer.product.image"
-            :alt="offer.product.nombre"
+            :src="offer.product?.image"
+            :alt="offer.product?.nombre"
             class="w-full h-64 object-cover"
           />
 
@@ -61,11 +46,11 @@ onMounted(async () => {
         <!-- INFO -->
         <div class="p-6">
           <h2 class="text-2xl font-bold text-on-surface">
-            {{ offer.product.nombre }}
+            {{ offer.product?.nombre }}
           </h2>
 
           <p class="mt-2 text-on-surface-variant">
-            {{ offer.product.descripcion }}
+            {{ offer.product?.descripcion }}
           </p>
 
           <!-- PRECIO -->
@@ -73,20 +58,20 @@ onMounted(async () => {
             <span class="text-3xl font-black text-primary">
               {{
                 (
-                  Number(offer.product.precio) -
-                  (Number(offer.product.precio) * Number(offer.descuento)) / 100
+                  Number(offer.product?.precio) -
+                  (Number(offer.product?.precio) * Number(offer.descuento)) / 100
                 ).toFixed(2)
               }}
             </span>
 
             <span class="text-lg line-through text-on-surface-variant opacity-60">
-              {{ Number(offer.product.precio).toFixed(2) }}
+              {{ Number(offer.product?.precio).toFixed(2) }}
             </span>
           </div>
 
           <!-- BOTÓN -->
           <RouterLink
-            :to="`/product/${offer.product.id}`"
+            :to="`/product/${offer.product?.id}`"
             class="mt-6 block w-full text-center bg-primary text-on-primary font-bold py-3 rounded-xl hover:opacity-90 transition"
           >
             Ver producto
@@ -98,3 +83,22 @@ onMounted(async () => {
 
   <Footer />
 </template>
+
+<script setup lang="ts">
+import { onMounted } from "vue";
+import Footer from "@/components/core/Footer.vue";
+import NavBar from "@/components/core/NavBar.vue";
+import { useOfferStore } from "@/stores/OfferStore";
+
+defineOptions({
+  name: "OfertasView",
+});
+
+const ofertas = useOfferStore();
+
+onMounted(async () => {
+  await ofertas.fetchOffers();
+
+  console.log("Ofertas:", ofertas.activeOffers);
+});
+</script>
